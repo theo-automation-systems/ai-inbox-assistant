@@ -1,0 +1,8 @@
+FROM: People Ops <peopleops@aurora.ai>
+TO: you@aurora.ai
+SUBJECT: Welcome aboard kit shipped
+DATE: 2026-05-15
+
+Your onboarding kit left warehouse today—tracking RB772991US.
+
+People Ops

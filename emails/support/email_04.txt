@@ -1,0 +1,10 @@
+FROM: Jordan Ellis <jordan.ellis@helixlabs.com>
+TO: support@aurora.ai
+SUBJECT: Broken CSV export for cohort report
+DATE: 2026-05-14
+
+The cohort retention export truncates after row 5000 even when applying filters. Dashboard shows full dataset.
+
+Ticket severity: high for our quarterly review deck due Monday.
+
+Jordan

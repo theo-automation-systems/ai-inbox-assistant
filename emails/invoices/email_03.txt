@@ -1,0 +1,10 @@
+FROM: Billing Ops <billingops@aurora.ai>
+TO: finance@aurora.ai
+SUBJECT: Credit memo CM-221 applied
+DATE: 2026-05-11
+
+Credit memo CM-221 for USD 2,100.00 applied to invoice INV-88102 per SLA remediation case SLA-991.
+
+No further action required unless disputed within 10 days.
+
+Billing Ops

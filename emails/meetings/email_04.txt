@@ -1,0 +1,8 @@
+FROM: Security PMO <sec-pmo@aurora.ai>
+TO: vendor-risk@aurora.ai
+SUBJECT: Vendor security review touchpoint
+DATE: 2026-05-17
+
+Touch base Tue May 20 11:30 ET on GreenSpruce SOC2 gaps.
+
+Security PMO

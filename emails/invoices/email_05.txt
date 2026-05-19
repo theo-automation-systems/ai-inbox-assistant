@@ -1,0 +1,10 @@
+FROM: Emma Clarke <emma.clarke@aurora.ai>
+TO: finance@aurora.ai
+SUBJECT: Quarterly true-up estimate
+DATE: 2026-05-12
+
+Finance preview: projected Q2 true-up GBP 11,400 due to seat growth in UK subsidiary.
+
+Detailed workbook attached.
+
+Emma

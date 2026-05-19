@@ -1,0 +1,8 @@
+FROM: Marcus Webb <marcus.webb@aurora.ai>
+TO: cs-leads@aurora.ai
+SUBJECT: Customer workshop planning call
+DATE: 2026-05-17
+
+Let's align Mon May 19 09:00 PT on workshop deck for Summit Retail.
+
+Marcus

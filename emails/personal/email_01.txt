@@ -1,0 +1,8 @@
+FROM: Workplace Experience <wx@aurora.ai>
+TO: all-nyc@aurora.ai
+SUBJECT: Coffee roastery pop-up Friday
+DATE: 2026-05-12
+
+Local roastery tasting Fri 09:00 in pantry B.
+
+WX

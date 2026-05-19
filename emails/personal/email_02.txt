@@ -1,0 +1,8 @@
+FROM: HR Shared Services <hr@aurora.ai>
+TO: all@aurora.ai
+SUBJECT: Reminder: submit PTO for Memorial Day
+DATE: 2026-05-13
+
+Please finalize time-off requests before May 17 payroll lock.
+
+HR

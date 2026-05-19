@@ -1,0 +1,8 @@
+FROM: Talent <talent@aurora.ai>
+TO: hiring-panel@aurora.ai
+SUBJECT: Interview loop for Staff ML Engineer
+DATE: 2026-05-16
+
+Loop scheduled May 23 for candidate A. Park. Panel: systems design 10:00, coding 13:00.
+
+Talent

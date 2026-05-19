@@ -1,0 +1,8 @@
+FROM: Facilities <facilities@aurora.ai>
+TO: nyc-office@aurora.ai
+SUBJECT: Parking garage closure notice
+DATE: 2026-05-14
+
+Garage level 2 closed Sat-Sun for cleaning.
+
+Facilities

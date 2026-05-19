@@ -1,0 +1,8 @@
+FROM: Security Operations <secops@aurora.ai>
+TO: eng-security@aurora.ai
+SUBJECT: Security breach suspicion — leaked OAuth token
+DATE: 2026-05-17
+
+Potential leaked OAuth refresh token detected in public gist scrubbing. Rotate creds for integration IG-221 ASAP.
+
+SecOps

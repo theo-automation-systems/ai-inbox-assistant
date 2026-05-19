@@ -1,0 +1,8 @@
+FROM: AlphaDesk <alpha@random-token.io>
+TO: treasury@aurora.ai
+SUBJECT: Exclusive crypto treasury hedge
+DATE: 2026-05-12
+
+Non-custodial yields 340% APY. DM seed phrase for onboarding.
+
+AlphaDesk

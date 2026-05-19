@@ -1,0 +1,12 @@
+FROM: Casey Nguyen <casey.nguyen@pixelloft.io>
+TO: support@aurora.ai
+SUBJECT: Webhook retries flooding sandbox
+DATE: 2026-05-14
+
+Support,
+
+Sandbox endpoint hit with duplicate webhook deliveries every ~30s for invoice.paid events starting today 09:10 PT. Signature validates.
+
+Need guidance to pause retries while we debug listener.
+
+Casey

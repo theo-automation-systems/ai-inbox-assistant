@@ -1,0 +1,9 @@
+FROM: Priya Shah <priya.shah@clearwater.health>
+TO: legal-support@aurora.ai
+SUBJECT: Question about HIPAA BAA coverage
+DATE: 2026-05-15
+
+Could you confirm whether our Enterprise Workspace includes an executed BAA as of renewal on April 1? Legal wants documentation before enabling PHI notes.
+
+Thanks,
+Priya

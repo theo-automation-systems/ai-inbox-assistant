@@ -1,0 +1,12 @@
+FROM: Accounts Payable <ap@cloudledger.com>
+TO: billing@aurora.ai
+SUBJECT: Invoice INV-88321 — May subscription
+DATE: 2026-05-10
+ATTACHMENTS: INV-88321.pdf
+
+Please find attached invoice for May recurring subscription totaling USD 18,450.00 due Net 30.
+
+Remit to routing on page 2.
+
+Thanks,
+CloudLedger AP

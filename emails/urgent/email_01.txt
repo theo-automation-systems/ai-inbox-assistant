@@ -1,0 +1,10 @@
+FROM: Incident Commander <ic@sre.aurora.ai>
+TO: eng-incidents@aurora.ai
+SUBJECT: SEV-1: Payments API returning 500s
+DATE: 2026-05-15
+
+Incident INC-772 declared SEV-1 at 13:05 UTC. Error budget exhausted for checkout API.
+
+War room Zoom bridge active.
+
+IC

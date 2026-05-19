@@ -1,0 +1,8 @@
+FROM: Product Marketing <pmktg@aurora.ai>
+TO: gtm@aurora.ai
+SUBJECT: Office hours — new analytics rollout
+DATE: 2026-05-18
+
+Drop-in session Wed May 21 17:00 UTC for launch collateral questions.
+
+PMKTG

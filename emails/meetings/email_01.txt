@@ -1,0 +1,8 @@
+FROM: Nina Ortiz <nina.ortiz@aurora.ai>
+TO: exec-staff@aurora.ai
+SUBJECT: Calendar hold — QBR dry run
+DATE: 2026-05-16
+
+Please hold Thu May 22 15:00-16:30 PT for internal QBR dry run. Agenda circulating Friday.
+
+Nina

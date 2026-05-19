@@ -1,0 +1,8 @@
+FROM: Culture Crew <culture@aurora.ai>
+TO: eng-nyc@aurora.ai
+SUBJECT: Team lunch lottery winners
+DATE: 2026-05-14
+
+Congrats to pod Orion—lunch budget USD 400 this Friday.
+
+Culture

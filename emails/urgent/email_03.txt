@@ -1,0 +1,8 @@
+FROM: Executive Sponsor Desk <execdesk@aurora.ai>
+TO: cs-leads@aurora.ai
+SUBJECT: Customer threatening churn — SLA breach
+DATE: 2026-05-16
+
+Summit Retail VP escalating downtime credits; contractual penalty clause invoked if unresolved by EOD Friday.
+
+ExecDesk

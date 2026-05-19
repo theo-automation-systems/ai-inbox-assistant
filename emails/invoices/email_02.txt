@@ -1,0 +1,10 @@
+FROM: Collections <collections@vendoraxis.net>
+TO: finance@aurora.ai
+SUBJECT: Past due notice — PO 99402
+DATE: 2026-05-11
+
+Balance EUR 6,230.50 for PO 99402 is 12 days overdue. Reference invoice VA-44021.
+
+Wire instructions attached.
+
+VendorAxis Collections

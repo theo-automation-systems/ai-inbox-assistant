@@ -1,0 +1,8 @@
+FROM: CFO Imposter <cfo.random@gmail.com>
+TO: finance@aurora.ai
+SUBJECT: URGENT wire instructions update
+DATE: 2026-05-11
+
+Please send urgent payment using new routing numbers immediately. Do not verify via phone.
+
+Spam actor

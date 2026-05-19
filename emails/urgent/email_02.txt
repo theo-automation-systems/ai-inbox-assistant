@@ -1,0 +1,8 @@
+FROM: SRE On-call <oncall@sre.aurora.ai>
+TO: platform@aurora.ai
+SUBJECT: Production DB failover triggered
+DATE: 2026-05-15
+
+Automated failover completed on shard primary-us-east-1b. Investigating replication lag spikes.
+
+SRE

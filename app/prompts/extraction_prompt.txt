@@ -1,0 +1,21 @@
+Provide concise structured extraction:
+
+1) summary: 1-3 crisp sentences covering intent and context.
+2) action_items: explicit tasks for the recipient (empty list if none). Use imperative phrasing.
+3) deadlines: concrete dates or timelines mentioned (empty if none). Preserve wording like "EOD Friday".
+4) entities:
+   - people: human names or roles mentioned with names.
+   - companies: organizations or vendors.
+   - products: SKUs, modules, services, or apps referenced.
+   - amounts: currency figures, percentages, SLAs with numbers.
+   - dates: any calendar references even if not deadlines.
+
+5) suggested_reply: professional email response that:
+   - starts with a salutation on its own line (e.g. "Dear Name,") then a blank line before the body,
+   - acknowledges specifics from the email,
+   - proposes clear next steps or questions,
+   - matches enterprise tone,
+   - avoids hallucinating policies not supported by the email,
+   - always ends with "Best regards," on its own line (blank line before the closing), then one signature line (no bracket placeholders).
+
+Return compact lists without duplicates. Prefer ISO-like dates when explicit.

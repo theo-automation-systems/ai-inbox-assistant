@@ -1,0 +1,15 @@
+FROM: Laura Mitchell <laura.mitchell@northwind.io>
+TO: enterprise-support@aurora.ai
+SUBJECT: Login failures after SSO cutover
+DATE: 2026-05-12
+THREAD-ID: THR-SUP-90812
+ATTACHMENTS: sso_error_timeline.pdf
+
+Hi Aurora team,
+
+Since yesterday's SSO migration roughly 14:30 UTC, ~40 users in our NYC finance pod cannot complete SAML assertions. They loop back to the login screen with error AAI-2048. IdP logs show successful authentication.
+
+Can you confirm whether attribute mapping for departmentNumber changed? We need this restored before payroll reconciliation tomorrow morning.
+
+Thanks,
+Laura

@@ -1,0 +1,8 @@
+FROM: AWS Marketplace <no-reply@marketplace.amazonaws.com>
+TO: finance@aurora.ai
+SUBJECT: AWS Marketplace seller disbursement
+DATE: 2026-05-12
+
+Disbursement of USD 42,118.33 scheduled May 15 for listing aurora-insights-pro.
+
+ATTACHMENTS: remittance_detail.csv

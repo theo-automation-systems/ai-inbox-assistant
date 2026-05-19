@@ -1,0 +1,12 @@
+FROM: Devon Patel <devon.patel@brightcart.co>
+TO: support@aurora.ai
+SUBJECT: API rate limiting unexpectedly aggressive
+DATE: 2026-05-13
+
+Hello,
+
+Our nightly inventory sync jobs began failing with HTTP 429 starting May 11. We did not change throughput. Project ID acct_771b.
+
+Please advise if limits were tightened globally.
+
+Devon
