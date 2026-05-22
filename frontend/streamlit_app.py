@@ -99,27 +99,28 @@ def inject_styles() -> None:
                 background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(11,17,32,0.92));
                 border: 1px solid rgba(148,163,184,0.12);
                 border-radius: 14px;
-                padding: 18px 20px;
-                margin-bottom: 14px;
+                padding: 11px 18px 10px 18px;
+                margin-bottom: 10px;
                 box-shadow: 0 12px 40px rgba(0,0,0,0.35);
                 text-align: center;
             }
             .app-header-inner { max-width: 920px; margin: 0 auto; }
             .app-title {
                 font-size: 1.65rem; font-weight: 700; letter-spacing: -0.03em;
-                color: #f8fafc; line-height: 1.25;
+                color: #f8fafc; line-height: 1.2;
+                margin: 0;
             }
             .app-sub {
-                font-size: 0.88rem; color: #94a3b8; margin-top: 8px;
-                line-height: 1.45; max-width: 640px; margin-left: auto; margin-right: auto;
+                font-size: 0.84rem; color: #94a3b8; margin-top: 4px;
+                line-height: 1.3; max-width: 640px; margin-left: auto; margin-right: auto;
             }
             .app-header-chips {
                 display: flex; flex-wrap: wrap; justify-content: center;
-                gap: 8px; margin-top: 14px;
+                gap: 6px; margin-top: 8px;
             }
             .stat-chip {
                 display: inline-flex; align-items: center; gap: 6px;
-                padding: 6px 12px; border-radius: 999px;
+                padding: 4px 10px; border-radius: 999px;
                 border: 1px solid rgba(148,163,184,0.15);
                 background: rgba(255,255,255,0.03);
                 font-size: 12px; color: #e2e8f0;
@@ -379,11 +380,96 @@ def inject_styles() -> None:
                 line-height: 1.2;
             }
             [class*="st-key-actions_panel"] {
-                margin: 4px 0 16px 0;
-                padding: 14px 16px 6px 16px;
-                border-radius: 12px;
+                margin: 2px 0 4px 0;
+                padding: 8px 12px 4px 12px;
+                border-radius: 10px;
                 border: 1px solid rgba(148,163,184,0.12);
                 background: rgba(255,255,255,0.02);
+            }
+            .action-group-head {
+                margin: 0 0 10px 0;
+                padding: 0 0 8px 0;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+            }
+            [class*="st-key-actions_panel"] .action-group-label {
+                margin: 0;
+                font-size: 10px;
+                line-height: 1.3;
+            }
+            [class*="st-key-actions_panel"] .action-group-head {
+                margin: 0 0 6px 0;
+                padding: 0 0 6px 0;
+            }
+            [class*="st-key-actions_panel"] > [data-testid="stVerticalBlock"] {
+                gap: 0.35rem !important;
+            }
+            [class*="st-key-actions_controls_row"] [data-testid="stHorizontalBlock"] {
+                align-items: center !important;
+            }
+            [class*="st-key-actions_controls_row"] [data-testid="column"] {
+                display: flex !important;
+                align-items: center !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stButton"] button {
+                min-height: 2.1rem !important;
+                height: 2.1rem !important;
+                padding: 0.2rem 0.65rem !important;
+                font-size: 13px !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFileUploader"] {
+                padding: 0 !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFileUploader"] section {
+                padding: 0.3rem 0.5rem !important;
+                min-height: 0 !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFileUploaderDropzone"] {
+                min-height: 2.25rem !important;
+                padding: 0.3rem 0.5rem !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFileUploaderDropzone"] div {
+                font-size: 12px !important;
+            }
+            [class*="st-key-actions_panel"] label[data-testid="stWidgetLabel"] {
+                font-size: 12px !important;
+                margin-bottom: 2px !important;
+            }
+            [class*="st-key-actions_panel"] form [data-testid="column"]:last-child {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: flex-end !important;
+            }
+            [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] {
+                gap: 0.15rem !important;
+            }
+            [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            [class*="st-key-actions_panel"] {
+                margin-bottom: 0 !important;
+            }
+            [class*="st-key-inbox_email_layout"] {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            .panel-section-title {
+                font-size: 0.98rem;
+                font-weight: 600;
+                color: #cbd5e1;
+                margin: 0.55rem 0 0.35rem 0;
+                line-height: 1.3;
+            }
+            [class*="st-key-inbox_counts"] [data-testid="stMetricLabel"] {
+                font-size: 0.8rem !important;
+            }
+            [class*="st-key-inbox_counts"] [data-testid="stMetricValue"] {
+                font-size: 1.28rem !important;
+            }
+            [class*="st-key-inbox_counts"] [data-testid="stMetric"] {
+                padding: 0.2rem 0 !important;
             }
         </style>
         """,
@@ -393,7 +479,15 @@ def inject_styles() -> None:
 
 def render_action_group_label(title: str) -> None:
     safe = html_module.escape(title.strip())
-    st.markdown(f'<p class="action-group-label">{safe}</p>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="action-group-head"><p class="action-group-label">{safe}</p></div>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_panel_section_title(title: str) -> None:
+    safe = html_module.escape(title.strip())
+    st.markdown(f'<p class="panel-section-title">{safe}</p>', unsafe_allow_html=True)
 
 
 def sentiment_emoji(sentiment: str) -> str:
@@ -946,92 +1040,108 @@ def main() -> None:
     stats = dashboard_counts(emails, st.session_state.analysis_store)
     render_header_bar(stats, api_ok)
 
-    with st.container(key="actions_panel"):
-        act_global, act_import = st.columns((1, 2), gap="large")
-        with act_global:
-            render_action_group_label("Global actions")
-            analyze_inbox = st.button(
-                "Process Inbox",
-                use_container_width=True,
-                type="primary",
-                key="act_process_inbox",
-            )
-        with act_import:
-            render_action_group_label("Import actions")
-            with st.form("import_actions", clear_on_submit=False):
-                uploaded = st.file_uploader(
-                    "Upload file",
-                    type=["txt", "eml"],
-                    help=".txt (FROM/SUBJECT + body) or standard .eml export.",
-                )
-                analyze_import = st.form_submit_button(
-                    "Analyze file",
-                    use_container_width=True,
-                )
-            if analyze_import:
-                if uploaded is None:
-                    st.warning("Choose a .txt or .eml file first.")
-                else:
-                    try:
-                        sender, subject, body = parse_uploaded_file(
-                            uploaded.getvalue(),
-                            uploaded.name or "upload.txt",
-                        )
-                    except ValueError as exc:
-                        st.error(str(exc))
-                        sender, subject, body = "", "", ""
-                    if sender and body:
-                        try:
-                            with st.spinner("Analyzing import…"):
-                                t0 = time.monotonic()
-                                bundle = _patch_bundle_reply(
-                                    post_analyze_inline(
-                                        active_base,
-                                        sender=sender,
-                                        subject=subject,
-                                        body=body,
-                                    )
-                                )
-                                st.session_state.last_ai_seconds = time.monotonic() - t0
-                                inline_id = bundle["email"]["id"]
-                                st.session_state.analysis_store[inline_id] = bundle
-                                st.session_state.selected_email_id = inline_id
-                                st.session_state.session_analyzed_count += 1
-                            st.toast("Import analyzed.", icon="✅")
-                            st.rerun()
-                        except ApiError as exc:
-                            st.error(exc.message)
+    analyze_inbox = False
+    analyze_import = False
+    uploaded = None
 
-    if analyze_inbox:
-        n = max(len(emails), 1)
-        with st.spinner("Processing inbox…"):
-            progress = st.progress(0.0)
-            for idx, row in enumerate(emails):
-                eid = row["id"]
-                if eid in st.session_state.analysis_store:
-                    progress.progress(min((idx + 1) / n, 1.0))
-                    continue
-                try:
-                    t0 = time.monotonic()
-                    bundle = _patch_bundle_reply(
-                        post_analyze(active_base, eid, regenerate=False)
+    with st.container(key="main_workspace"):
+        with st.container(key="actions_panel"):
+            act_lbl_global, act_lbl_import = st.columns((1, 2), gap="small")
+            with act_lbl_global:
+                render_action_group_label("Global actions")
+            with act_lbl_import:
+                render_action_group_label("Import actions")
+
+            with st.container(key="actions_controls_row"):
+                act_ctrl_global, act_ctrl_import = st.columns((1, 2), gap="small")
+                with act_ctrl_global:
+                    analyze_inbox = st.button(
+                        "Process Inbox",
+                        use_container_width=True,
+                        type="primary",
+                        key="act_process_inbox",
                     )
-                    st.session_state.analysis_store[eid] = bundle
-                    st.session_state.last_ai_seconds = time.monotonic() - t0
-                    st.session_state.session_analyzed_count += 1
-                except ApiError as exc:
-                    st.error(exc.message)
-                    break
-                progress.progress(min((idx + 1) / n, 1.0))
-        st.toast("Inbox processing finished.", icon="✅")
-        st.rerun()
+                with act_ctrl_import:
+                    with st.form("import_actions", clear_on_submit=False):
+                        imp_file, imp_btn = st.columns((1.55, 0.45), gap="small")
+                        with imp_file:
+                            uploaded = st.file_uploader(
+                                "Upload file",
+                                type=["txt", "eml"],
+                                label_visibility="collapsed",
+                                help=".txt (FROM/SUBJECT + body) or standard .eml export.",
+                            )
+                        with imp_btn:
+                            analyze_import = st.form_submit_button(
+                                "Analyze file",
+                                use_container_width=True,
+                            )
 
-    left, right = st.columns((0.34, 0.66), gap="medium")
+        if analyze_import:
+            if uploaded is None:
+                st.warning("Choose a .txt or .eml file first.")
+            else:
+                try:
+                    sender, subject, body = parse_uploaded_file(
+                        uploaded.getvalue(),
+                        uploaded.name or "upload.txt",
+                    )
+                except ValueError as exc:
+                    st.error(str(exc))
+                    sender, subject, body = "", "", ""
+                if sender and body:
+                    try:
+                        with st.spinner("Analyzing import…"):
+                            t0 = time.monotonic()
+                            bundle = _patch_bundle_reply(
+                                post_analyze_inline(
+                                    active_base,
+                                    sender=sender,
+                                    subject=subject,
+                                    body=body,
+                                )
+                            )
+                            st.session_state.last_ai_seconds = time.monotonic() - t0
+                            inline_id = bundle["email"]["id"]
+                            st.session_state.analysis_store[inline_id] = bundle
+                            st.session_state.selected_email_id = inline_id
+                            st.session_state.session_analyzed_count += 1
+                        st.toast("Import analyzed.", icon="✅")
+                        st.rerun()
+                    except ApiError as exc:
+                        st.error(exc.message)
+
+        if analyze_inbox:
+            n = max(len(emails), 1)
+            with st.spinner("Processing inbox…"):
+                progress = st.progress(0.0)
+                for idx, row in enumerate(emails):
+                    eid = row["id"]
+                    if eid in st.session_state.analysis_store:
+                        progress.progress(min((idx + 1) / n, 1.0))
+                        continue
+                    try:
+                        t0 = time.monotonic()
+                        bundle = _patch_bundle_reply(
+                            post_analyze(active_base, eid, regenerate=False)
+                        )
+                        st.session_state.analysis_store[eid] = bundle
+                        st.session_state.last_ai_seconds = time.monotonic() - t0
+                        st.session_state.session_analyzed_count += 1
+                    except ApiError as exc:
+                        st.error(exc.message)
+                        break
+                    progress.progress(min((idx + 1) / n, 1.0))
+            st.toast("Inbox processing finished.", icon="✅")
+            st.rerun()
+
+        with st.container(key="inbox_email_layout"):
+            left, right = st.columns((0.34, 0.66), gap="small")
 
     with left:
         st.markdown("### Inbox")
 
-        st.markdown("#### Filters")
+        render_panel_section_title("Filters")
         quick = st.radio(
             "Quick filter",
             options=["All", "High priority+", "Invoices", "Meetings", "Support", "Spam"],
@@ -1094,14 +1204,15 @@ def main() -> None:
 
         filtered.sort(key=sort_key)
 
-        st.markdown("#### Counts")
-        mini = st.columns(4)
-        mini[0].metric("Emails", stats["total"])
-        mini[1].metric("Urgent", stats["urgent_ai"])
-        mini[2].metric("Meetings", stats["meetings_ai"])
-        mini[3].metric("Invoices", stats["invoices_ai"])
+        render_panel_section_title("Counts")
+        with st.container(key="inbox_counts"):
+            mini = st.columns(4)
+            mini[0].metric("Emails", stats["total"])
+            mini[1].metric("Urgent", stats["urgent_ai"])
+            mini[2].metric("Meetings", stats["meetings_ai"])
+            mini[3].metric("Invoices", stats["invoices_ai"])
 
-        st.markdown("#### Email list")
+        render_panel_section_title("Email list")
 
         if not filtered:
             st.info("No emails match these filters.")
@@ -1188,11 +1299,7 @@ def main() -> None:
         has_previous = selected_id in st.session_state.get("analysis_previous", {})
         analyze_label = "Regenerate Analysis" if has_analysis else "Analyze Email"
 
-        if has_previous:
-            email_act = st.columns(2)
-        else:
-            email_act = st.columns(1)
-
+        email_act = st.columns(2)
         with email_act[0]:
             if st.button(
                 analyze_label,
@@ -1223,38 +1330,37 @@ def main() -> None:
                     st.rerun()
                 except ApiError as exc:
                     st.error(exc.message)
+        with email_act[1]:
+            if st.button("Draft Reply", use_container_width=True, key="act_draft_reply"):
+                try:
+                    with st.spinner("Drafting reply…"):
+                        txt = post_reply(
+                            active_base,
+                            selected_id,
+                            tone=tone,
+                            detail=detail,
+                        )
+                    prepared = prepare_reply_text(txt)
+                    st.session_state["_pending_reply_body"] = (selected_id, prepared)
+                    st.session_state.reply_edit_buffer[selected_id] = prepared
+                    st.toast("Draft ready.", icon="✅")
+                    st.rerun()
+                except ApiError as exc:
+                    st.error(exc.message)
 
         if has_previous:
-            with email_act[1]:
-                if st.button(
-                    "Restore previous analysis",
-                    use_container_width=True,
-                    key="act_restore_analysis",
-                    help="Swap back to the analysis saved before the last regenerate.",
-                ):
-                    if _restore_previous_analysis(selected_id):
-                        _clear_reply_edit_for_email(selected_id)
-                        st.toast("Previous analysis restored.", icon="✅")
-                        st.rerun()
-                    else:
-                        st.warning("No previous analysis to restore.")
-
-        if st.button("Draft Reply", use_container_width=True, key="act_draft_reply"):
-            try:
-                with st.spinner("Drafting reply…"):
-                    txt = post_reply(
-                        active_base,
-                        selected_id,
-                        tone=tone,
-                        detail=detail,
-                    )
-                prepared = prepare_reply_text(txt)
-                st.session_state["_pending_reply_body"] = (selected_id, prepared)
-                st.session_state.reply_edit_buffer[selected_id] = prepared
-                st.toast("Draft ready.", icon="✅")
-                st.rerun()
-            except ApiError as exc:
-                st.error(exc.message)
+            if st.button(
+                "Restore previous analysis",
+                use_container_width=True,
+                key="act_restore_analysis",
+                help="Swap back to the analysis saved before the last regenerate.",
+            ):
+                if _restore_previous_analysis(selected_id):
+                    _clear_reply_edit_for_email(selected_id)
+                    st.toast("Previous analysis restored.", icon="✅")
+                    st.rerun()
+                else:
+                    st.warning("No previous analysis to restore.")
 
         sender_txt = html_module.escape(str(detail.get("sender", "")))
         subject_txt = html_module.escape(str(detail.get("subject", "")))
@@ -1371,7 +1477,7 @@ def main() -> None:
             raw = st.session_state.reply_edit_buffer.get(selected_id, default_reply)
             st.session_state[edited_key] = prepare_reply_text(raw)
 
-        st.markdown("#### Suggested reply")
+        render_panel_section_title("Suggested reply")
         reply_body = st.text_area(
             "Suggested reply",
             height=260,
