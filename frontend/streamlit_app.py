@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import html as html_module
 import json
 import os
@@ -30,7 +31,7 @@ API_BASE_DEFAULT: Final[str] = "http://127.0.0.1:8000"
 # Rough manual baseline for one email (read → triage → short reply): not measured per user,
 # common desk-research range is ~3–6 minutes; used only for the “time saved” ratio in the UI.
 MANUAL_MIN_PER_EMAIL: Final[float] = 4.0
-INBOX_COLLAPSED_COUNT: Final[int] = 4
+INBOX_COLLAPSED_COUNT: Final[int] = 5
 
 
 def api_base() -> str:
@@ -751,8 +752,36 @@ def _select_inbox_email(email_id: str) -> None:
     st.session_state.selected_email_id = email_id
 
 
+def _save_analysis_snapshot(email_id: str, bundle: dict[str, Any]) -> None:
+    """Keep the current analysis so the user can restore it after a regenerate."""
+
+    snapshots = st.session_state.setdefault("analysis_previous", {})
+    snapshots[email_id] = copy.deepcopy(bundle)
+
+
+def _restore_previous_analysis(email_id: str) -> bool:
+    """Swap current analysis with the last snapshot (toggle back and forth)."""
+
+    snapshots = st.session_state.get("analysis_previous", {})
+    previous = snapshots.get(email_id)
+    if not previous:
+        return False
+    current = st.session_state.analysis_store.get(email_id)
+    if current is not None:
+        snapshots[email_id] = copy.deepcopy(current)
+    st.session_state.analysis_store[email_id] = copy.deepcopy(previous)
+    return True
+
+
+def _clear_reply_edit_for_email(email_id: str) -> None:
+    edited_key = f"suggested_reply_edit_{email_id}"
+    if edited_key in st.session_state:
+        del st.session_state[edited_key]
+
+
 def ensure_session_state() -> None:
     st.session_state.setdefault("analysis_store", {})
+    st.session_state.setdefault("analysis_previous", {})
     st.session_state.setdefault("selected_email_id", None)
     st.session_state.setdefault("session_analyzed_count", 0)
     st.session_state.setdefault("last_ai_seconds", None)
@@ -1151,61 +1180,64 @@ def main() -> None:
                 "Tone",
                 key="reply_tone_header",
                 label_visibility="collapsed",
-                placeholder="Professional, concise",
+                placeholder="e.g. Professional, concise, etc.",
             )
         tone = str(st.session_state.get("reply_tone_header") or "").strip() or "Professional, concise"
 
-        email_act = st.columns(2)
+        has_analysis = bundle is not None
+        has_previous = selected_id in st.session_state.get("analysis_previous", {})
+        analyze_label = "Regenerate Analysis" if has_analysis else "Analyze Email"
+
+        if has_previous:
+            email_act = st.columns(2)
+        else:
+            email_act = st.columns(1)
+
         with email_act[0]:
-            if st.button("Analyze Email", use_container_width=True, type="primary", key="act_analyze_email"):
-                try:
-                    with st.spinner("Analyzing email…"):
-                        t0 = time.monotonic()
-                        bundle = _patch_bundle_reply(
-                            post_analyze(
-                                active_base,
-                                selected_id,
-                                regenerate=False,
-                                detail=detail,
-                            )
-                        )
-                        st.session_state.analysis_store[selected_id] = bundle
-                        edited_key = f"suggested_reply_edit_{selected_id}"
-                        if edited_key in st.session_state:
-                            del st.session_state[edited_key]
-                        st.session_state.last_ai_seconds = time.monotonic() - t0
-                        st.session_state.session_analyzed_count += 1
-                    st.toast("Email analyzed.", icon="✅")
-                    st.rerun()
-                except ApiError as exc:
-                    st.error(exc.message)
-        with email_act[1]:
             if st.button(
-                "Regenerate Analysis",
+                analyze_label,
                 use_container_width=True,
-                key="act_regenerate_analysis",
+                type="primary",
+                key="act_analyze_or_regenerate",
             ):
                 try:
-                    with st.spinner("Regenerating analysis…"):
+                    spinner_msg = "Regenerating analysis…" if has_analysis else "Analyzing email…"
+                    with st.spinner(spinner_msg):
+                        if has_analysis and bundle is not None:
+                            _save_analysis_snapshot(selected_id, bundle)
                         t0 = time.monotonic()
-                        bundle = _patch_bundle_reply(
+                        new_bundle = _patch_bundle_reply(
                             post_analyze(
                                 active_base,
                                 selected_id,
-                                regenerate=True,
+                                regenerate=has_analysis,
                                 detail=detail,
                             )
                         )
-                        st.session_state.analysis_store[selected_id] = bundle
+                        st.session_state.analysis_store[selected_id] = new_bundle
+                        _clear_reply_edit_for_email(selected_id)
                         st.session_state.last_ai_seconds = time.monotonic() - t0
                         st.session_state.session_analyzed_count += 1
-                        edited_key = f"suggested_reply_edit_{selected_id}"
-                        if edited_key in st.session_state:
-                            del st.session_state[edited_key]
-                    st.toast("Analysis updated.", icon="✅")
+                    toast_msg = "Analysis updated." if has_analysis else "Email analyzed."
+                    st.toast(toast_msg, icon="✅")
                     st.rerun()
                 except ApiError as exc:
                     st.error(exc.message)
+
+        if has_previous:
+            with email_act[1]:
+                if st.button(
+                    "Restore previous analysis",
+                    use_container_width=True,
+                    key="act_restore_analysis",
+                    help="Swap back to the analysis saved before the last regenerate.",
+                ):
+                    if _restore_previous_analysis(selected_id):
+                        _clear_reply_edit_for_email(selected_id)
+                        st.toast("Previous analysis restored.", icon="✅")
+                        st.rerun()
+                    else:
+                        st.warning("No previous analysis to restore.")
 
         if st.button("Draft Reply", use_container_width=True, key="act_draft_reply"):
             try:
