@@ -11,8 +11,8 @@ Demo “enterprise inbox” assistant: classify, prioritize, summarize, and sugg
 - **Structured LLM analysis** (JSON schema + validation): category, priority, sentiment, summary, action items, deadlines, entities, suggested reply.
 - **Dedicated LLM service** (`app/services/llm_service.py`): external prompts, retries on rate limits, robust parsing.
 - **Server-side analysis cache** to avoid redundant calls (`app/services/analysis_cache.py`).
-- **Fake dataset**: 30 realistic emails under `emails/` (5 per folder: support, invoices, meetings, spam, urgent, personal).
-- **Streamlit frontend**: dark theme, search, folder filters, quick stats, JSON export (full analysis + tasks).
+- **Fake dataset**: 30 realistic emails under `emails/` (stored on disk by topic for generation only; the UI does not filter by folder).
+- **Streamlit frontend**: dark theme, search, AI-only category filters after analysis, quick stats (`—` until analyzed), JSON export (full analysis + tasks).
 - **Heuristic urgency hints** (UX complement, not ML): `app/utils/urgency.py`.
 
 ## Architecture

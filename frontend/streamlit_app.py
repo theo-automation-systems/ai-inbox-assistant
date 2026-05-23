@@ -98,32 +98,62 @@ def inject_styles() -> None:
             .app-header-bar {
                 background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(11,17,32,0.92));
                 border: 1px solid rgba(148,163,184,0.12);
-                border-radius: 14px;
-                padding: 11px 18px 10px 18px;
-                margin-bottom: 10px;
-                box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-                text-align: center;
+                border-radius: 12px;
+                padding: 10px 16px;
+                margin-bottom: 8px;
+                box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 56px;
             }
-            .app-header-inner { max-width: 920px; margin: 0 auto; }
+            .app-header-text {
+                text-align: center;
+                max-width: 720px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
             .app-title {
-                font-size: 1.65rem; font-weight: 700; letter-spacing: -0.03em;
-                color: #f8fafc; line-height: 1.2;
+                font-size: 1.48rem; font-weight: 700; letter-spacing: -0.03em;
+                color: #f8fafc; line-height: 1.15;
                 margin: 0;
             }
             .app-sub {
-                font-size: 0.84rem; color: #94a3b8; margin-top: 4px;
-                line-height: 1.3; max-width: 640px; margin-left: auto; margin-right: auto;
+                font-size: 0.82rem; color: #94a3b8; margin-top: 3px;
+                line-height: 1.25; max-width: 560px; margin-left: auto; margin-right: auto;
             }
-            .app-header-chips {
-                display: flex; flex-wrap: wrap; justify-content: center;
-                gap: 6px; margin-top: 8px;
+            .app-header-offline {
+                margin-top: 4px;
+                font-size: 0.72rem;
+                color: #fbbf24;
             }
-            .stat-chip {
-                display: inline-flex; align-items: center; gap: 6px;
-                padding: 4px 10px; border-radius: 999px;
-                border: 1px solid rgba(148,163,184,0.15);
-                background: rgba(255,255,255,0.03);
-                font-size: 12px; color: #e2e8f0;
+            textarea:focus,
+            input:focus,
+            [data-baseweb="input"]:focus-within,
+            [data-baseweb="textarea"]:focus-within,
+            [data-baseweb="select"]:focus-within {
+                border-color: #3b82f6 !important;
+                box-shadow: 0 0 0 1px #3b82f6 !important;
+                outline: none !important;
+            }
+            [data-baseweb="input"] input:focus {
+                border-color: #3b82f6 !important;
+                box-shadow: none !important;
+            }
+            div[data-testid="stButton"] button[kind="primary"],
+            div[data-testid="stButton"] button[data-testid="baseButton-primary"] {
+                background: linear-gradient(180deg, #475569 0%, #334155 100%) !important;
+                border: 1px solid rgba(148, 163, 184, 0.35) !important;
+                color: #f8fafc !important;
+                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
+            }
+            div[data-testid="stButton"] button[kind="primary"]:hover,
+            div[data-testid="stButton"] button[data-testid="baseButton-primary"]:hover {
+                background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
+                border-color: rgba(96, 165, 250, 0.5) !important;
+                color: #ffffff !important;
             }
             .email-card {
                 border-radius: 12px;
@@ -370,6 +400,133 @@ def inject_styles() -> None:
                 overflow: hidden !important;
                 pointer-events: auto !important;
             }
+            [class*="st-key-reply_actions"] > [data-testid="stHorizontalBlock"] {
+                align-items: center !important;
+            }
+            [class*="st-key-regen_reply_combo"] > [data-testid="stVerticalBlock"],
+            div[data-testid="stVerticalBlockBorderWrapper"][class*="st-key-regen_reply_combo"]
+                > [data-testid="stVerticalBlock"] {
+                gap: 0 !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="stHorizontalBlock"] {
+                gap: 0 !important;
+                align-items: stretch !important;
+                width: 100% !important;
+                border-radius: 8px !important;
+                overflow: hidden !important;
+                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"] {
+                padding: 0 !important;
+                min-width: 0 !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:first-child {
+                flex: 1 1 auto !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child {
+                flex: 0 0 2.35rem !important;
+                width: 2.35rem !important;
+                max-width: 2.35rem !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"] [data-testid="stButton"],
+            [class*="st-key-regen_reply_split"] [data-testid="column"] [data-testid="stButton"] > div {
+                width: 100% !important;
+                height: 100% !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:first-child button {
+                width: 100% !important;
+                min-height: 2.75rem !important;
+                height: 2.75rem !important;
+                border-top-right-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-right: none !important;
+                margin: 0 !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child button {
+                width: 100% !important;
+                min-height: 2.75rem !important;
+                height: 2.75rem !important;
+                border-top-left-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;
+                border-left: 1px solid rgba(148, 163, 184, 0.32) !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: linear-gradient(180deg, #475569 0%, #334155 100%) !important;
+                border-color: rgba(148, 163, 184, 0.35) !important;
+                color: #e2e8f0 !important;
+                font-size: 10px !important;
+                line-height: 1 !important;
+                box-shadow: none !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child button:hover {
+                background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
+                border-color: rgba(96, 165, 250, 0.5) !important;
+                color: #ffffff !important;
+            }
+            [class*="st-key-regen_reply_combo"]:has([class*="st-key-regen_style_panel"])
+                [class*="st-key-regen_reply_split"] [data-testid="column"]:first-child button,
+            [class*="st-key-regen_reply_combo"]:has([class*="st-key-regen_style_panel"])
+                [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child button {
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+            [class*="st-key-regen_reply_combo"] > [data-testid="stVerticalBlock"]
+                > [data-testid="stElementContainer"]:has([class*="st-key-regen_style_panel"]),
+            div[data-testid="stVerticalBlockBorderWrapper"][class*="st-key-regen_reply_combo"]
+                > [data-testid="stVerticalBlock"]
+                > [data-testid="stElementContainer"]:has([class*="st-key-regen_style_panel"]) {
+                margin-top: -14px !important;
+                margin-bottom: 0 !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+            div[data-testid="stVerticalBlockBorderWrapper"][class*="st-key-regen_style_panel"],
+            [class*="st-key-regen_style_panel"] {
+                margin: -14px 0 0 0 !important;
+                padding: 0 !important;
+            }
+            div[data-testid="stVerticalBlockBorderWrapper"][class*="st-key-regen_style_panel"]
+                > [data-testid="stVerticalBlock"],
+            [class*="st-key-regen_style_panel"] > [data-testid="stVerticalBlock"] {
+                gap: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            [class*="st-key-regen_style_panel"] [data-testid="stElementContainer"] {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            [class*="st-key-regen_style_panel"] [data-testid="stTextInput"] {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            [class*="st-key-regen_style_panel"] [data-testid="stTextInput"] label {
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            [class*="st-key-regen_style_panel"] [data-testid="stTextInput"] > div {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            [class*="st-key-regen_style_panel"] [data-testid="stTextInput"] input {
+                margin: 0 !important;
+                min-height: 2.5rem !important;
+                border-top: none !important;
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: 0 !important;
+                border-bottom-left-radius: 8px !important;
+                border-bottom-right-radius: 8px !important;
+                border-color: rgba(148, 163, 184, 0.35) !important;
+                background: rgba(15, 23, 42, 0.55) !important;
+                font-size: 13px !important;
+                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
+            }
+            [class*="st-key-reply_actions"] > [data-testid="stHorizontalBlock"] > [data-testid="column"]:last-child
+                > [data-testid="stVerticalBlock"] {
+                gap: 0 !important;
+            }
             .action-group-label {
                 font-size: 11px;
                 font-weight: 600;
@@ -393,7 +550,7 @@ def inject_styles() -> None:
             }
             [class*="st-key-actions_panel"] .action-group-label {
                 margin: 0;
-                font-size: 10px;
+                font-size: 11.5px;
                 line-height: 1.3;
             }
             [class*="st-key-actions_panel"] .action-group-head {
@@ -462,13 +619,20 @@ def inject_styles() -> None:
                 margin: 0.55rem 0 0.35rem 0;
                 line-height: 1.3;
             }
-            [class*="st-key-inbox_counts"] [data-testid="stMetricLabel"] {
+            .time-saved-label {
+                font-size: 0.82rem;
+                font-weight: 600;
+                color: #94a3b8;
+                margin: 0.2rem 0 0.45rem 0;
+                line-height: 1.25;
+            }
+            [class*="st-key-inbox_filters_counts"] [data-testid="stMetricLabel"] {
                 font-size: 0.8rem !important;
             }
-            [class*="st-key-inbox_counts"] [data-testid="stMetricValue"] {
+            [class*="st-key-inbox_filters_counts"] [data-testid="stMetricValue"] {
                 font-size: 1.28rem !important;
             }
-            [class*="st-key-inbox_counts"] [data-testid="stMetric"] {
+            [class*="st-key-inbox_filters_counts"] [data-testid="stMetric"] {
                 padding: 0.2rem 0 !important;
             }
         </style>
@@ -511,17 +675,15 @@ _CATEGORY_LABELS: dict[str, tuple[str, str]] = {
 }
 
 
-def category_banner(bundle: dict[str, Any] | None, folder: str) -> tuple[str, str]:
-    """Emoji + uppercase label for inbox rows (AI category when analyzed)."""
+def category_banner(bundle: dict[str, Any] | None, _folder: str = "") -> tuple[str, str]:
+    """Emoji + uppercase label from AI analysis only (not demo folder paths)."""
 
-    cat = str(folder or "").strip().lower()
-    if bundle:
-        ai_cat = str(bundle["analysis"].get("category", "") or "").strip().lower()
-        if ai_cat:
-            cat = ai_cat
+    if not bundle:
+        return ("⚪", "UNCLASSIFIED")
+    cat = str(bundle["analysis"].get("category", "") or "").strip().lower()
     if cat in _CATEGORY_LABELS:
         return _CATEGORY_LABELS[cat]
-    label = cat.upper().replace("_", " ")[:18] or "MESSAGE"
+    label = cat.upper().replace("_", " ")[:18] or "—"
     return ("⚪", label)
 
 
@@ -533,14 +695,40 @@ def pretty_enum_label(value: str | None) -> str:
     return str(value).replace("_", " ").strip().title()
 
 
-def display_priority(bundle: dict[str, Any] | None, folder: str) -> str:
-    if bundle:
-        return str(bundle["analysis"].get("priority", "medium"))
-    if folder == "urgent":
-        return "high"
-    if folder == "spam":
-        return "low"
-    return "medium"
+def display_priority(bundle: dict[str, Any] | None, _folder: str = "") -> str | None:
+    if not bundle:
+        return None
+    return str(bundle["analysis"].get("priority", "medium"))
+
+
+def metric_display_count(value: int) -> str | int:
+    """Show em dash until AI stats exist (avoid misleading zeros)."""
+
+    return value if value > 0 else "—"
+
+
+def email_matches_quick_filter(quick: str, bundle: dict[str, Any] | None) -> bool:
+    """Category filters apply only after AI analysis (Process Inbox / Analyze Email)."""
+
+    if quick == "All":
+        return True
+    if not bundle:
+        return False
+    analysis = bundle.get("analysis") or {}
+    cat = str(analysis.get("category", "")).lower()
+    pr = str(analysis.get("priority", "")).lower()
+    if quick == "High priority+":
+        return pr in {"high", "critical"} or cat == "urgent"
+    category_map = {
+        "Invoices": {"invoice"},
+        "Meetings": {"meeting"},
+        "Support": {"support"},
+        "Spam": {"spam"},
+    }
+    allowed = category_map.get(quick)
+    if allowed is not None:
+        return cat in allowed
+    return True
 
 
 def _parse_email_datetime(date_str: str | None) -> datetime | None:
@@ -651,7 +839,6 @@ def smart_match(row: dict[str, Any], bundle: dict[str, Any] | None, query: str) 
             str(row.get("subject", "")),
             str(row.get("sender", "")),
             str(row.get("body", "")),
-            str(row.get("folder", "")),
         ]
     ).lower()
     if bundle:
@@ -683,11 +870,17 @@ def _patch_bundle_reply(bundle: dict[str, Any]) -> dict[str, Any]:
     return patched
 
 
-def render_copy_to_clipboard(text: str, *, key_suffix: str) -> None:
-    """Copy via the browser clipboard — no Streamlit rerun."""
+def render_copy_to_clipboard(
+    text: str,
+    *,
+    key_suffix: str,
+    widget_key: str | None = None,
+) -> None:
+    """Copy via the browser clipboard — reads live textarea value when widget_key is set."""
 
     payload = json.dumps(text or "")
     safe_id = re.sub(r"[^\w-]", "_", key_suffix)
+    widget_key_json = json.dumps(widget_key or "")
     doc = f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
@@ -717,10 +910,25 @@ def render_copy_to_clipboard(text: str, *, key_suffix: str) -> None:
 <button type="button" id="copy_{safe_id}">Copy</button>
 <script>
 (function() {{
-  const text = {payload};
+  const fallback = {payload};
+  const widgetKey = {widget_key_json};
   const btn = document.getElementById("copy_{safe_id}");
   if (!btn) return;
+  function readLiveText() {{
+    if (!widgetKey) return fallback;
+    const root = window.parent.document;
+    const needle = "st-key-" + widgetKey;
+    const nodes = root.querySelectorAll('[class*="st-key-"]');
+    for (const el of nodes) {{
+      const cls = el.className || "";
+      if (cls.indexOf(needle) < 0) continue;
+      const ta = el.querySelector("textarea");
+      if (ta) return ta.value;
+    }}
+    return fallback;
+  }}
   async function copyNow() {{
+    const text = readLiveText();
     try {{
       if (navigator.clipboard && window.isSecureContext) {{
         await navigator.clipboard.writeText(text);
@@ -989,26 +1197,87 @@ def render_inbox_ticket(
 
 
 def render_header_bar(stats: dict[str, Any], api_ok: bool) -> None:
-    analyzed = int(stats.get("analyzed", 0))
-    urgent = int(stats.get("urgent_ai", 0))
-    actions = int(stats.get("actions", 0))
-    chips = (
-        f"<span class='stat-chip'>📬 <b>{analyzed}</b> analyzed</span>"
-        f"<span class='stat-chip'>🚨 <b>{urgent}</b> urgent</span>"
-        f"<span class='stat-chip'>✅ <b>{actions}</b> actions</span>"
+    _ = stats
+    offline = (
+        "<div class='app-header-offline'>⚠️ API offline</div>" if not api_ok else ""
     )
-    if not api_ok:
-        chips += "<span class='stat-chip'>⚠️ API offline</span>"
     st.markdown(
         f"<div class='app-header-host'></div><div class='app-header-bar'>"
-        f"<div class='app-header-inner'>"
+        f"<div class='app-header-text'>"
         f"<div class='app-title'>✉️ AI Inbox Assistant</div>"
         f"<div class='app-sub'>Intelligent email triage, prioritization and response generation</div>"
-        f"<div class='app-header-chips'>{chips}</div>"
-        f"</div>"
+        f"{offline}"
         f"</div></div>",
         unsafe_allow_html=True,
     )
+
+
+def _regenerate_reply_draft(
+    *,
+    active_base: str,
+    selected_id: str,
+    detail: dict[str, Any],
+) -> None:
+    tone = (
+        str(st.session_state.get("reply_tone_header") or "").strip()
+        or "Professional, concise"
+    )
+    try:
+        with st.spinner("Regenerating reply…"):
+            txt = post_reply(active_base, selected_id, tone=tone, detail=detail)
+        prepared = prepare_reply_text(txt)
+        st.session_state["_pending_reply_body"] = (selected_id, prepared)
+        st.session_state.reply_edit_buffer[selected_id] = prepared
+        st.toast("Reply updated.", icon="✅")
+        st.rerun()
+    except ApiError as exc:
+        st.error(exc.message)
+
+
+def render_regenerate_reply_controls(
+    *,
+    active_base: str,
+    selected_id: str,
+    detail: dict[str, Any],
+) -> None:
+    """Split-button Regenerate reply + caret; native Streamlit (no iframe/query_params)."""
+    style_open_key = f"reply_style_open_{selected_id}"
+    style_open = bool(st.session_state.get(style_open_key, False))
+
+    with st.container(key="regen_reply_combo"):
+        with st.container(key="regen_reply_split"):
+            regen_main, regen_caret = st.columns([12, 1], gap="small")
+            with regen_main:
+                if st.button(
+                    "Regenerate reply",
+                    use_container_width=True,
+                    type="primary",
+                    key=f"regreply_{selected_id}",
+                    help="Regenerate the reply draft.",
+                ):
+                    _regenerate_reply_draft(
+                        active_base=active_base,
+                        selected_id=selected_id,
+                        detail=detail,
+                    )
+            with regen_caret:
+                arrow_label = "▴" if style_open else "▾"
+                if st.button(
+                    arrow_label,
+                    use_container_width=True,
+                    key=f"reply_style_toggle_{selected_id}",
+                    help="Reply style (tone for regeneration)",
+                ):
+                    st.session_state[style_open_key] = not style_open
+                    st.rerun()
+        if style_open:
+            with st.container(key="regen_style_panel"):
+                st.text_input(
+                    "Reply tone",
+                    key="reply_tone_header",
+                    label_visibility="collapsed",
+                    placeholder="Reply style · e.g. Professional, concise, etc.",
+                )
 
 
 def main() -> None:
@@ -1141,56 +1410,30 @@ def main() -> None:
     with left:
         st.markdown("### Inbox")
 
-        render_panel_section_title("Filters")
-        quick = st.radio(
-            "Quick filter",
-            options=["All", "High priority+", "Invoices", "Meetings", "Support", "Spam"],
-            horizontal=True,
-            label_visibility="collapsed",
-        )
-
-        query = st.text_input(
-            "Search",
-            placeholder='e.g. refund before Friday, invoice, "John Smith"',
-            label_visibility="visible",
-        ).strip()
+        render_panel_section_title("Filters & overview")
+        with st.container(key="inbox_filters_counts"):
+            mini = st.columns(4)
+            mini[0].metric("Emails", stats["total"])
+            mini[1].metric("Urgent", metric_display_count(stats["urgent_ai"]))
+            mini[2].metric("Meetings", metric_display_count(stats["meetings_ai"]))
+            mini[3].metric("Invoices", metric_display_count(stats["invoices_ai"]))
+            quick = st.radio(
+                "Quick filter",
+                options=["All", "High priority+", "Invoices", "Meetings", "Support", "Spam"],
+                horizontal=True,
+                label_visibility="collapsed",
+            )
+            query = st.text_input(
+                "Search",
+                placeholder='e.g. refund before Friday, invoice, "John Smith"',
+                label_visibility="visible",
+            ).strip()
 
         filtered: list[dict[str, Any]] = []
         for row in display_emails:
             bundle = st.session_state.analysis_store.get(row["id"])
-            if quick == "High priority+":
-                pr = display_priority(bundle, str(row.get("folder", "")))
-                if pr not in {"high", "critical"}:
-                    continue
-            elif quick == "Invoices":
-                ok = str(row.get("folder")) == "invoices"
-                ok = ok or (
-                    bundle is not None and str(bundle["analysis"].get("category")) == "invoice"
-                )
-                if not ok:
-                    continue
-            elif quick == "Meetings":
-                ok = str(row.get("folder")) == "meetings"
-                ok = ok or (
-                    bundle is not None and str(bundle["analysis"].get("category")) == "meeting"
-                )
-                if not ok:
-                    continue
-            elif quick == "Support":
-                ok = str(row.get("folder")) == "support"
-                ok = ok or (
-                    bundle is not None and str(bundle["analysis"].get("category")) == "support"
-                )
-                if not ok:
-                    continue
-            elif quick == "Spam":
-                ok = str(row.get("folder")) == "spam"
-                ok = ok or (
-                    bundle is not None and str(bundle["analysis"].get("category")) == "spam"
-                )
-                if not ok:
-                    continue
-
+            if not email_matches_quick_filter(quick, bundle):
+                continue
             if not smart_match(row, bundle, query):
                 continue
             filtered.append(row)
@@ -1199,23 +1442,22 @@ def main() -> None:
 
         def sort_key(r: dict[str, Any]) -> tuple[int, str]:
             b = st.session_state.analysis_store.get(r["id"])
-            pr = display_priority(b, str(r.get("folder", "")))
-            return (priority_rank.get(pr, 9), str(r.get("subject", "")).lower())
+            pr = display_priority(b)
+            rank = priority_rank.get(pr, 9) if pr else 9
+            return (rank, str(r.get("subject", "")).lower())
 
         filtered.sort(key=sort_key)
 
-        render_panel_section_title("Counts")
-        with st.container(key="inbox_counts"):
-            mini = st.columns(4)
-            mini[0].metric("Emails", stats["total"])
-            mini[1].metric("Urgent", stats["urgent_ai"])
-            mini[2].metric("Meetings", stats["meetings_ai"])
-            mini[3].metric("Invoices", stats["invoices_ai"])
+        if quick != "All" and not stats["analyzed"]:
+            st.caption("Category filters apply after **Process Inbox** or **Analyze Email**.")
 
         render_panel_section_title("Email list")
 
         if not filtered:
-            st.info("No emails match these filters.")
+            if quick != "All" and stats["analyzed"] == 0:
+                st.info("No analyzed emails yet. Run **Process Inbox** to enable category filters.")
+            else:
+                st.info("No emails match these filters.")
             st.session_state.selected_email_id = None
         else:
             expanded = bool(st.session_state.inbox_list_expanded)
@@ -1285,83 +1527,6 @@ def main() -> None:
 
         st.markdown("### Email")
 
-        render_action_group_label("Email actions")
-        with st.expander("Reply style", expanded=False):
-            st.text_input(
-                "Tone",
-                key="reply_tone_header",
-                label_visibility="collapsed",
-                placeholder="e.g. Professional, concise, etc.",
-            )
-        tone = str(st.session_state.get("reply_tone_header") or "").strip() or "Professional, concise"
-
-        has_analysis = bundle is not None
-        has_previous = selected_id in st.session_state.get("analysis_previous", {})
-        analyze_label = "Regenerate Analysis" if has_analysis else "Analyze Email"
-
-        email_act = st.columns(2)
-        with email_act[0]:
-            if st.button(
-                analyze_label,
-                use_container_width=True,
-                type="primary",
-                key="act_analyze_or_regenerate",
-            ):
-                try:
-                    spinner_msg = "Regenerating analysis…" if has_analysis else "Analyzing email…"
-                    with st.spinner(spinner_msg):
-                        if has_analysis and bundle is not None:
-                            _save_analysis_snapshot(selected_id, bundle)
-                        t0 = time.monotonic()
-                        new_bundle = _patch_bundle_reply(
-                            post_analyze(
-                                active_base,
-                                selected_id,
-                                regenerate=has_analysis,
-                                detail=detail,
-                            )
-                        )
-                        st.session_state.analysis_store[selected_id] = new_bundle
-                        _clear_reply_edit_for_email(selected_id)
-                        st.session_state.last_ai_seconds = time.monotonic() - t0
-                        st.session_state.session_analyzed_count += 1
-                    toast_msg = "Analysis updated." if has_analysis else "Email analyzed."
-                    st.toast(toast_msg, icon="✅")
-                    st.rerun()
-                except ApiError as exc:
-                    st.error(exc.message)
-        with email_act[1]:
-            if st.button("Draft Reply", use_container_width=True, key="act_draft_reply"):
-                try:
-                    with st.spinner("Drafting reply…"):
-                        txt = post_reply(
-                            active_base,
-                            selected_id,
-                            tone=tone,
-                            detail=detail,
-                        )
-                    prepared = prepare_reply_text(txt)
-                    st.session_state["_pending_reply_body"] = (selected_id, prepared)
-                    st.session_state.reply_edit_buffer[selected_id] = prepared
-                    st.toast("Draft ready.", icon="✅")
-                    st.rerun()
-                except ApiError as exc:
-                    st.error(exc.message)
-
-        if has_previous:
-            if st.button(
-                "Restore previous analysis",
-                use_container_width=True,
-                key="act_restore_analysis",
-                help="Swap back to the analysis saved before the last regenerate.",
-            ):
-                if _restore_previous_analysis(selected_id):
-                    _clear_reply_edit_for_email(selected_id)
-                    st.toast("Previous analysis restored.", icon="✅")
-                    st.rerun()
-                else:
-                    st.warning("No previous analysis to restore.")
-
         sender_txt = html_module.escape(str(detail.get("sender", "")))
         subject_txt = html_module.escape(str(detail.get("subject", "")))
         body_txt = html_module.escape(str(detail.get("body", ""))).replace("\n", "<br/>")
@@ -1376,6 +1541,55 @@ def main() -> None:
             f"</div>",
             unsafe_allow_html=True,
         )
+
+        render_action_group_label("Email actions")
+        has_analysis = bundle is not None
+        has_previous = selected_id in st.session_state.get("analysis_previous", {})
+        analyze_label = "Regenerate Analysis" if has_analysis else "Analyze Email"
+
+        if st.button(
+            analyze_label,
+            use_container_width=True,
+            type="primary",
+            key="act_analyze_or_regenerate",
+        ):
+            try:
+                spinner_msg = "Regenerating analysis…" if has_analysis else "Analyzing email…"
+                with st.spinner(spinner_msg):
+                    if has_analysis and bundle is not None:
+                        _save_analysis_snapshot(selected_id, bundle)
+                    t0 = time.monotonic()
+                    new_bundle = _patch_bundle_reply(
+                        post_analyze(
+                            active_base,
+                            selected_id,
+                            regenerate=has_analysis,
+                            detail=detail,
+                        )
+                    )
+                    st.session_state.analysis_store[selected_id] = new_bundle
+                    _clear_reply_edit_for_email(selected_id)
+                    st.session_state.last_ai_seconds = time.monotonic() - t0
+                    st.session_state.session_analyzed_count += 1
+                toast_msg = "Analysis updated." if has_analysis else "Email analyzed."
+                st.toast(toast_msg, icon="✅")
+                st.rerun()
+            except ApiError as exc:
+                st.error(exc.message)
+
+        if has_previous:
+            if st.button(
+                "Restore previous analysis",
+                use_container_width=True,
+                key="act_restore_analysis",
+                help="Swap back to the analysis saved before the last regenerate.",
+            ):
+                if _restore_previous_analysis(selected_id):
+                    _clear_reply_edit_for_email(selected_id)
+                    st.toast("Previous analysis restored.", icon="✅")
+                    st.rerun()
+                else:
+                    st.warning("No previous analysis to restore.")
 
         if bundle:
             analysis = bundle["analysis"]
@@ -1428,88 +1642,75 @@ def main() -> None:
                 if not analysis.get("deadlines"):
                     st.caption("None extracted.")
 
-            st.markdown("---")
             manual_m = int(MANUAL_MIN_PER_EMAIL)
-            st.markdown(f"#### Estimated time saved : ~{manual_m}min")
+            st.markdown(
+                f'<p class="time-saved-label">Estimated time saved : ~{manual_m}min</p>',
+                unsafe_allow_html=True,
+            )
 
-            with st.expander("Export", expanded=False):
-                export_payload = {"email": detail, "analysis": analysis}
-                d1, d2 = st.columns(2)
-                with d1:
-                    st.download_button(
-                        "Download JSON",
-                        data=json.dumps(export_payload, ensure_ascii=False, indent=2),
-                        file_name=f"{selected_id}_analysis.json",
-                        mime="application/json",
-                        use_container_width=True,
-                    )
-                with d2:
-                    tasks_only = {
-                        "email_id": selected_id,
-                        "action_items": analysis.get("action_items", []),
-                        "deadlines": analysis.get("deadlines", []),
-                    }
-                    st.download_button(
-                        "Download tasks",
-                        data=json.dumps(tasks_only, ensure_ascii=False, indent=2),
-                        file_name=f"{selected_id}_tasks.json",
-                        mime="application/json",
-                        use_container_width=True,
-                    )
+            export_payload = {"email": detail, "analysis": analysis}
+            ex1, ex2 = st.columns(2)
+            with ex1:
+                st.download_button(
+                    "Export to JSON",
+                    data=json.dumps(export_payload, ensure_ascii=False, indent=2),
+                    file_name=f"{selected_id}_analysis.json",
+                    mime="application/json",
+                    use_container_width=True,
+                )
+            with ex2:
+                tasks_only = {
+                    "email_id": selected_id,
+                    "action_items": analysis.get("action_items", []),
+                    "deadlines": analysis.get("deadlines", []),
+                }
+                st.download_button(
+                    "Download tasks",
+                    data=json.dumps(tasks_only, ensure_ascii=False, indent=2),
+                    file_name=f"{selected_id}_tasks.json",
+                    mime="application/json",
+                    use_container_width=True,
+                )
         else:
             st.info(
                 "Run **Analyze Email** on this message, or use **Process Inbox** to analyze the mailbox."
             )
 
-        edited_key = f"suggested_reply_edit_{selected_id}"
-        pending_reply = st.session_state.pop("_pending_reply_body", None)
-        if isinstance(pending_reply, tuple) and len(pending_reply) == 2:
-            peid, ptxt = pending_reply
-            if peid == selected_id:
-                st.session_state[edited_key] = ptxt
-                st.session_state.reply_edit_buffer[selected_id] = ptxt
-
-        default_reply = ""
         if bundle:
+            edited_key = f"suggested_reply_edit_{selected_id}"
+            pending_reply = st.session_state.pop("_pending_reply_body", None)
+            if isinstance(pending_reply, tuple) and len(pending_reply) == 2:
+                peid, ptxt = pending_reply
+                if peid == selected_id:
+                    st.session_state[edited_key] = ptxt
+                    st.session_state.reply_edit_buffer[selected_id] = ptxt
+
             default_reply = str(bundle["analysis"].get("suggested_reply", "") or "")
+            if edited_key not in st.session_state:
+                raw = st.session_state.reply_edit_buffer.get(selected_id, default_reply)
+                st.session_state[edited_key] = prepare_reply_text(raw)
 
-        if edited_key not in st.session_state:
-            raw = st.session_state.reply_edit_buffer.get(selected_id, default_reply)
-            st.session_state[edited_key] = prepare_reply_text(raw)
-
-        render_panel_section_title("Suggested reply")
-        reply_body = st.text_area(
-            "Suggested reply",
-            height=260,
-            key=edited_key,
-            label_visibility="collapsed",
-        )
-        with st.container(key="reply_actions"):
-            bc1, bc2 = st.columns(2, gap="small")
-            with bc1:
-                render_copy_to_clipboard(reply_body, key_suffix=selected_id)
-            with bc2:
-                if st.button(
-                    "New draft",
-                    use_container_width=True,
-                    key=f"regreply_{selected_id}",
-                    help="Calls the model again (slightly higher randomness). Adjust Reply style for more variation.",
-                ):
-                    try:
-                        with st.spinner("Drafting reply…"):
-                            txt = post_reply(
-                                active_base,
-                                selected_id,
-                                tone=tone,
-                                detail=detail,
-                            )
-                        prepared = prepare_reply_text(txt)
-                        st.session_state["_pending_reply_body"] = (selected_id, prepared)
-                        st.session_state.reply_edit_buffer[selected_id] = prepared
-                        st.toast("New draft ready.", icon="✅")
-                        st.rerun()
-                    except ApiError as exc:
-                        st.error(exc.message)
+            render_panel_section_title("Suggested reply")
+            reply_body = st.text_area(
+                "Suggested reply",
+                height=260,
+                key=edited_key,
+                label_visibility="collapsed",
+            )
+            with st.container(key="reply_actions"):
+                ra_copy, ra_regen = st.columns(2, gap="small")
+                with ra_copy:
+                    render_copy_to_clipboard(
+                        reply_body,
+                        key_suffix=selected_id,
+                        widget_key=edited_key,
+                    )
+                with ra_regen:
+                    render_regenerate_reply_controls(
+                        active_base=active_base,
+                        selected_id=selected_id,
+                        detail=detail,
+                    )
 
 
 if __name__ == "__main__":
