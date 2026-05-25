@@ -1,113 +1,174 @@
 # AI Inbox Assistant
 
-AI-powered inbox assistant that automatically classifies, summarizes, and prioritizes 
-emails to reduce daily workload.
+Intelligent email triage, prioritization, and AI-generated replies for enterprise inbox workflows.
 
-Demo “enterprise inbox” assistant: classify, prioritize, summarize, and suggest replies via **Groq** (default, OpenAI-compatible API) or **OpenAI**, with a modular FastAPI backend and a SaaS-style Streamlit UI.
+![AI Inbox Assistant dashboard](assets/ai-inbox-assistant-dashboard.png)
+
+AI Inbox Assistant is a SaaS-style internal operations tool that helps teams turn messy inboxes into structured, actionable work. It classifies emails, detects priority, summarizes context, extracts tasks, and drafts replies using an LLM-backed workflow.
+
+## Why This Project?
+
+Managing large inboxes is repetitive, time-consuming, and easy to miss under pressure.
+
+AI Inbox Assistant helps teams:
+
+- detect urgent or high-priority messages,
+- summarize long or noisy emails,
+- extract action items and deadlines,
+- generate contextual reply drafts,
+- process an entire inbox in batches,
+- export structured analysis for downstream workflows.
+
+The project is designed as a realistic product prototype: polished UI, API-first backend, structured LLM outputs, and practical operations-focused UX.
 
 ## Features
 
-- **FastAPI backend** with typed endpoints and Pydantic validation.
-- **Structured LLM analysis** (JSON schema + validation): category, priority, sentiment, summary, action items, deadlines, entities, suggested reply.
-- **Dedicated LLM service** (`app/services/llm_service.py`): external prompts, retries on rate limits, robust parsing.
-- **Server-side analysis cache** to avoid redundant calls (`app/services/analysis_cache.py`).
-- **Fake dataset**: 30 realistic emails under `emails/` (stored on disk by topic for generation only; the UI does not filter by folder).
-- **Streamlit frontend**: dark theme, search, AI-only category filters after analysis, quick stats (`—` until analyzed), JSON export (full analysis + tasks).
-- **Heuristic urgency hints** (UX complement, not ML): `app/utils/urgency.py`.
+- AI-powered email classification
+- Priority detection for urgent, high, medium, and low importance
+- Automatic summaries for faster triage
+- Sentiment and intent extraction
+- Action item and deadline extraction
+- AI-generated suggested replies
+- Regenerate reply with custom reply style
+- Batch inbox processing
+- Single email analysis
+- Upload `.txt` and `.eml` emails
+- Search and AI-based category filters
+- Export full analysis to JSON
+- Export tasks and deadlines separately
+
+## Product Preview
+
+### Inbox Triage
+
+Browse emails, identify pending analysis, run batch processing, and filter the inbox using AI-generated categories.
+
+![Inbox triage preview](assets/ai-inbox-assistant-dashboard.png)
+
+### AI Analysis
+
+Each analyzed email includes category, priority, sentiment, summary, action items, deadlines, entities, and a contextual suggested reply.
+
+## Tech Stack
+
+- **Frontend:** Streamlit, custom CSS, SaaS-style dark UI
+- **Backend:** FastAPI, Pydantic, Uvicorn
+- **LLM providers:** Groq by default, OpenAI-compatible fallback
+- **Data:** Local demo inbox with `.txt` files and `.eml` upload support
+- **Testing:** Pytest and pytest-asyncio
 
 ## Architecture
 
-```
+```text
 project_root/
 ├── app/
-│   ├── api/              # REST routes (/emails, /analyze, /reply)
-│   ├── core/             # Configuration (pydantic-settings)
-│   ├── services/         # Email repo, LLM, analysis cache
+│   ├── api/              # REST routes: /emails, /analyze, /reply
+│   ├── core/             # Settings and environment configuration
+│   ├── services/         # Email repository, LLM orchestration, cache
 │   ├── models/           # Shared Pydantic schemas
-│   ├── prompts/          # Versioned prompts (classification / extraction / reply)
-│   ├── utils/            # Parse .txt emails, JSON extraction, heuristics
-│   └── main.py           # FastAPI app + CORS + lifespan
-├── frontend/streamlit_app.py
-├── emails/               # Fake data (.txt)
-├── scripts/generate_emails.py  # Regenerate files if needed
+│   ├── prompts/          # Versioned prompts for analysis and replies
+│   ├── utils/            # Email parsing, JSON extraction, urgency hints
+│   └── main.py           # FastAPI app, CORS, lifespan
+├── frontend/
+│   └── streamlit_app.py  # Product UI
+├── emails/               # Demo inbox data
+├── scripts/              # Dataset generation helpers
 ├── tests/
-├── requirements.txt
-├── .env.example
-└── README.md
+└── requirements.txt
 ```
 
-Main flow:
+High-level flow:
 
-1. `.txt` files are indexed on startup (`EmailRepository.refresh`).
-2. `POST /analyze` loads (or receives) an email, checks the cache, then calls the LLM (Groq or OpenAI) with validated JSON output (`EmailAnalysisResult`).
-3. `POST /reply` regenerates only a reply (`reply_prompt.txt`).
-4. Streamlit calls the API with `httpx` and keeps a small UI cache in `st.session_state`.
-
-## Prerequisites
-
-- **Python 3.12+**
-- **Groq** API key ([console](https://console.groq.com/keys)) with `LLM_PROVIDER=groq`, or **OpenAI** if `LLM_PROVIDER=openai`.
+1. The backend indexes demo emails on startup.
+2. The Streamlit UI requests the inbox list and selected email details.
+3. `POST /analyze` sends an email through the LLM workflow and validates the structured JSON result.
+4. `POST /reply` regenerates only the reply draft with an optional custom tone.
+5. The UI stores session-level analysis state, edited replies, and export-ready results.
 
 ## Setup
+
+### Prerequisites
+
+- Python 3.12+
+- Groq API key from the [Groq Console](https://console.groq.com/keys), or an OpenAI key if using `LLM_PROVIDER=openai`
+
+### Installation
 
 ```powershell
 cd ai-inbox-assistant
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-copy .env.example .env   # then set GROQ_API_KEY (or OpenAI if needed)
+copy .env.example .env
 ```
 
-### Environment variables
+Then set `GROQ_API_KEY` in `.env` for the default Groq setup, or configure OpenAI variables if using OpenAI.
+
+### Environment Variables
 
 See `.env.example`. Main settings:
 
 | Variable | Description |
 | --- | --- |
-| `LLM_PROVIDER` | `groq` (default) or `openai`. |
-| `GROQ_API_KEY` | Groq key (**default** for `/analyze` and `/reply`). |
-| `GROQ_MODEL` | Groq model (e.g. `llama-3.3-70b-versatile`). |
-| `OPENAI_API_KEY` | If `LLM_PROVIDER=openai`. |
-| `OPENAI_MODEL` | OpenAI model when used. |
-| `EMAILS_DIR` | Fake emails directory (relative to project or absolute). |
-| `CORS_ORIGINS` | Allowed origins for Streamlit (CSV list). |
-| `STREAMLIT_API_BASE` | Backend URL for Streamlit (`http://127.0.0.1:8000` by default). |
+| `LLM_PROVIDER` | `groq` by default, or `openai`. |
+| `GROQ_API_KEY` | Groq API key for `/analyze` and `/reply`. |
+| `GROQ_MODEL` | Groq model name. |
+| `OPENAI_API_KEY` | Required if `LLM_PROVIDER=openai`. |
+| `OPENAI_MODEL` | OpenAI model name when used. |
+| `EMAILS_DIR` | Demo emails directory. |
+| `CORS_ORIGINS` | Allowed frontend origins. |
+| `STREAMLIT_API_BASE` | Backend URL used by Streamlit. |
 
-## Run the backend
+## Run Locally
 
-From the repo root:
+Start the backend:
 
 ```powershell
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Check: `GET http://127.0.0.1:8000/health` should return `{"status":"ok","emails_loaded":30}`.
+Health check:
 
-Interactive docs: `http://127.0.0.1:8000/docs`.
+```text
+http://127.0.0.1:8000/health
+```
 
-## Run the Streamlit frontend
+Interactive API docs:
 
-In a **second** terminal (venv active):
+```text
+http://127.0.0.1:8000/docs
+```
+
+In a second terminal, start the frontend:
 
 ```powershell
 streamlit run frontend/streamlit_app.py
 ```
 
-Browser opens at `http://localhost:8501`. Adjust `STREAMLIT_API_BASE` in `.env` if needed.
+The app opens at:
 
-Upload a single message via **Analyze upload**: `.txt` (demo `FROM`/`SUBJECT` format) or standard `.eml` exports (Outlook, Thunderbird, etc.).
+```text
+http://localhost:8501
+```
 
-## Dataset
+## Demo Dataset
 
-Files live under `emails/<folder>/email_XX.txt`. To regenerate:
+Demo emails live under `emails/<folder>/email_XX.txt`. The folders are used only to organize sample data; classification in the UI comes from AI analysis, not from folder names.
+
+To regenerate the dataset:
 
 ```powershell
 python scripts/generate_emails.py
 ```
 
-Expected format:
+Supported upload formats:
 
-```
+- `.txt` using the demo header format
+- `.eml` exports from email clients such as Outlook or Thunderbird
+
+Example `.txt` format:
+
+```text
 FROM: Name <email>
 TO: recipient
 SUBJECT: ...
@@ -124,26 +185,22 @@ Message body...
 pytest
 ```
 
-## Screenshots
+## Future Improvements
 
-Add product-demo screenshots here:
-
-1. **Streamlit inbox** — filtered list + message panel.
-2. **AI analysis cards** — priority / sentiment badges + summary.
-3. **JSON export** — sample downloaded file.
-
-*(Placeholder: replace with portfolio images when presenting.)*
+- Gmail OAuth integration
+- Multi-user accounts and team workspaces
+- Database persistence for analyzed emails
+- Async background processing for large inboxes
+- Shared task queues and collaboration features
+- Production deployment with auth, observability, and rate limits
+- Calendar/task manager integrations
 
 ## Troubleshooting
 
-- **Missing `GROQ_API_KEY` or `OPENAI_API_KEY`** (per `LLM_PROVIDER`): `/analyze` and `/reply` return `503` with a clear message.
-- **Quota / rate limit**: the LLM service retries a few times on `429`.
-- **Missing `emails` directory**: the backend fails to start (`RuntimeError` on lifespan).
-- **Invalid LLM output**: `503` “schema” error — regenerate or try another model.
-
-## Possible extensions
-
-OAuth Gmail, database, async queues, multi-tenant auth, fine-tuning: **out of MVP scope**, but the `services/` vs `api/` split keeps things extensible.
+- Missing `GROQ_API_KEY` or `OPENAI_API_KEY`: `/analyze` and `/reply` return a clear `503`.
+- Quota or rate limits: the LLM service retries on `429`.
+- Missing `emails` directory: the backend fails fast on startup.
+- Invalid LLM output: schema validation returns a clear error so the user can retry.
 
 ## License
 
