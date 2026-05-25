@@ -89,23 +89,37 @@ def inject_styles() -> None:
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
             html, body, [class*="css"] { font-family: 'Inter', sans-serif; color-scheme: dark; }
-            .block-container { padding-top: 0.5rem; padding-bottom: 2rem; max-width: 1480px; }
+            .block-container { padding-top: 0 !important; padding-bottom: 2.5rem; max-width: 1480px; }
             div[data-testid="stSidebar"] { display: none; }
             header[data-testid="stHeader"] { background: transparent; }
+            /* Linear-style: no chrome on Streamlit layout wrappers */
+            div[data-testid="stVerticalBlockBorderWrapper"] {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+            }
+            textarea, input, select,
+            [data-baseweb="input"], [data-baseweb="textarea"], [data-baseweb="select"] {
+                border: none !important;
+                box-shadow: none !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+            }
             div[data-testid="stVerticalBlock"] > div:has(> div.app-header-host) {
                 margin-bottom: 0;
             }
             .app-header-bar {
-                background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(11,17,32,0.92));
-                border: 1px solid rgba(148,163,184,0.12);
+                background: rgba(255, 255, 255, 0.03);
+                border: none;
                 border-radius: 12px;
-                padding: 10px 16px;
-                margin-bottom: 8px;
-                box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+                padding: 9px 20px;
+                margin-top: -0.75rem;
+                margin-bottom: 12px;
+                box-shadow: none;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                min-height: 56px;
+                min-height: 48px;
             }
             .app-header-text {
                 text-align: center;
@@ -134,64 +148,79 @@ def inject_styles() -> None:
             [data-baseweb="input"]:focus-within,
             [data-baseweb="textarea"]:focus-within,
             [data-baseweb="select"]:focus-within {
-                border-color: #3b82f6 !important;
-                box-shadow: 0 0 0 1px #3b82f6 !important;
+                background: rgba(255, 255, 255, 0.07) !important;
                 outline: none !important;
+                box-shadow: none !important;
             }
             [data-baseweb="input"] input:focus {
-                border-color: #3b82f6 !important;
                 box-shadow: none !important;
+            }
+            div[data-testid="stButton"] button {
+                border: none !important;
+                box-shadow: none !important;
+            }
+            div[data-testid="stButton"] button[kind="secondary"],
+            div[data-testid="stButton"] button[data-testid="baseButton-secondary"] {
+                background: rgba(255, 255, 255, 0.06) !important;
+                color: #e2e8f0 !important;
+            }
+            div[data-testid="stButton"] button[kind="secondary"]:hover,
+            div[data-testid="stButton"] button[data-testid="baseButton-secondary"]:hover {
+                background: rgba(255, 255, 255, 0.1) !important;
+                color: #f8fafc !important;
             }
             div[data-testid="stButton"] button[kind="primary"],
             div[data-testid="stButton"] button[data-testid="baseButton-primary"] {
-                background: linear-gradient(180deg, #475569 0%, #334155 100%) !important;
-                border: 1px solid rgba(148, 163, 184, 0.35) !important;
+                background: rgba(255, 255, 255, 0.1) !important;
                 color: #f8fafc !important;
-                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
             }
             div[data-testid="stButton"] button[kind="primary"]:hover,
             div[data-testid="stButton"] button[data-testid="baseButton-primary"]:hover {
-                background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
-                border-color: rgba(96, 165, 250, 0.5) !important;
+                background: rgba(255, 255, 255, 0.16) !important;
                 color: #ffffff !important;
             }
             .email-card {
                 border-radius: 12px;
-                border: 1px solid rgba(148,163,184,0.1);
-                background: linear-gradient(160deg, rgba(30,41,59,0.55), rgba(15,23,42,0.65));
-                padding: 14px 16px;
-                margin-bottom: 12px;
+                border: none;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 18px 20px;
+                margin-bottom: 20px;
             }
             .analysis-grid {
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 10px;
-                margin: 12px 0 16px 0;
+                gap: 16px;
+                margin: 16px 0 24px 0;
             }
             @media (max-width: 900px) {
                 .analysis-grid { grid-template-columns: 1fr; }
             }
             .mini-card {
-                border-radius: 12px;
-                border: 1px solid rgba(148,163,184,0.12);
-                background: rgba(255,255,255,0.03);
-                padding: 12px 14px;
+                border-radius: 10px;
+                border: none;
+                background: rgba(255, 255, 255, 0.04);
+                padding: 14px 16px;
             }
-            .mini-card-label { font-size: 12px; font-weight: 500; color: #94a3b8; margin-bottom: 4px; }
+            .mini-card-label { font-size: 12px; font-weight: 500; color: #64748b; margin-bottom: 6px; }
             .mini-card-value { font-size: 16px; font-weight: 600; color: #f1f5f9; line-height: 1.35; }
             .summary-box {
-                border-radius: 14px;
-                border: 1px solid rgba(59,130,246,0.25);
-                background: rgba(37,99,235,0.08);
-                padding: 16px 18px;
-                margin: 12px 0;
+                border-radius: 12px;
+                border: none;
+                background: rgba(255, 255, 255, 0.04);
+                padding: 18px 20px;
+                margin: 16px 0 24px 0;
             }
-            .summary-box-title { font-size: 13px; font-weight: 600; color: #93c5fd; margin-bottom: 10px; }
-            .summary-box-body { font-size: 15px; color: #e2e8f0; line-height: 1.55; }
+            .summary-box-title { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 10px; letter-spacing: 0.01em; text-transform: lowercase; }
+            .summary-box-body { font-size: 15px; color: #e2e8f0; line-height: 1.6; }
             .tag {
-                display:inline-block; padding: 3px 8px; border-radius: 999px;
-                font-size: 11px; margin: 3px 6px 0 0;
-                border: 1px solid rgba(148,163,184,0.2); color: #cbd5e1; background: rgba(255,255,255,0.03);
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 6px;
+                font-size: 11px;
+                margin: 4px 8px 0 0;
+                border: none;
+                color: #cbd5e1;
+                background: rgba(255, 255, 255, 0.06);
             }
             .prio-dot-critical { color: #fecaca; }
             .prio-dot-high { color: #fdba74; }
@@ -293,13 +322,10 @@ def inject_styles() -> None:
             div[data-testid="stVerticalBlock"][class*="st-key-ticket_"]:has(
                 [data-testid="stButton"] button:hover
             ) .inbox-ticket {
-                border-color: rgba(59,130,246,0.42) !important;
-                background: linear-gradient(
-                    160deg,
-                    rgba(37,99,235,0.14),
-                    rgba(15,23,42,0.68)
-                ) !important;
-                box-shadow: 0 0 0 1px rgba(59,130,246,0.22) !important;
+                border-color: rgba(148, 163, 184, 0.14) !important;
+                background: rgba(255, 255, 255, 0.045) !important;
+                box-shadow: inset 0 1px 0 rgba(255,255,255,0.035) !important;
+                transform: translateY(-1px);
             }
             div[data-testid="stVerticalBlockBorderWrapper"][class*="st-key-ticket_"]
                 [data-testid="stButton"] button:hover,
@@ -321,29 +347,37 @@ def inject_styles() -> None:
             }
             .inbox-ticket-shell {
                 display: block;
-                margin: 0 0 10px 0;
+                margin: 0 0 6px 0;
             }
             .inbox-ticket {
                 width: 100%;
                 box-sizing: border-box;
-                border-radius: 12px;
-                border: 1px solid rgba(148,163,184,0.14);
-                background: linear-gradient(160deg, rgba(30,41,59,0.55), rgba(15,23,42,0.65));
-                padding: 12px 14px 13px 14px;
+                border-radius: 10px;
+                border: 1px solid transparent;
+                background: transparent;
+                padding: 12px 14px;
                 text-align: left;
                 pointer-events: none;
-                transition: border-color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+                transition:
+                    background 0.16s ease,
+                    border-color 0.16s ease,
+                    box-shadow 0.16s ease,
+                    transform 0.16s ease;
             }
             .inbox-ticket-selected {
-                border-color: rgba(59,130,246,0.55);
-                background: linear-gradient(160deg, rgba(37,99,235,0.18), rgba(15,23,42,0.72));
-                box-shadow: 0 0 0 1px rgba(59,130,246,0.2);
+                border-color: rgba(148, 163, 184, 0.18) !important;
+                background: linear-gradient(135deg, rgba(255,255,255,0.085), rgba(255,255,255,0.045)) !important;
+                box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,0.05),
+                    0 10px 28px rgba(15,23,42,0.18);
+            }
+            .inbox-ticket.inbox-ticket-selected .inbox-ticket-subj {
+                color: #f8fafc;
             }
             .inbox-ticket-meta {
                 font-size: 0.72rem;
                 font-weight: 600;
-                letter-spacing: 0.05em;
-                text-transform: uppercase;
+                letter-spacing: 0;
                 color: #94a3b8;
                 line-height: 1.35;
             }
@@ -414,7 +448,8 @@ def inject_styles() -> None:
                 width: 100% !important;
                 border-radius: 8px !important;
                 overflow: hidden !important;
-                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
+                box-shadow: none !important;
+                background: rgba(255, 255, 255, 0.08) !important;
             }
             [class*="st-key-regen_reply_split"] [data-testid="column"] {
                 padding: 0 !important;
@@ -439,8 +474,10 @@ def inject_styles() -> None:
                 height: 2.75rem !important;
                 border-top-right-radius: 0 !important;
                 border-bottom-right-radius: 0 !important;
-                border-right: none !important;
                 margin: 0 !important;
+            }
+            [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child {
+                background: rgba(255, 255, 255, 0.04) !important;
             }
             [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child button {
                 width: 100% !important;
@@ -448,20 +485,18 @@ def inject_styles() -> None:
                 height: 2.75rem !important;
                 border-top-left-radius: 0 !important;
                 border-bottom-left-radius: 0 !important;
-                border-left: 1px solid rgba(148, 163, 184, 0.32) !important;
+                border: none !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                background: linear-gradient(180deg, #475569 0%, #334155 100%) !important;
-                border-color: rgba(148, 163, 184, 0.35) !important;
-                color: #e2e8f0 !important;
+                background: transparent !important;
+                color: #94a3b8 !important;
                 font-size: 10px !important;
                 line-height: 1 !important;
                 box-shadow: none !important;
             }
             [class*="st-key-regen_reply_split"] [data-testid="column"]:last-child button:hover {
-                background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
-                border-color: rgba(96, 165, 250, 0.5) !important;
-                color: #ffffff !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                color: #f1f5f9 !important;
             }
             [class*="st-key-regen_reply_combo"]:has([class*="st-key-regen_style_panel"])
                 [class*="st-key-regen_reply_split"] [data-testid="column"]:first-child button,
@@ -513,15 +548,18 @@ def inject_styles() -> None:
             [class*="st-key-regen_style_panel"] [data-testid="stTextInput"] input {
                 margin: 0 !important;
                 min-height: 2.5rem !important;
-                border-top: none !important;
+                border: none !important;
                 border-top-left-radius: 0 !important;
                 border-top-right-radius: 0 !important;
                 border-bottom-left-radius: 8px !important;
                 border-bottom-right-radius: 8px !important;
-                border-color: rgba(148, 163, 184, 0.35) !important;
-                background: rgba(15, 23, 42, 0.55) !important;
+                background: rgba(255, 255, 255, 0.04) !important;
                 font-size: 13px !important;
-                box-shadow: 0 1px 2px rgba(15, 23, 42, 0.35) !important;
+                box-shadow: none !important;
+            }
+            [class*="st-key-regen_reply_combo"]:has([class*="st-key-regen_style_panel"])
+                [class*="st-key-regen_reply_split"] [data-testid="stHorizontalBlock"] {
+                border-radius: 8px 8px 0 0 !important;
             }
             [class*="st-key-reply_actions"] > [data-testid="stHorizontalBlock"] > [data-testid="column"]:last-child
                 > [data-testid="stVerticalBlock"] {
@@ -530,23 +568,22 @@ def inject_styles() -> None:
             .action-group-label {
                 font-size: 11px;
                 font-weight: 600;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
+                letter-spacing: 0.01em;
                 color: #64748b;
-                margin: 0 0 8px 0;
+                margin: 0 0 10px 0;
                 line-height: 1.2;
             }
             [class*="st-key-actions_panel"] {
-                margin: 2px 0 4px 0;
-                padding: 8px 12px 4px 12px;
-                border-radius: 10px;
-                border: 1px solid rgba(148,163,184,0.12);
-                background: rgba(255,255,255,0.02);
+                margin: 0 0 20px 0;
+                padding: 4px 0 8px 0;
+                border-radius: 0;
+                border: none;
+                background: transparent;
             }
             .action-group-head {
-                margin: 0 0 10px 0;
-                padding: 0 0 8px 0;
-                border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+                margin: 0 0 12px 0;
+                padding: 0;
+                border-bottom: none;
             }
             [class*="st-key-actions_panel"] .action-group-label {
                 margin: 0;
@@ -597,7 +634,7 @@ def inject_styles() -> None:
                 justify-content: flex-end !important;
             }
             [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] {
-                gap: 0.15rem !important;
+                gap: 1.25rem !important;
             }
             [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {
                 margin-top: 0 !important;
@@ -613,17 +650,33 @@ def inject_styles() -> None:
                 padding-top: 0 !important;
             }
             .panel-section-title {
-                font-size: 0.98rem;
+                font-size: 0.75rem;
                 font-weight: 600;
-                color: #cbd5e1;
-                margin: 0.55rem 0 0.35rem 0;
+                letter-spacing: 0.02em;
+                color: #64748b;
+                margin: 1.25rem 0 0.65rem 0;
                 line-height: 1.3;
             }
             .time-saved-label {
                 font-size: 0.82rem;
+                font-weight: 500;
+                color: #64748b;
+                margin: 0.5rem 0 1rem 0;
+                line-height: 1.25;
+            }
+            h3 {
+                font-size: 1.05rem !important;
+                font-weight: 600 !important;
+                color: #f1f5f9 !important;
+                letter-spacing: -0.02em;
+                margin: 0 0 1rem 0 !important;
+            }
+            .insights-title {
+                font-size: 1.05rem;
                 font-weight: 600;
-                color: #94a3b8;
-                margin: 0.2rem 0 0.45rem 0;
+                color: #f1f5f9;
+                letter-spacing: -0.02em;
+                margin: 0 0 0.35rem 0;
                 line-height: 1.25;
             }
             [class*="st-key-inbox_filters_counts"] [data-testid="stMetricLabel"] {
@@ -664,26 +717,26 @@ def sentiment_emoji(sentiment: str) -> str:
 
 
 _CATEGORY_LABELS: dict[str, tuple[str, str]] = {
-    "urgent": ("🔴", "URGENT"),
-    "invoice": ("🟡", "INVOICE"),
-    "invoices": ("🟡", "INVOICE"),
-    "meeting": ("🔵", "MEETING"),
-    "meetings": ("🔵", "MEETING"),
-    "support": ("🟣", "SUPPORT"),
-    "spam": ("⚫", "SPAM"),
-    "personal": ("🟢", "PERSONAL"),
+    "urgent": ("🔴", "urgent"),
+    "invoice": ("🟡", "invoice"),
+    "invoices": ("🟡", "invoice"),
+    "meeting": ("🔵", "meeting"),
+    "meetings": ("🔵", "meeting"),
+    "support": ("🟣", "support"),
+    "spam": ("⚫", "spam"),
+    "personal": ("🟢", "personal"),
 }
 
 
 def category_banner(bundle: dict[str, Any] | None, _folder: str = "") -> tuple[str, str]:
-    """Emoji + uppercase label from AI analysis only (not demo folder paths)."""
+    """Emoji + lowercase label from AI analysis only (not demo folder paths)."""
 
     if not bundle:
-        return ("⚪", "UNCLASSIFIED")
+        return ("⚪", "Pending analysis")
     cat = str(bundle["analysis"].get("category", "") or "").strip().lower()
     if cat in _CATEGORY_LABELS:
         return _CATEGORY_LABELS[cat]
-    label = cat.upper().replace("_", " ")[:18] or "—"
+    label = cat.replace("_", " ")[:18] or "—"
     return ("⚪", label)
 
 
@@ -891,18 +944,19 @@ def render_copy_to_clipboard(
   button {{
     width: 100%; height: 44px; box-sizing: border-box;
     margin: 0; padding: 0 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 8px;
+    border: none;
     background: rgba(255, 255, 255, 0.06);
     color: #e2e8f0;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
     font-family: inherit;
     line-height: 1;
   }}
   button:hover {{
-    border-color: rgba(148, 163, 184, 0.55);
     background: rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
   }}
 </style>
 </head>
@@ -970,6 +1024,7 @@ def fetch_email_index(base: str) -> list[dict[str, Any]]:
     return data
 
 
+@st.cache_data(show_spinner=False, ttl=300)
 def fetch_email_detail(base: str, email_id: str) -> dict[str, Any]:
     try:
         response = httpx.get(f"{base}/emails/{email_id}", timeout=30.0)
@@ -1234,6 +1289,11 @@ def _regenerate_reply_draft(
         st.error(exc.message)
 
 
+def _toggle_session_bool(key: str) -> None:
+    st.session_state[key] = not bool(st.session_state.get(key, False))
+
+
+@st.fragment
 def render_regenerate_reply_controls(
     *,
     active_base: str,
@@ -1262,14 +1322,14 @@ def render_regenerate_reply_controls(
                     )
             with regen_caret:
                 arrow_label = "▴" if style_open else "▾"
-                if st.button(
+                st.button(
                     arrow_label,
                     use_container_width=True,
                     key=f"reply_style_toggle_{selected_id}",
                     help="Reply style (tone for regeneration)",
-                ):
-                    st.session_state[style_open_key] = not style_open
-                    st.rerun()
+                    on_click=_toggle_session_bool,
+                    args=(style_open_key,),
+                )
         if style_open:
             with st.container(key="regen_style_panel"):
                 st.text_input(
@@ -1317,9 +1377,9 @@ def main() -> None:
         with st.container(key="actions_panel"):
             act_lbl_global, act_lbl_import = st.columns((1, 2), gap="small")
             with act_lbl_global:
-                render_action_group_label("Global actions")
+                render_action_group_label("Global Actions")
             with act_lbl_import:
-                render_action_group_label("Import actions")
+                render_action_group_label("Import Actions")
 
             with st.container(key="actions_controls_row"):
                 act_ctrl_global, act_ctrl_import = st.columns((1, 2), gap="small")
@@ -1410,7 +1470,7 @@ def main() -> None:
     with left:
         st.markdown("### Inbox")
 
-        render_panel_section_title("Filters & overview")
+        render_panel_section_title("Filters & Overview")
         with st.container(key="inbox_filters_counts"):
             mini = st.columns(4)
             mini[0].metric("Emails", stats["total"])
@@ -1451,7 +1511,7 @@ def main() -> None:
         if quick != "All" and not stats["analyzed"]:
             st.caption("Category filters apply after **Process Inbox** or **Analyze Email**.")
 
-        render_panel_section_title("Email list")
+        render_panel_section_title("Email List")
 
         if not filtered:
             if quick != "All" and stats["analyzed"] == 0:
@@ -1542,7 +1602,7 @@ def main() -> None:
             unsafe_allow_html=True,
         )
 
-        render_action_group_label("Email actions")
+        render_action_group_label("Email Actions")
         has_analysis = bundle is not None
         has_previous = selected_id in st.session_state.get("analysis_previous", {})
         analyze_label = "Regenerate Analysis" if has_analysis else "Analyze Email"
@@ -1598,7 +1658,7 @@ def main() -> None:
             pri_safe = html_module.escape(pretty_enum_label(str(analysis.get("priority", ""))))
             sent_safe = html_module.escape(pretty_enum_label(str(analysis.get("sentiment", ""))))
 
-            st.markdown("### Insights")
+            st.markdown("<h3 class='insights-title'>Insights</h3>", unsafe_allow_html=True)
             c1, c2, c3 = st.columns(3)
             with c1:
                 st.markdown(
@@ -1690,10 +1750,10 @@ def main() -> None:
                 raw = st.session_state.reply_edit_buffer.get(selected_id, default_reply)
                 st.session_state[edited_key] = prepare_reply_text(raw)
 
-            render_panel_section_title("Suggested reply")
+            render_panel_section_title("Suggested Reply")
             reply_body = st.text_area(
                 "Suggested reply",
-                height=260,
+                height=180,
                 key=edited_key,
                 label_visibility="collapsed",
             )
