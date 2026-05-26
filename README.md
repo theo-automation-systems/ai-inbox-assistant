@@ -6,6 +6,15 @@ Intelligent email triage, prioritization, and AI-generated replies for enterpris
 
 AI Inbox Assistant is a SaaS-style internal operations tool that helps teams turn messy inboxes into structured, actionable work. It classifies emails, detects priority, summarizes context, extracts tasks, and drafts replies using an LLM-backed workflow.
 
+Designed for:
+
+- support teams,
+- operations workflows,
+- executive inbox triage,
+- internal enterprise communications.
+
+Built to reduce manual inbox processing in high-volume operational environments.
+
 ## Why This Project?
 
 Managing large inboxes is repetitive, time-consuming, and easy to miss under pressure.
@@ -20,6 +29,17 @@ AI Inbox Assistant helps teams:
 - export structured analysis for downstream workflows.
 
 The project is designed as a realistic product prototype: polished UI, API-first backend, structured LLM outputs, and practical operations-focused UX.
+
+## Why Not Just ChatGPT?
+
+Unlike a generic chatbot workflow, AI Inbox Assistant provides:
+
+- structured, validated outputs,
+- batch inbox processing,
+- reusable JSON and task exports,
+- a workflow-oriented UI,
+- deterministic schema enforcement,
+- inbox-scale processing instead of one-off prompting.
 
 ## Features
 
@@ -43,21 +63,33 @@ The project is designed as a realistic product prototype: polished UI, API-first
 
 Browse emails, identify pending analysis, run batch processing, and filter the inbox using AI-generated categories.
 
-[Watch the inbox processing demo](assets/demo_process_inbox.mp4)
+![Inbox processing demo](assets/demo_process_inbox.gif)
 
 ### AI Analysis
 
 Each analyzed email includes category, priority, sentiment, summary, action items, deadlines, entities, and a contextual suggested reply.
 
-[Watch the single email analysis demo](assets/demo_analyze_email.mp4)
+![Single email analysis demo](assets/demo_analyze_email.gif)
 
 ## Tech Stack
 
 - **Frontend:** Streamlit, custom CSS, SaaS-style dark UI
 - **Backend:** FastAPI, Pydantic, Uvicorn
-- **LLM providers:** Groq by default, OpenAI-compatible fallback
+- **LLM providers:** Groq by default, with OpenAI-compatible provider support
 - **Data:** Local demo inbox with `.txt` files and `.eml` upload support
 - **Testing:** Pytest and pytest-asyncio
+
+## Key Design Decisions
+
+- Structured outputs enforced with strict Pydantic validation
+- Provider abstraction layer for Groq/OpenAI compatibility
+- JSON extraction and validation layer for malformed or wrapped LLM responses
+- Retry handling for provider rate limits and transient API pressure
+- Provider-specific structured output strategy: OpenAI schema parsing, Groq JSON contract + validation
+- Stateless backend architecture with session-based UI state
+- Prompt files separated from code for reproducibility and testing
+- Server-side analysis cache to avoid redundant LLM calls
+- Batch inbox processing routed through the backend API workflow
 
 ## Architecture
 
@@ -86,6 +118,28 @@ High-level flow:
 3. `POST /analyze` sends an email through the LLM workflow and validates the structured JSON result.
 4. `POST /reply` regenerates only the reply draft with an optional custom tone.
 5. The UI stores session-level analysis state, edited replies, and export-ready results.
+
+### LLM Pipeline
+
+```text
+Email
+  ↓
+Parser / Email Repository
+  ↓
+Prompt Builder
+  ↓
+LLM Provider (Groq or OpenAI)
+  ↓
+Structured JSON Extraction
+  ↓
+Pydantic Schema Validation
+  ↓
+Rate-limit Retry / Provider-specific Structured Output Fallback
+  ↓
+Analysis Cache + Frontend UI + Export
+```
+
+The reliability layer is intentionally explicit: model responses are not trusted as plain text. The service extracts JSON, validates it against strict schemas, retries rate-limit failures with exponential backoff, and surfaces clear errors when the model output does not match the expected contract.
 
 ## Setup
 
@@ -187,12 +241,24 @@ Message body...
 pytest
 ```
 
+## Current Limitations
+
+- No live Gmail or Outlook integration yet
+- LLM extraction may occasionally produce imperfect summaries
+- Batch processing cost depends on API provider pricing
+- No persistent database in the MVP
+- No multi-user authentication or team permissions yet
+
 ## Future Improvements
 
 - Gmail OAuth integration
 - Multi-user accounts and team workspaces
 - Database persistence for analyzed emails
 - Async background processing for large inboxes
+- Event-driven architecture with queues and workers
+- LLM response caching for cost and performance optimization
+- Prompt versioning and evaluation framework for LLM output quality
+- Fine-tuning or domain-specific prompt packs
 - Shared task queues and collaboration features
 - Production deployment with auth, observability, and rate limits
 - Calendar/task manager integrations
