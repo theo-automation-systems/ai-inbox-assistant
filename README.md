@@ -43,11 +43,13 @@ The project is designed as a realistic product prototype: polished UI, API-first
 
 Browse emails, identify pending analysis, run batch processing, and filter the inbox using AI-generated categories.
 
-![Inbox triage preview](assets/ai-inbox-assistant-dashboard.png)
+<video src="assets/demo_process_inbox.mp4" controls width="100%"></video>
 
 ### AI Analysis
 
 Each analyzed email includes category, priority, sentiment, summary, action items, deadlines, entities, and a contextual suggested reply.
+
+<video src="assets/demo_analyze_email.mp4" controls width="100%"></video>
 
 ## Tech Stack
 
