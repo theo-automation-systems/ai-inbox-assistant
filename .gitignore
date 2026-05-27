@@ -7,6 +7,7 @@ venv/
 .idea/
 .vscode/
 .streamlit/
+!.streamlit/config.toml
 dist/
 build/
 *.egg-info/
