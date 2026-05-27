@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Final
+import math
 
 # Streamlit runs this file as a script; ensure the repo root is on sys.path for `app.*`.
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -205,7 +206,7 @@ def inject_styles() -> None:
             /* Typography: L1 page · L2 section · L3 label/metadata (use <p>, not h2/h3 — Streamlit overrides headings) */
             p.type-l1,
             .type-l1 {
-                font-size: 1.3125rem !important;
+                font-size: 1.7rem !important;
                 font-weight: 700 !important;
                 letter-spacing: -0.02em !important;
                 color: #f8fafc !important;
@@ -215,7 +216,7 @@ def inject_styles() -> None:
             }
             p.type-l2,
             .type-l2 {
-                font-size: 1.0625rem !important;
+                font-size: 1.3rem !important;
                 font-weight: 600 !important;
                 letter-spacing: -0.01em !important;
                 color: #e2e8f0 !important;
@@ -234,6 +235,20 @@ def inject_styles() -> None:
                 margin: 0;
                 padding: 0;
             }
+            .insights-spacer--tight {
+                height: 0;
+            }
+            [class*="st-key-reply_actions"] {
+                margin-bottom: 0 !important;
+            }
+            [class*="st-key-analysis_breakdown"] {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+            [class*="st-key-analysis_breakdown"] p.type-l2 {
+                margin-top: 0.15rem !important;
+                margin-bottom: 0.2rem !important;
+            }
             [class*="st-key-insights_summary"] {
                 margin-bottom: 14px !important;
             }
@@ -243,9 +258,9 @@ def inject_styles() -> None:
             .type-l3,
             .panel-section-title,
             .action-group-label {
-                font-size: 0.6875rem;
+                font-size: 0.6rem;
                 font-weight: 600;
-                letter-spacing: 0.035em;
+                letter-spacing: 0.03em;
                 text-transform: uppercase;
                 color: #94a3b8;
                 line-height: 1.35;
@@ -253,7 +268,7 @@ def inject_styles() -> None:
                 padding: 0;
             }
             .type-l3-field {
-                font-size: 0.6875rem;
+                font-size: 0.6rem;
                 font-weight: 600;
                 letter-spacing: 0.02em;
                 color: #94a3b8;
@@ -261,7 +276,7 @@ def inject_styles() -> None:
                 margin: 0 0 0.2rem 0;
             }
             .insight-label {
-                font-size: 0.6875rem;
+                font-size: 0.6rem;
                 font-weight: 600;
                 letter-spacing: 0.02em;
                 color: #94a3b8;
@@ -369,6 +384,65 @@ def inject_styles() -> None:
                 font-size: 11px;
                 flex: 0 0 auto;
             }
+            .insight-subcard {
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 14px 16px;
+                border: 1px solid rgba(148, 163, 184, 0.10);
+            }
+            .breakdown-row {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 8px 0;
+                border-top: 1px solid rgba(255,255,255,0.045);
+            }
+            .breakdown-row:first-child { border-top: none; padding-top: 0; }
+            .breakdown-label { color: #cbd5e1; font-size: 0.86rem; font-weight: 600; }
+            .breakdown-hint { color: #94a3b8; font-size: 0.78rem; margin-top: 2px; line-height: 1.35; }
+            .breakdown-pill {
+                border-radius: 999px;
+                padding: 3px 7px;
+                font-size: 0.68rem;
+                font-weight: 700;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                line-height: 1.1;
+                background: rgba(255,255,255,0.06);
+                color: #94a3b8;
+                flex: 0 0 auto;
+                margin-top: 1px;
+            }
+            .breakdown-ok { background: rgba(34, 197, 94, 0.14); color: #86efac; }
+            .breakdown-review { background: rgba(245, 158, 11, 0.14); color: #fde68a; }
+            .reason-line {
+                color: #cbd5e1;
+                font-size: 0.86rem;
+                line-height: 1.45;
+                padding: 7px 0;
+                border-top: 1px solid rgba(255,255,255,0.045);
+            }
+            .reason-line:first-child { border-top: none; padding-top: 0; }
+            .entity-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .entity-chip {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                border-radius: 999px;
+                padding: 4px 8px;
+                background: rgba(255, 255, 255, 0.05);
+                color: #cbd5e1;
+                font-size: 0.74rem;
+                font-weight: 650;
+                line-height: 1.1;
+                width: fit-content;
+            }
+            .entity-kind { color: #94a3b8; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; font-size: 0.62rem; }
             .empty-state {
                 margin: 2px 0 14px 0;
                 color: #64748b;
@@ -391,8 +465,23 @@ def inject_styles() -> None:
                 padding: 10px 14px;
                 margin: 2px 0 10px 0;
             }
+            .efficiency-main {
+                display: flex;
+                align-items: center;
+                gap: 96px;
+                min-width: 0;
+            }
+            .efficiency-block {
+                min-width: 0;
+            }
+            .efficiency-divider {
+                width: 1px;
+                height: 28px;
+                background: rgba(148, 163, 184, 0.22);
+                flex: 0 0 auto;
+            }
             .efficiency-label {
-                font-size: 0.6875rem;
+                font-size: 0.6rem;
                 font-weight: 600;
                 letter-spacing: 0.035em;
                 text-transform: uppercase;
@@ -855,10 +944,10 @@ def inject_styles() -> None:
             }
             [class*="st-key-inbox_email_layout"] {
                 margin-top: 0 !important;
-                padding-top: 0 !important;
+                padding-top: 0.35rem !important;
             }
             .time-saved-label {
-                font-size: 0.6875rem;
+                font-size: 0.6rem;
                 font-weight: 600;
                 letter-spacing: 0.03em;
                 color: #64748b;
@@ -873,7 +962,7 @@ def inject_styles() -> None:
             }
             [class*="st-key-inbox_email_layout"] [data-testid="stMarkdown"] p.type-l1,
             [class*="st-key-inbox_email_layout"] p.type-l1 {
-                font-size: 1.3125rem !important;
+                font-size: 1.7rem !important;
                 font-weight: 700 !important;
                 letter-spacing: -0.02em !important;
                 color: #f8fafc !important;
@@ -882,7 +971,7 @@ def inject_styles() -> None:
             }
             [class*="st-key-inbox_email_layout"] [data-testid="stMarkdown"] p.type-l2,
             [class*="st-key-inbox_email_layout"] p.type-l2 {
-                font-size: 1.0625rem !important;
+                font-size: 1.3rem !important;
                 font-weight: 600 !important;
                 color: #e2e8f0 !important;
                 line-height: 1.3 !important;
@@ -920,6 +1009,27 @@ def inject_styles() -> None:
                 font-size: 0.975rem !important;
                 font-weight: 650 !important;
                 color: #f1f5f9 !important;
+            }
+            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricValue"] {
+                font-size: 0.975rem !important;
+                font-weight: 650 !important;
+                color: #f1f5f9 !important;
+            }
+            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricLabel"] {
+                font-size: 0.64rem !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.01em !important;
+                text-transform: uppercase !important;
+                color: #64748b !important;
+                white-space: nowrap !important;
+                overflow: visible !important;
+                text-overflow: clip !important;
+            }
+            .efficiency-sub {
+                margin-top: 4px;
+                font-size: 0.78rem;
+                color: #94a3b8;
+                line-height: 1.35;
             }
             [class*="st-key-suggested_reply_edit_"] [data-testid="stTextArea"] {
                 resize: vertical !important;
@@ -1111,14 +1221,62 @@ def inject_styles() -> None:
                     0 6px 18px rgba(15, 23, 42, 0.18);
                 padding: 12px 14px;
                 margin-top: 12px;
+                margin-bottom: 14px;
             }
             .activity-title {
                 font-size: 0.6875rem;
                 font-weight: 600;
-                letter-spacing: 0.04em;
+                letter-spacing: 0.035em;
                 text-transform: uppercase;
                 color: #94a3b8;
-                margin-bottom: 8px;
+                line-height: 1.35;
+                margin: 0.4rem 0 0.25rem 0;
+            }
+            .mini-kpi-card {
+                border-radius: 12px;
+                border: 1px solid rgba(148, 163, 184, 0.10);
+                background: rgba(255, 255, 255, 0.028);
+                padding: 10px 12px;
+                margin: 6px 0 0 0;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+            }
+            .mini-kpi-card:hover {
+                background: rgba(255, 255, 255, 0.04);
+                border-color: rgba(148, 163, 184, 0.16);
+                transform: translateY(-1px);
+                transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+            }
+            .mini-kpi-head {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 10px;
+                font-size: 0.6rem;
+                font-weight: 650;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                color: #94a3b8;
+                margin: 0 0 6px 0;
+            }
+            .mini-kpi-val {
+                font-size: 0.75rem;
+                letter-spacing: -0.01em;
+                font-weight: 750;
+                color: #f1f5f9;
+                text-transform: none;
+                white-space: nowrap;
+            }
+            .mini-spark {
+                display: block;
+                width: 100%;
+                height: 34px;
+                opacity: 0.95;
+            }
+            .mini-kpi-sub {
+                margin-top: 6px;
+                font-size: 0.72rem;
+                color: #64748b;
+                line-height: 1.25;
             }
             .activity-line {
                 font-size: 0.8125rem;
@@ -1577,7 +1735,7 @@ def render_activity_feed() -> None:
         )
     st.markdown(
         "<div class='activity-card'>"
-        "<div class='activity-title'>Recent activity</div>"
+        "<p class='type-l3'>Recent activity</p>"
         f"{''.join(items)}"
         "</div>",
         unsafe_allow_html=True,
@@ -1735,6 +1893,108 @@ def analysis_confidence(analysis: dict[str, Any]) -> tuple[str, str, str]:
     if score >= 3:
         return ("Medium confidence", "confidence-medium", "Review extracted details before exporting.")
     return ("Needs review", "confidence-review", "Analysis is sparse; manual verification recommended.")
+
+
+def confidence_breakdown(analysis: dict[str, Any]) -> list[tuple[str, str, str]]:
+    """Return (label, status, hint) for UI breakdown."""
+
+    entities = analysis.get("entities") or {}
+    items: list[tuple[str, str, str]] = []
+
+    def ok(value: Any) -> bool:
+        if value is None:
+            return False
+        if isinstance(value, str):
+            return bool(value.strip())
+        if isinstance(value, (list, tuple, set, dict)):
+            return len(value) > 0
+        return True
+
+    def add(label: str, good: bool, hint: str) -> None:
+        items.append((label, "ok" if good else "review", hint))
+
+    add("Summary", ok(analysis.get("summary")), "Concise context for fast triage.")
+    add("Category", ok(analysis.get("category")), "Used for routing and filtering.")
+    add("Priority", ok(analysis.get("priority")), "Used for escalation and SLA hints.")
+    add("Sentiment", ok(analysis.get("sentiment")), "Helps anticipate tone and urgency.")
+    ent_good = any(entities.get(k) for k in ("people", "companies", "products", "amounts", "dates"))
+    add("Entities", ent_good, "People, orgs, dates, amounts extracted from the text.")
+    add("Action items", ok(analysis.get("action_items")), "Concrete next steps extracted.")
+    add("Deadlines", ok(analysis.get("deadlines")), "Explicit due dates and time constraints.")
+    return items
+
+
+def analysis_reasoning_timeline(*, detail: dict[str, Any], analysis: dict[str, Any]) -> list[str]:
+    """Business-facing rationale signals derived from extracted fields (demo)."""
+
+    lines: list[str] = []
+    subject = str(detail.get("subject", "") or "").strip()
+    if subject:
+        lines.append(f"Ingested email subject: {subject[:70]}")
+
+    priority = str(analysis.get("priority", "") or "").strip().lower()
+    category = str(analysis.get("category", "") or "").strip().lower()
+    sentiment = str(analysis.get("sentiment", "") or "").strip().lower()
+    if category:
+        lines.append(f"Detected category: {category.replace('_', ' ')}")
+    if priority:
+        lines.append(f"Assessed priority: {priority}")
+    if sentiment:
+        lines.append(f"Inferred sentiment: {sentiment}")
+
+    deadlines = analysis.get("deadlines") or []
+    if deadlines:
+        lines.append(f"Deadline signal: {str(deadlines[0])[:80]}")
+
+    action_items = analysis.get("action_items") or []
+    if action_items:
+        lines.append(f"Action items extracted: {len(action_items)}")
+
+    entities = analysis.get("entities") or {}
+    people = entities.get("people") or []
+    companies = entities.get("companies") or []
+    amounts = entities.get("amounts") or []
+    dates = entities.get("dates") or []
+    ent_bits = []
+    if people:
+        ent_bits.append(f"{len(people)} people")
+    if companies:
+        ent_bits.append(f"{len(companies)} companies")
+    if dates:
+        ent_bits.append(f"{len(dates)} dates")
+    if amounts:
+        ent_bits.append(f"{len(amounts)} amounts")
+    if ent_bits:
+        lines.append("Entities detected: " + ", ".join(ent_bits))
+
+    if priority == "critical" or category == "urgent":
+        lines.append("Conclusion: Escalation risk detected (critical/urgent).")
+    elif priority == "high":
+        lines.append("Conclusion: SLA-risk email (high priority).")
+    else:
+        lines.append("Conclusion: Standard triage path recommended.")
+
+    return lines[:8]
+
+
+def flatten_entities(entities: dict[str, Any] | None) -> list[tuple[str, str]]:
+    if not isinstance(entities, dict):
+        return []
+    out: list[tuple[str, str]] = []
+    for key, value in entities.items():
+        if not value:
+            continue
+        label = str(key).replace("_", " ").title()
+        if isinstance(value, list):
+            for v in value[:12]:
+                s = str(v).strip()
+                if s:
+                    out.append((label, s[:80]))
+        else:
+            s = str(value).strip()
+            if s:
+                out.append((label, s[:80]))
+    return out
 
 
 def display_priority(bundle: dict[str, Any] | None, _folder: str = "") -> str | None:
@@ -2151,6 +2411,8 @@ def ensure_session_state() -> None:
     st.session_state.setdefault("assigned_tasks", set())
     st.session_state.setdefault("jira_exports", set())
     st.session_state.setdefault("checked_action_items", {})
+    st.session_state.setdefault("analysis_feedback", {})
+    st.session_state.setdefault("analysis_metrics", {"ai_calls": 0, "ai_errors": 0, "ai_seconds_total": 0.0})
 
 
 def merge_display_emails(emails: list[dict[str, Any]], store: dict[str, Any]) -> list[dict[str, Any]]:
@@ -2219,6 +2481,298 @@ def dashboard_counts(emails: list[dict[str, Any]], store: dict[str, Any]) -> dic
         "invoices_ai": invoices_ai,
         "actions": actions,
     }
+
+
+def ops_kpis(*, emails: list[dict[str, Any]], store: dict[str, Any]) -> dict[str, Any]:
+    analyzed = len(store)
+    metrics = st.session_state.get("analysis_metrics") or {}
+    ai_calls = int(metrics.get("ai_calls", 0))
+    ai_errors = int(metrics.get("ai_errors", 0))
+    ai_seconds_total = float(metrics.get("ai_seconds_total", 0.0))
+    avg_ai = (ai_seconds_total / ai_calls) if ai_calls else None
+
+    escalation = 0
+    sla_due2h = 0
+    sla_today = 0
+    sla_ok = 0
+    saved_total = 0
+    for row in emails:
+        eid = str(row.get("id"))
+        bundle = store.get(eid)
+        if not bundle:
+            continue
+        analysis = bundle.get("analysis") or {}
+        pr = str(analysis.get("priority", "")).lower()
+        cat = str(analysis.get("category", "")).lower()
+        if pr in {"high", "critical"} or cat == "urgent":
+            escalation += 1
+        label, _cls, _title = inbox_sla(bundle)
+        if label == "due in 2h":
+            sla_due2h += 1
+        elif label == "due today":
+            sla_today += 1
+        else:
+            sla_ok += 1
+        saved_total += estimate_minutes_saved(detail=row, analysis=analysis)
+
+    feedback = st.session_state.get("analysis_feedback") or {}
+    fb_total = len(feedback)
+    fb_up = sum(1 for v in feedback.values() if v == "up")
+    fb_accuracy = (fb_up / fb_total) if fb_total else None
+
+    resolved = len(st.session_state.get("resolved_emails", set()))
+    assigned = len(st.session_state.get("assigned_tasks", set()))
+    jira = len(st.session_state.get("jira_exports", set()))
+    automated = len(
+        set()
+        .union(st.session_state.get("resolved_emails", set()))
+        .union(st.session_state.get("assigned_tasks", set()))
+        .union(st.session_state.get("jira_exports", set()))
+    )
+    automation_rate = (automated / analyzed) if analyzed else None
+
+    return {
+        "analyzed": analyzed,
+        "avg_ai_seconds": avg_ai,
+        "ai_error_rate": (ai_errors / ai_calls) if ai_calls else None,
+        "escalation_rate": (escalation / analyzed) if analyzed else None,
+        "sla_due2h": sla_due2h,
+        "sla_today": sla_today,
+        "sla_ok": sla_ok,
+        "workload_saved_min": saved_total,
+        "automation_rate": automation_rate,
+        "resolved": resolved,
+        "assigned": assigned,
+        "jira": jira,
+        "ai_accuracy": fb_accuracy,
+        "feedback_n": fb_total,
+    }
+
+
+def ops_metrics_display(kpis: dict[str, Any]) -> list[tuple[str, str]]:
+    esc = kpis.get("escalation_rate")
+    auto = kpis.get("automation_rate")
+    avg = kpis.get("avg_ai_seconds")
+    saved = kpis.get("workload_saved_min")
+    return [
+        (
+            "Escalation rate",
+            f"{int(round((esc or 0) * 100))}%" if esc is not None else "—",
+        ),
+        (
+            "Avg AI time",
+            f"{avg:.1f}s" if avg is not None else "—",
+        ),
+        (
+            "Workload saved",
+            f"~{int(saved)} min" if saved else "—",
+        ),
+        (
+            "Automation rate",
+            f"{int(round((auto or 0) * 100))}%" if auto is not None else "—",
+        ),
+    ]
+
+
+def _ts_wave(n: int, *, base: float, amp: float, phase: float) -> list[float]:
+    out: list[float] = []
+    for i in range(n):
+        out.append(base + amp * math.sin((i / max(1, n - 1)) * (2 * math.pi) + phase))
+    return out
+
+
+def _normalize(values: list[float]) -> list[float]:
+    if not values:
+        return []
+    lo = min(values)
+    hi = max(values)
+    if hi <= lo:
+        return [0.5 for _ in values]
+    return [(v - lo) / (hi - lo) for v in values]
+
+
+def sparkline_svg(
+    values: list[float],
+    *,
+    width: int = 120,
+    height: int = 34,
+    stroke: str = "#60a5fa",
+    fill: str | None = "rgba(96,165,250,0.18)",
+) -> str:
+    vals = _normalize(values)
+    if len(vals) < 2:
+        vals = [0.5, 0.5]
+
+    pad = 2
+    w = max(10, width - pad * 2)
+    h = max(10, height - pad * 2)
+    pts: list[tuple[float, float]] = []
+    for i, v in enumerate(vals):
+        x = pad + (i / (len(vals) - 1)) * w
+        y = pad + (1 - v) * h
+        pts.append((x, y))
+    path = "M " + " L ".join(f"{x:.2f},{y:.2f}" for x, y in pts)
+
+    area = ""
+    if fill:
+        x0, y0 = pts[0]
+        x1, _y1 = pts[-1]
+        base_y = pad + h
+        area_path = f"M {x0:.2f},{base_y:.2f} " + " ".join(
+            ["L " + " ".join(f"{x:.2f},{y:.2f}" for x, y in pts)]
+        ) + f" L {x1:.2f},{base_y:.2f} Z"
+        area = f"<path d='{area_path}' fill='{fill}' stroke='none' />"
+
+    return (
+        f"<svg class='mini-spark' width='{width}' height='{height}' viewBox='0 0 {width} {height}' "
+        "preserveAspectRatio='none' aria-hidden='true'>"
+        f"{area}"
+        f"<path d='{path}' fill='none' stroke='{stroke}' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' />"
+        "</svg>"
+    )
+
+
+def inbox_trend_series(*, kpis: dict[str, Any]) -> dict[str, list[float]]:
+    analyzed = int(kpis.get("analyzed") or 0)
+    esc = float(kpis.get("escalation_rate") or 0.0)
+    auto = float(kpis.get("automation_rate") or 0.0)
+    avg_ai = float(kpis.get("avg_ai_seconds") or 0.0)
+    sla_due = int(kpis.get("sla_due2h") or 0)
+    sla_today = int(kpis.get("sla_today") or 0)
+    sla_ok = int(kpis.get("sla_ok") or 0)
+
+    n = 14
+    seed = (analyzed % 9) / 9.0
+    phase = 0.4 + seed
+
+    throughput = _ts_wave(n, base=max(2.0, analyzed / 6.0), amp=max(1.5, analyzed / 16.0), phase=phase)
+    escalation = _ts_wave(n, base=max(0.05, esc), amp=0.08 + 0.03 * seed, phase=1.6 + phase)
+    ai_time = _ts_wave(n, base=max(0.15, avg_ai), amp=0.22 + 0.06 * seed, phase=2.4 + phase)
+
+    sla_total = max(1, sla_due + sla_today + sla_ok)
+    sla_health_now = (sla_ok / sla_total) if sla_total else 1.0
+    sla_health = _ts_wave(n, base=sla_health_now, amp=0.08 + 0.02 * seed, phase=0.9 + phase)
+
+    automation = _ts_wave(n, base=max(0.05, auto), amp=0.12 + 0.03 * seed, phase=3.0 + phase)
+
+    return {
+        "throughput": throughput,
+        "escalation": escalation,
+        "ai_time": ai_time,
+        "sla_health": sla_health,
+        "automation": automation,
+    }
+
+
+def render_inbox_mini_charts(*, kpis: dict[str, Any]) -> None:
+    series = inbox_trend_series(kpis=kpis)
+    render_panel_section_title("Trends")
+
+    c1, c2 = st.columns(2, gap="small")
+    with c1:
+        st.markdown(
+            "<div class='mini-kpi-card'>"
+            "<div class='mini-kpi-head'><span>AI throughput</span><span class='mini-kpi-val'>"
+            f"{int(round(series['throughput'][-1]))}/hr"
+            "</span></div>"
+            f"{sparkline_svg(series['throughput'], stroke='#93c5fd', fill='rgba(147,197,253,0.16)')}"
+            "<div class='mini-kpi-sub'>Emails analyzed per hour (demo)</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c2:
+        st.markdown(
+            "<div class='mini-kpi-card'>"
+            "<div class='mini-kpi-head'><span>SLA health</span><span class='mini-kpi-val'>"
+            f"{int(round((series['sla_health'][-1]) * 100))}%"
+            "</span></div>"
+            f"{sparkline_svg(series['sla_health'], stroke='#4ade80', fill='rgba(74,222,128,0.14)')}"
+            "<div class='mini-kpi-sub'>On-track ratio over time (demo)</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+    c3, c4, c5 = st.columns(3, gap="small")
+    with c3:
+        st.markdown(
+            "<div class='mini-kpi-card'>"
+            "<div class='mini-kpi-head'><span>Escalation curve</span><span class='mini-kpi-val'>"
+            f"{int(round((kpis.get('escalation_rate') or 0) * 100))}%"
+            "</span></div>"
+            f"{sparkline_svg(series['escalation'], stroke='#fbbf24', fill='rgba(251,191,36,0.14)')}"
+            "<div class='mini-kpi-sub'>High/critical share (demo)</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c4:
+        st.markdown(
+            "<div class='mini-kpi-card'>"
+            "<div class='mini-kpi-head'><span>Avg AI time</span><span class='mini-kpi-val'>"
+            f"{float(kpis.get('avg_ai_seconds') or 0.0):.1f}s"
+            "</span></div>"
+            f"{sparkline_svg(series['ai_time'], stroke='#a78bfa', fill='rgba(167,139,250,0.14)')}"
+            "<div class='mini-kpi-sub'>Model latency trend (demo)</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    with c5:
+        st.markdown(
+            "<div class='mini-kpi-card'>"
+            "<div class='mini-kpi-head'><span>Automation rate</span><span class='mini-kpi-val'>"
+            f"{int(round((kpis.get('automation_rate') or 0) * 100))}%"
+            "</span></div>"
+            f"{sparkline_svg(series['automation'], stroke='#38bdf8', fill='rgba(56,189,248,0.14)')}"
+            "<div class='mini-kpi-sub'>Ops actions triggered (demo)</div>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+
+def render_ops_metrics_row(
+    kpis: dict[str, Any], *, container_key: str, n_cols: int = 4
+) -> None:
+    metrics = ops_metrics_display(kpis)
+    n_cols = 4 if n_cols not in {2, 4} else n_cols
+
+    if container_key:
+        with st.container(key=container_key):
+            if n_cols == 2:
+                r1c1, r1c2 = st.columns(2)
+                r1c1.metric(*metrics[0])
+                r1c2.metric(*metrics[1])
+                r2c1, r2c2 = st.columns(2)
+                r2c1.metric(*metrics[2])
+                r2c2.metric(*metrics[3])
+            else:
+                c1, c2, c3, c4 = st.columns(4)
+                for col, (label, value) in zip((c1, c2, c3, c4), metrics):
+                    with col:
+                        col.metric(label, value)
+    else:
+        if n_cols == 2:
+            r1c1, r1c2 = st.columns(2)
+            r1c1.metric(*metrics[0])
+            r1c2.metric(*metrics[1])
+            r2c1, r2c2 = st.columns(2)
+            r2c1.metric(*metrics[2])
+            r2c2.metric(*metrics[3])
+        else:
+            c1, c2, c3, c4 = st.columns(4)
+            for col, (label, value) in zip((c1, c2, c3, c4), metrics):
+                with col:
+                    col.metric(label, value)
+
+
+def bundle_analyze_seconds(bundle: dict[str, Any] | None) -> float | None:
+    if not bundle:
+        return None
+    raw = bundle.get("analyze_seconds")
+    if raw is None:
+        return None
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return None
 
 
 def render_inbox_ticket(
@@ -2477,7 +3031,8 @@ def main() -> None:
                                     body=body,
                                 )
                             )
-                            st.session_state.last_ai_seconds = time.monotonic() - t0
+                            bundle["analyze_seconds"] = time.monotonic() - t0
+                            st.session_state.last_ai_seconds = float(bundle["analyze_seconds"])
                             inline_id = bundle["email"]["id"]
                             st.session_state.analysis_store[inline_id] = bundle
                             st.session_state.selected_email_id = inline_id
@@ -2528,8 +3083,9 @@ def main() -> None:
                         bundle = _patch_bundle_reply(
                             post_analyze(active_base, eid, regenerate=False)
                         )
+                        bundle["analyze_seconds"] = time.monotonic() - t0
                         st.session_state.analysis_store[eid] = bundle
-                        st.session_state.last_ai_seconds = time.monotonic() - t0
+                        st.session_state.last_ai_seconds = float(bundle["analyze_seconds"])
                         st.session_state.session_analyzed_count += 1
                         analyzed_now += 1
                     except ApiError as exc:
@@ -2562,6 +3118,13 @@ def main() -> None:
             mini[1].metric("Urgent", metric_display_count(stats["urgent_ai"]))
             mini[2].metric("Meetings", metric_display_count(stats["meetings_ai"]))
             mini[3].metric("Invoices", metric_display_count(stats["invoices_ai"]))
+            kpis = ops_kpis(emails=emails, store=st.session_state.analysis_store)
+            render_panel_section_title("Operational metrics")
+            render_ops_metrics_row(kpis, container_key="inbox_ops_metrics", n_cols=2)
+            render_inbox_mini_charts(kpis=kpis)
+            st.caption(
+                f"SLA: {kpis['sla_due2h']} due in 2h · {kpis['sla_today']} due today · {kpis['sla_ok']} on track"
+            )
             quick = st.radio(
                 "Quick filter",
                 options=["All", "High priority+", "Invoices", "Meetings", "Support", "Spam"],
@@ -2727,12 +3290,20 @@ def main() -> None:
                     progress_title,
                     str(detail.get("subject", "(No subject)")),
                     0,
-                    1,
+                    4,
                     show_icon=True,
                 )
                 with st.container(key="progress_only_ui"):
                     if has_analysis and bundle is not None:
                         _save_analysis_snapshot(selected_id, bundle)
+                    render_progress_card(
+                        status_slot,
+                        progress_title,
+                        "Extracting entities and signals",
+                        1,
+                        4,
+                        show_icon=True,
+                    )
                     t0 = time.monotonic()
                     new_bundle = _patch_bundle_reply(
                         post_analyze(
@@ -2742,16 +3313,30 @@ def main() -> None:
                             detail=detail,
                         )
                     )
+                    render_progress_card(
+                        status_slot,
+                        progress_title,
+                        "Validating structured output",
+                        3,
+                        4,
+                        show_icon=True,
+                    )
+                    new_bundle["analyze_seconds"] = time.monotonic() - t0
                     st.session_state.analysis_store[selected_id] = new_bundle
                     _clear_reply_edit_for_email(selected_id)
-                    st.session_state.last_ai_seconds = time.monotonic() - t0
+                    dt = float(new_bundle["analyze_seconds"])
+                    st.session_state.last_ai_seconds = dt
+                    metrics = st.session_state.get("analysis_metrics") or {}
+                    metrics["ai_calls"] = int(metrics.get("ai_calls", 0)) + 1
+                    metrics["ai_seconds_total"] = float(metrics.get("ai_seconds_total", 0.0)) + float(dt)
+                    st.session_state.analysis_metrics = metrics
                     st.session_state.session_analyzed_count += 1
                     render_progress_card(
                         status_slot,
                         "Analysis ready",
                         str(detail.get("subject", "(No subject)")),
-                        1,
-                        1,
+                        4,
+                        4,
                     )
                 st.session_state.pop("analyzing_email_id", None)
                 toast_msg = "Analysis updated." if has_analysis else "Email analyzed."
@@ -2764,6 +3349,9 @@ def main() -> None:
                 st.rerun()
             except ApiError as exc:
                 st.session_state.pop("analyzing_email_id", None)
+                metrics = st.session_state.get("analysis_metrics") or {}
+                metrics["ai_errors"] = int(metrics.get("ai_errors", 0)) + 1
+                st.session_state.analysis_metrics = metrics
                 st.error(exc.message)
 
         if has_previous:
@@ -2893,11 +3481,20 @@ def main() -> None:
                     st.markdown("<p class='empty-state'>None extracted.</p>", unsafe_allow_html=True)
 
             dynamic_saved = estimate_minutes_saved(detail=detail, analysis=analysis)
+            ai_run = bundle_analyze_seconds(bundle)
+            ai_run_txt = f"{ai_run:.1f}s" if ai_run is not None else "—"
             st.markdown(
                 "<div class='efficiency-card'>"
-                "<div>"
+                "<div class='efficiency-main'>"
+                "<div class='efficiency-block'>"
+                "<div class='efficiency-label'>AI processing</div>"
+                f"<div class='efficiency-value'>{html_module.escape(ai_run_txt)}</div>"
+                "</div>"
+                "<div class='efficiency-divider' aria-hidden='true'></div>"
+                "<div class='efficiency-block'>"
                 "<div class='efficiency-label'>Efficiency gain</div>"
                 f"<div class='efficiency-value'>~{dynamic_saved} min saved</div>"
+                "</div>"
                 "</div>"
                 "<span class='efficiency-badge'>AI assisted</span>"
                 "</div>",
@@ -2972,6 +3569,60 @@ def main() -> None:
                         active_base=active_base,
                         selected_id=selected_id,
                         detail=detail,
+                    )
+
+            with st.container(key="analysis_breakdown"):
+                rcol, ecol, ccol = st.columns(3, gap="small")
+                with rcol:
+                    render_section_title("AI reasoning")
+                    reasoning = analysis_reasoning_timeline(detail=detail, analysis=analysis)
+                    st.markdown(
+                        "<div class='insight-subcard'>"
+                        + "".join(
+                            f"<div class='reason-line'>{html_module.escape(line)}</div>"
+                            for line in reasoning
+                        )
+                        + "</div>",
+                        unsafe_allow_html=True,
+                    )
+                with ecol:
+                    render_section_title("Entities")
+                    ent_rows = flatten_entities(
+                        analysis.get("entities") if isinstance(analysis, dict) else None
+                    )
+                    if ent_rows:
+                        ent_html = "".join(
+                            "<span class='entity-chip'>"
+                            f"<span class='entity-kind'>{html_module.escape(kind)}</span>"
+                            f"<span>{html_module.escape(val)}</span>"
+                            "</span>"
+                            for kind, val in ent_rows[:24]
+                        )
+                        st.markdown(
+                            f"<div class='insight-subcard'><div class='entity-grid'>{ent_html}</div></div>",
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.markdown("<p class='empty-state'>No entities extracted.</p>", unsafe_allow_html=True)
+                with ccol:
+                    render_section_title("Confidence breakdown")
+                    breakdown = confidence_breakdown(analysis)
+                    breakdown_rows = []
+                    for label, status, hint in breakdown:
+                        pill_class = "breakdown-ok" if status == "ok" else "breakdown-review"
+                        pill_txt = "ok" if status == "ok" else "review"
+                        breakdown_rows.append(
+                            "<div class='breakdown-row'>"
+                            "<div>"
+                            f"<div class='breakdown-label'>{html_module.escape(label)}</div>"
+                            f"<div class='breakdown-hint'>{html_module.escape(hint)}</div>"
+                            "</div>"
+                            f"<span class='breakdown-pill {pill_class}'>{pill_txt}</span>"
+                            "</div>"
+                        )
+                    st.markdown(
+                        "<div class='insight-subcard'>" + "".join(breakdown_rows) + "</div>",
+                        unsafe_allow_html=True,
                     )
 
     if activity_feed_slot is not None:
