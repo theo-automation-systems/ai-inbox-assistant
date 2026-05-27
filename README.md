@@ -2,6 +2,8 @@
 
 Intelligent email triage, prioritization, and AI-generated replies for enterprise inbox workflows.
 
+Live demo: `https://ai-inbox-assistant-khwwptkayrqjyuukdtcysp.streamlit.app/`
+
 ![AI Inbox Assistant dashboard](assets/ai-inbox-assistant-dashboard.png)
 
 AI Inbox Assistant is a SaaS-style internal operations tool that helps teams turn messy inboxes into structured, actionable work. It classifies emails, detects priority, summarizes context, extracts tasks, and drafts replies using an LLM-backed workflow.
