@@ -246,6 +246,7 @@ pytest
 - No live Gmail or Outlook integration yet
 - LLM extraction may occasionally produce imperfect summaries
 - Batch processing cost depends on API provider pricing
+- Operational workflow buttons (Mark resolved, Assign task, Export to Jira) are demo-only and not connected to real Jira accounts yet
 - No persistent database in the MVP
 - No multi-user authentication or team permissions yet
 

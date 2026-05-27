@@ -112,9 +112,9 @@ def inject_styles() -> None:
                 background: rgba(255, 255, 255, 0.03);
                 border: none;
                 border-radius: 12px;
-                padding: 9px 20px;
+                padding: 8px 18px;
                 margin-top: -0.75rem;
-                margin-bottom: 12px;
+                margin-bottom: 8px;
                 box-shadow: none;
                 display: flex;
                 align-items: center;
@@ -183,35 +183,237 @@ def inject_styles() -> None:
                 border-radius: 12px;
                 border: none;
                 background: rgba(255, 255, 255, 0.03);
-                padding: 18px 20px;
-                margin-bottom: 20px;
+                padding: 14px 16px;
+                margin-bottom: 12px;
             }
             .analysis-grid {
                 display: grid;
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 16px;
-                margin: 16px 0 24px 0;
+                gap: 8px;
+                margin: 4px 0 10px 0;
             }
             @media (max-width: 900px) {
                 .analysis-grid { grid-template-columns: 1fr; }
             }
-            .mini-card {
+            .insight-tile {
                 border-radius: 10px;
-                border: none;
-                background: rgba(255, 255, 255, 0.04);
-                padding: 14px 16px;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 16px 18px;
+                min-height: 0;
+                box-sizing: border-box;
             }
-            .mini-card-label { font-size: 12px; font-weight: 500; color: #64748b; margin-bottom: 6px; }
-            .mini-card-value { font-size: 16px; font-weight: 600; color: #f1f5f9; line-height: 1.35; }
+            /* Typography: L1 page · L2 section · L3 label/metadata (use <p>, not h2/h3 — Streamlit overrides headings) */
+            p.type-l1,
+            .type-l1 {
+                font-size: 1.3125rem !important;
+                font-weight: 700 !important;
+                letter-spacing: -0.02em !important;
+                color: #f8fafc !important;
+                line-height: 1.25 !important;
+                margin: 0 0 0.5rem 0 !important;
+                padding: 0 !important;
+            }
+            p.type-l2,
+            .type-l2 {
+                font-size: 1.0625rem !important;
+                font-weight: 600 !important;
+                letter-spacing: -0.01em !important;
+                color: #e2e8f0 !important;
+                line-height: 1.3 !important;
+                margin: 0.65rem 0 0.45rem 0 !important;
+                padding: 0 !important;
+            }
+            p.type-l1 + p.type-l2,
+            .type-l1 + .type-l2 {
+                margin-top: 0.35rem !important;
+            }
+            .insights-spacer {
+                display: block;
+                height: 14px;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            [class*="st-key-insights_summary"] {
+                margin-bottom: 14px !important;
+            }
+            [class*="st-key-insights_tiles"] [data-testid="stHorizontalBlock"] {
+                gap: 0.65rem !important;
+            }
+            .type-l3,
+            .panel-section-title,
+            .action-group-label {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.035em;
+                text-transform: uppercase;
+                color: #94a3b8;
+                line-height: 1.35;
+                margin: 0.4rem 0 0.25rem 0;
+                padding: 0;
+            }
+            .type-l3-field {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                color: #94a3b8;
+                line-height: 1.35;
+                margin: 0 0 0.2rem 0;
+            }
+            .insight-label {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                color: #94a3b8;
+                margin-bottom: 6px;
+            }
+            .insight-value {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #e2e8f0;
+                line-height: 1.25;
+            }
+            .insight-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                flex: 0 0 auto;
+                background: #94a3b8;
+            }
+            .insight-dot.category-invoice,
+            .insight-dot.category-invoices { background: #fbbf24; }
+            .insight-dot.category-urgent { background: #f87171; }
+            .insight-dot.category-meeting,
+            .insight-dot.category-meetings { background: #60a5fa; }
+            .insight-dot.category-support { background: #a78bfa; }
+            .insight-dot.category-spam { background: #94a3b8; }
+            .insight-dot.category-personal { background: #4ade80; }
+            .insight-dot.priority-critical,
+            .insight-dot.priority-high { background: #f87171; }
+            .insight-dot.priority-medium { background: #fbbf24; }
+            .insight-dot.priority-low { background: #94a3b8; }
+            .insight-dot.sentiment-positive { background: #4ade80; }
+            .insight-dot.sentiment-neutral { background: #94a3b8; }
+            .insight-dot.sentiment-negative,
+            .insight-dot.sentiment-frustrated { background: #f87171; }
+            .badge-category-invoice,
+            .badge-category-invoices { background: rgba(245, 158, 11, 0.14); color: #fbbf24; }
+            .badge-category-urgent,
+            .badge-priority-critical,
+            .badge-priority-high { background: rgba(239, 68, 68, 0.14); color: #fecaca; }
+            .badge-category-meeting,
+            .badge-category-meetings { background: rgba(59, 130, 246, 0.14); color: #bfdbfe; }
+            .badge-category-support { background: rgba(168, 85, 247, 0.14); color: #ddd6fe; }
+            .badge-category-spam { background: rgba(100, 116, 139, 0.18); color: #cbd5e1; }
+            .badge-category-personal { background: rgba(34, 197, 94, 0.14); color: #bbf7d0; }
+            .badge-priority-medium { background: rgba(245, 158, 11, 0.14); color: #fde68a; }
+            .badge-priority-low { background: rgba(148, 163, 184, 0.12); color: #cbd5e1; }
+            .badge-sentiment-positive { background: rgba(34, 197, 94, 0.14); color: #bbf7d0; }
+            .badge-sentiment-neutral { background: rgba(148, 163, 184, 0.12); color: #cbd5e1; }
+            .badge-sentiment-negative,
+            .badge-sentiment-frustrated { background: rgba(239, 68, 68, 0.14); color: #fecaca; }
             .summary-box {
                 border-radius: 12px;
                 border: none;
-                background: rgba(255, 255, 255, 0.04);
-                padding: 18px 20px;
-                margin: 16px 0 24px 0;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 16px 18px;
+                margin: 0;
             }
-            .summary-box-title { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 10px; letter-spacing: 0.01em; text-transform: lowercase; }
+            .summary-box-title {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.035em;
+                text-transform: uppercase;
+                color: #94a3b8;
+                margin-bottom: 8px;
+                line-height: 1.35;
+            }
             .summary-box-body { font-size: 15px; color: #e2e8f0; line-height: 1.6; }
+            .task-list,
+            .deadline-list {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin: 2px 0 14px 0;
+            }
+            .task-item,
+            .deadline-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 9px;
+                color: #cbd5e1;
+                font-size: 14px;
+                line-height: 1.45;
+            }
+            .task-check {
+                width: 16px;
+                height: 16px;
+                margin-top: 2px;
+                border-radius: 5px;
+                background: rgba(255, 255, 255, 0.06);
+                box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+                flex: 0 0 auto;
+            }
+            .deadline-dot {
+                width: 18px;
+                height: 18px;
+                margin-top: 1px;
+                border-radius: 6px;
+                display: grid;
+                place-items: center;
+                background: rgba(59, 130, 246, 0.12);
+                color: #bfdbfe;
+                font-size: 11px;
+                flex: 0 0 auto;
+            }
+            .empty-state {
+                margin: 2px 0 14px 0;
+                color: #64748b;
+                font-size: 13px;
+            }
+            .efficiency-card {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                border-radius: 12px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(12, 38, 24, 0.62) 0%,
+                    rgba(20, 83, 45, 0.14) 32%,
+                    rgba(255, 255, 255, 0.028) 68%,
+                    rgba(255, 255, 255, 0.02) 100%
+                );
+                border: 1px solid rgba(34, 197, 94, 0.08);
+                padding: 10px 14px;
+                margin: 2px 0 10px 0;
+            }
+            .efficiency-label {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.035em;
+                text-transform: uppercase;
+                color: #94a3b8;
+                margin-bottom: 4px;
+            }
+            .efficiency-value {
+                color: #f8fafc;
+                font-size: 17px;
+                font-weight: 750;
+                letter-spacing: -0.02em;
+            }
+            .efficiency-badge {
+                border-radius: 999px;
+                padding: 4px 9px;
+                background: rgba(20, 83, 45, 0.22);
+                color: #86efac;
+                font-size: 11px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
             .tag {
                 display: inline-block;
                 padding: 4px 10px;
@@ -566,12 +768,7 @@ def inject_styles() -> None:
                 gap: 0 !important;
             }
             .action-group-label {
-                font-size: 11px;
-                font-weight: 600;
-                letter-spacing: 0.01em;
-                color: #64748b;
-                margin: 0 0 10px 0;
-                line-height: 1.2;
+                margin: 0 0 8px 0;
             }
             [class*="st-key-actions_panel"] {
                 margin: 0 0 20px 0;
@@ -586,9 +783,7 @@ def inject_styles() -> None:
                 border-bottom: none;
             }
             [class*="st-key-actions_panel"] .action-group-label {
-                margin: 0;
-                font-size: 11.5px;
-                line-height: 1.3;
+                margin: 0 0 6px 0;
             }
             [class*="st-key-actions_panel"] .action-group-head {
                 margin: 0 0 6px 0;
@@ -609,6 +804,19 @@ def inject_styles() -> None:
                 height: 2.1rem !important;
                 padding: 0.2rem 0.65rem !important;
                 font-size: 13px !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFormSubmitButton"] button {
+                min-height: 2.25rem !important;
+                height: 2.25rem !important;
+                padding: 0.25rem 0.85rem !important;
+                font-size: 13px !important;
+                font-weight: 650 !important;
+                background: rgba(255, 255, 255, 0.095) !important;
+                color: #f8fafc !important;
+            }
+            [class*="st-key-actions_panel"] [data-testid="stFormSubmitButton"] button:hover {
+                background: rgba(59, 130, 246, 0.22) !important;
+                color: #ffffff !important;
             }
             [class*="st-key-actions_panel"] [data-testid="stFileUploader"] {
                 padding: 0 !important;
@@ -634,7 +842,7 @@ def inject_styles() -> None:
                 justify-content: flex-end !important;
             }
             [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] {
-                gap: 1.25rem !important;
+                gap: 0.9rem !important;
             }
             [class*="st-key-main_workspace"] > [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"] {
                 margin-top: 0 !important;
@@ -649,35 +857,436 @@ def inject_styles() -> None:
                 margin-top: 0 !important;
                 padding-top: 0 !important;
             }
-            .panel-section-title {
-                font-size: 0.75rem;
-                font-weight: 600;
-                letter-spacing: 0.02em;
-                color: #64748b;
-                margin: 1.25rem 0 0.65rem 0;
-                line-height: 1.3;
-            }
             .time-saved-label {
-                font-size: 0.82rem;
-                font-weight: 500;
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.03em;
                 color: #64748b;
                 margin: 0.5rem 0 1rem 0;
                 line-height: 1.25;
             }
-            h3 {
-                font-size: 1.05rem !important;
-                font-weight: 600 !important;
-                color: #f1f5f9 !important;
-                letter-spacing: -0.02em;
-                margin: 0 0 1rem 0 !important;
+            [class*="st-key-inbox_email_layout"] h1,
+            [class*="st-key-inbox_email_layout"] h2,
+            [class*="st-key-inbox_email_layout"] h3,
+            [class*="st-key-inbox_email_layout"] h4 {
+                font-family: 'Inter', sans-serif !important;
             }
-            .insights-title {
-                font-size: 1.05rem;
+            [class*="st-key-inbox_email_layout"] [data-testid="stMarkdown"] p.type-l1,
+            [class*="st-key-inbox_email_layout"] p.type-l1 {
+                font-size: 1.3125rem !important;
+                font-weight: 700 !important;
+                letter-spacing: -0.02em !important;
+                color: #f8fafc !important;
+                line-height: 1.25 !important;
+                margin: 0 0 0.5rem 0 !important;
+            }
+            [class*="st-key-inbox_email_layout"] [data-testid="stMarkdown"] p.type-l2,
+            [class*="st-key-inbox_email_layout"] p.type-l2 {
+                font-size: 1.0625rem !important;
+                font-weight: 600 !important;
+                color: #e2e8f0 !important;
+                line-height: 1.3 !important;
+                margin: 0.65rem 0 0.45rem 0 !important;
+            }
+            .email-sender {
+                font-size: 0.8125rem;
                 font-weight: 600;
                 color: #f1f5f9;
+                line-height: 1.35;
+            }
+            .email-subject {
+                font-size: 0.875rem;
+                font-weight: 650;
+                letter-spacing: -0.01em;
+                color: #f8fafc;
+                line-height: 1.35;
+                margin-top: 0.4rem;
+            }
+            .email-body {
+                margin-top: 0.75rem;
+                font-size: 0.875rem;
+                line-height: 1.6;
+                color: #cbd5e1;
+            }
+            [class*="st-key-inbox_filters_counts"] label[data-testid="stWidgetLabel"],
+            [class*="st-key-inbox_filters_counts"] [data-testid="stMetricLabel"] {
+                font-size: 0.6875rem !important;
+                font-weight: 600 !important;
+                letter-spacing: 0.04em !important;
+                text-transform: uppercase !important;
+                color: #64748b !important;
+            }
+            [class*="st-key-inbox_filters_counts"] [data-testid="stMetricValue"] {
+                font-size: 0.975rem !important;
+                font-weight: 650 !important;
+                color: #f1f5f9 !important;
+            }
+            [class*="st-key-suggested_reply_edit_"] [data-testid="stTextArea"] {
+                resize: vertical !important;
+                overflow: auto !important;
+                min-height: 145px !important;
+            }
+            [class*="st-key-suggested_reply_edit_"] textarea {
+                min-height: 145px !important;
+                height: auto !important;
+                resize: vertical !important;
+                overflow: auto !important;
+                padding: 0.65rem 0.75rem !important;
+                background: rgba(255, 255, 255, 0.032) !important;
+                color: #dbe4ef !important;
+                font-size: 14px !important;
+                line-height: 1.55 !important;
+                field-sizing: content;
+            }
+            [class*="st-key-suggested_reply_edit_"] [data-baseweb="textarea"] {
+                background: rgba(255, 255, 255, 0.032) !important;
+                resize: vertical !important;
+                overflow: auto !important;
+                min-height: 145px !important;
+            }
+            .app-header-bar,
+            .email-card,
+            .insight-tile,
+            .summary-box,
+            .efficiency-card,
+            .inbox-ticket,
+            .empty-product-state,
+            .progress-card,
+            .activity-card,
+            .confidence-strip,
+            div[data-testid="stButton"] button,
+            div[data-testid="stDownloadButton"] button,
+            [data-baseweb="input"],
+            [data-baseweb="textarea"] {
+                transition:
+                    background 0.18s ease,
+                    border-color 0.18s ease,
+                    box-shadow 0.18s ease,
+                    transform 0.18s ease,
+                    color 0.18s ease !important;
+            }
+            .email-card:hover,
+            .insight-tile:hover,
+            .summary-box:hover {
+                background: rgba(255, 255, 255, 0.055);
+                transform: translateY(-1px);
+                box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+            }
+            .efficiency-card:hover {
+                background: linear-gradient(
+                    135deg,
+                    rgba(12, 38, 24, 0.68) 0%,
+                    rgba(20, 83, 45, 0.16) 32%,
+                    rgba(255, 255, 255, 0.032) 68%,
+                    rgba(255, 255, 255, 0.025) 100%
+                );
+                transform: none;
+                box-shadow: none;
+            }
+            div[data-testid="stButton"] button:hover,
+            div[data-testid="stDownloadButton"] button:hover {
+                transform: translateY(-1px);
+            }
+            .empty-product-state {
+                min-height: 280px;
+                border-radius: 16px;
+                background:
+                    radial-gradient(circle at top, rgba(59,130,246,0.12), transparent 38%),
+                    rgba(255, 255, 255, 0.025);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 34px 28px;
+                text-align: center;
+            }
+            .empty-product-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 14px;
+                margin: 0 auto 14px auto;
+                display: grid;
+                place-items: center;
+                background: rgba(255, 255, 255, 0.07);
+                color: #dbeafe;
+                font-weight: 750;
+                letter-spacing: -0.03em;
+            }
+            .empty-product-title {
+                color: #f8fafc;
+                font-size: 1.08rem;
+                font-weight: 650;
                 letter-spacing: -0.02em;
-                margin: 0 0 0.35rem 0;
-                line-height: 1.25;
+                margin-bottom: 6px;
+            }
+            .empty-product-body {
+                color: #94a3b8;
+                font-size: 0.9rem;
+                line-height: 1.55;
+                max-width: 390px;
+            }
+            .progress-card {
+                border-radius: 14px;
+                background: linear-gradient(135deg, rgba(59,130,246,0.13), rgba(255,255,255,0.035));
+                padding: 11px 14px;
+                margin: 6px 0 8px 0;
+                overflow: hidden;
+                position: relative;
+            }
+            .progress-card::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+                transform: translateX(-100%);
+                animation: shimmer 1.6s infinite;
+                pointer-events: none;
+            }
+            @keyframes shimmer {
+                100% { transform: translateX(100%); }
+            }
+            .progress-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 10px;
+            }
+            .progress-title-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .progress-spinner {
+                color: #93c5fd;
+                font-size: 0.9rem;
+                line-height: 1;
+                flex: 0 0 auto;
+                display: inline-block;
+            }
+            .progress-spinner--spin {
+                animation: progress-spin 0.85s linear infinite;
+            }
+            @keyframes progress-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .progress-title {
+                color: #f8fafc;
+                font-size: 0.92rem;
+                font-weight: 650;
+            }
+            .progress-meta {
+                color: #93c5fd;
+                font-size: 0.78rem;
+                font-weight: 650;
+                white-space: nowrap;
+            }
+            .progress-body {
+                color: #94a3b8;
+                font-size: 0.82rem;
+                margin-bottom: 10px;
+            }
+            .progress-track {
+                height: 6px;
+                border-radius: 999px;
+                background: rgba(255,255,255,0.08);
+                overflow: hidden;
+            }
+            .progress-fill {
+                height: 100%;
+                border-radius: 999px;
+                background: linear-gradient(90deg, #60a5fa, #93c5fd);
+            }
+            .activity-card {
+                border-radius: 14px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(15, 23, 42, 0.78) 0%,
+                    rgba(30, 58, 138, 0.16) 48%,
+                    rgba(30, 41, 59, 0.55) 100%
+                );
+                border: 1px solid rgba(59, 130, 246, 0.06);
+                box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+                    0 6px 18px rgba(15, 23, 42, 0.18);
+                padding: 12px 14px;
+                margin-top: 12px;
+            }
+            .activity-title {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                color: #94a3b8;
+                margin-bottom: 8px;
+            }
+            .activity-line {
+                font-size: 0.8125rem;
+                color: #cbd5e1;
+                line-height: 1.4;
+            }
+            .activity-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 9px;
+                padding: 7px 0;
+                color: #cbd5e1;
+                font-size: 0.82rem;
+                line-height: 1.35;
+            }
+            .activity-item + .activity-item {
+                border-top: 1px solid rgba(255,255,255,0.045);
+            }
+            .activity-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #93c5fd;
+                margin-top: 5px;
+                box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+                flex: 0 0 auto;
+            }
+            .activity-time {
+                color: #64748b;
+                font-size: 0.74rem;
+                margin-top: 2px;
+            }
+            .inbox-ticket-layout {
+                display: flex;
+                align-items: flex-start;
+                gap: 11px;
+            }
+            .inbox-avatar {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+                display: grid;
+                place-items: center;
+                color: #e2e8f0;
+                background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(255,255,255,0.055));
+                font-size: 0.72rem;
+                font-weight: 750;
+                letter-spacing: -0.02em;
+                flex: 0 0 auto;
+                margin-top: 1px;
+            }
+            .inbox-ticket-content { min-width: 0; flex: 1 1 auto; }
+            .inbox-ticket-footer {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-top: 8px;
+            }
+            .meta-chip,
+            .sla-chip,
+            .confidence-pill {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                border-radius: 999px;
+                padding: 3px 7px;
+                font-size: 0.68rem;
+                font-weight: 650;
+                line-height: 1.1;
+                background: rgba(255,255,255,0.055);
+                color: #94a3b8;
+            }
+            .sla-urgent { background: rgba(239,68,68,0.13); color: #fecaca; }
+            .sla-soon { background: rgba(245,158,11,0.13); color: #fde68a; }
+            .sla-normal { background: rgba(34,197,94,0.11); color: #bbf7d0; }
+            .sla-pending { background: rgba(148,163,184,0.1); color: #cbd5e1; }
+            .confidence-strip {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.032);
+                padding: 16px 18px;
+                margin: 0;
+            }
+            .confidence-label {
+                font-size: 0.6875rem;
+                font-weight: 600;
+                letter-spacing: 0.035em;
+                text-transform: uppercase;
+                color: #94a3b8;
+            }
+            .confidence-copy {
+                color: #94a3b8;
+                font-size: 0.8125rem;
+                margin-top: 3px;
+                line-height: 1.4;
+            }
+            .confidence-high { background: rgba(34,197,94,0.12); color: #bbf7d0; }
+            .confidence-medium { background: rgba(245,158,11,0.12); color: #fde68a; }
+            .confidence-review { background: rgba(239,68,68,0.12); color: #fecaca; }
+            [class*="st-key-progress_only_ui"] [data-testid="stSpinner"] {
+                display: none !important;
+            }
+            [class*="st-key-op_"] button,
+            [class*="st-key-export_"] button {
+                background: rgba(255,255,255,0.055) !important;
+                color: #cbd5e1 !important;
+            }
+            [class*="st-key-action_items_"] label[data-testid="stWidgetLabel"],
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label {
+                background: transparent !important;
+            }
+            [class*="st-key-action_items_"] label[data-testid="stWidgetLabel"] p,
+            [class*="st-key-action_items_"] label[data-testid="stWidgetLabel"]:has(input:checked) p,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label p,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label[data-checked="true"] p {
+                font-size: 0.875rem !important;
+                color: #cbd5e1 !important;
+                line-height: 1.45 !important;
+                background: transparent !important;
+                text-decoration: none !important;
+            }
+            [class*="st-key-action_items_"] label[data-testid="stWidgetLabel"]:has(input:checked) p {
+                color: #94a3b8 !important;
+                text-decoration: line-through;
+            }
+            [class*="st-key-action_items_"] input[type="checkbox"] {
+                accent-color: #3b82f6 !important;
+            }
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label {
+                align-items: flex-start !important;
+            }
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label > span:first-child,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label > div:first-child {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(148, 163, 184, 0.45) !important;
+            }
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label[data-checked="true"] > span:first-child,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label[data-checked="true"] > div:first-child {
+                background-color: #3b82f6 !important;
+                border-color: #2563eb !important;
+            }
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label > div:last-child,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] label > span:last-child {
+                background: transparent !important;
+                color: #cbd5e1 !important;
+            }
+            [class*="st-key-action_items_"] [data-baseweb="checkbox"] > div:first-child {
+                border-color: rgba(148, 163, 184, 0.45) !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+            }
+            [class*="st-key-action_items_"] [data-baseweb="checkbox"] [aria-checked="true"] > div:first-child,
+            [class*="st-key-action_items_"] [data-baseweb="checkbox"] > div:first-child[data-checked="true"] {
+                background: #3b82f6 !important;
+                border-color: #2563eb !important;
+            }
+            [class*="st-key-action_items_"] [data-baseweb="checkbox"] svg,
+            [class*="st-key-action_items_"] [data-testid="stCheckbox"] svg {
+                stroke: #f8fafc !important;
+                fill: #f8fafc !important;
+            }
+            [class*="st-key-op_"] button:hover,
+            [class*="st-key-export_"] button:hover {
+                background: rgba(59,130,246,0.16) !important;
+                color: #f8fafc !important;
             }
             [class*="st-key-inbox_filters_counts"] [data-testid="stMetricLabel"] {
                 font-size: 0.8rem !important;
@@ -694,17 +1303,285 @@ def inject_styles() -> None:
     )
 
 
+def render_page_title(title: str) -> None:
+    safe = html_module.escape(title.strip())
+    st.markdown(
+        f'<p class="type-l1" role="heading" aria-level="1">{safe}</p>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_title(title: str) -> None:
+    safe = html_module.escape(title.strip())
+    st.markdown(
+        f'<p class="type-l2" role="heading" aria-level="2">{safe}</p>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_meta_label(title: str) -> None:
+    safe = html_module.escape(title.strip())
+    st.markdown(f'<p class="type-l3">{safe}</p>', unsafe_allow_html=True)
+
+
 def render_action_group_label(title: str) -> None:
     safe = html_module.escape(title.strip())
     st.markdown(
-        f'<div class="action-group-head"><p class="action-group-label">{safe}</p></div>',
+        f'<div class="action-group-head"><p class="type-l3 action-group-label">{safe}</p></div>',
         unsafe_allow_html=True,
     )
 
 
 def render_panel_section_title(title: str) -> None:
-    safe = html_module.escape(title.strip())
-    st.markdown(f'<p class="panel-section-title">{safe}</p>', unsafe_allow_html=True)
+    render_meta_label(title)
+
+
+def render_empty_product_state(title: str, body: str, icon: str = "AI") -> None:
+    icon_html = (
+        f"<div class='empty-product-icon'>{html_module.escape(icon)}</div>"
+        if str(icon or "").strip()
+        else ""
+    )
+    st.markdown(
+        "<div class='empty-product-state'>"
+        "<div>"
+        f"{icon_html}"
+        f"<div class='empty-product-title'>{html_module.escape(title)}</div>"
+        f"<div class='empty-product-body'>{html_module.escape(body)}</div>"
+        "</div>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+
+def progress_card_html(
+    title: str,
+    body: str,
+    current: int,
+    total: int,
+    *,
+    show_icon: bool = False,
+) -> str:
+    total_safe = max(total, 1)
+    pct = max(0, min(100, round((current / total_safe) * 100)))
+    title_safe = html_module.escape(title)
+    if show_icon:
+        spinning = current < total_safe
+        spin_class = " progress-spinner--spin" if spinning else ""
+        title_block = (
+            "<div class='progress-title-row'>"
+            f"<span class='progress-spinner{spin_class}' aria-hidden='true'>◐</span>"
+            f"<span class='progress-title'>{title_safe}</span>"
+            "</div>"
+        )
+    else:
+        title_block = f"<div class='progress-title'>{title_safe}</div>"
+    return (
+        "<div class='progress-card'>"
+        "<div class='progress-row'>"
+        f"{title_block}"
+        f"<div class='progress-meta'>{current}/{total_safe} · {pct}%</div>"
+        "</div>"
+        f"<div class='progress-body'>{html_module.escape(body)}</div>"
+        "<div class='progress-track'>"
+        f"<div class='progress-fill' style='width:{pct}%'></div>"
+        "</div>"
+        "</div>"
+    )
+
+
+def render_progress_card(
+    slot: Any,
+    title: str,
+    body: str,
+    current: int,
+    total: int,
+    *,
+    show_icon: bool = False,
+) -> None:
+    slot.markdown(
+        progress_card_html(title, body, current, total, show_icon=show_icon),
+        unsafe_allow_html=True,
+    )
+
+
+def insight_dot_class(kind: str, value: str | None) -> str:
+    token = css_token(value)
+    if kind == "category":
+        return f"category-{token}"
+    if kind == "priority":
+        return f"priority-{token}"
+    return f"sentiment-{token}"
+
+
+def _action_item_id(index: int, text: str) -> str:
+    return f"{index}::{text}"
+
+
+def _purge_action_checkbox_widget_keys() -> None:
+    for key in list(st.session_state.keys()):
+        if isinstance(key, str) and key.startswith("action_chk_"):
+            del st.session_state[key]
+
+
+def _persist_action_checkbox(email_id: str, item_id: str, widget_key: str) -> None:
+    store = st.session_state.setdefault("checked_action_items", {})
+    bucket = set(store.get(email_id, []))
+    if st.session_state.get(widget_key):
+        bucket.add(item_id)
+    else:
+        bucket.discard(item_id)
+    store[email_id] = sorted(bucket)
+
+
+def render_action_items(email_id: str, action_items: list[Any]) -> None:
+    """Checkable action items persisted per email across inbox navigation."""
+
+    if not action_items:
+        st.markdown("<p class='empty-state'>None extracted.</p>", unsafe_allow_html=True)
+        return
+
+    store = st.session_state.setdefault("checked_action_items", {})
+    safe_id = re.sub(r"[^\w]", "_", email_id)
+    saved = set(store.get(email_id, []))
+
+    if st.session_state.get("_action_panel_email") != email_id:
+        st.session_state["_action_panel_email"] = email_id
+        _purge_action_checkbox_widget_keys()
+        for index, item in enumerate(action_items):
+            item_id = _action_item_id(index, str(item))
+            widget_key = f"action_chk_{safe_id}_{index}"
+            st.session_state[widget_key] = item_id in saved
+
+    with st.container(key=f"action_items_{safe_id}"):
+        bucket: set[str] = set()
+        for index, item in enumerate(action_items):
+            item_id = _action_item_id(index, str(item))
+            widget_key = f"action_chk_{safe_id}_{index}"
+            if widget_key not in st.session_state:
+                st.session_state[widget_key] = item_id in saved
+            st.checkbox(
+                str(item),
+                key=widget_key,
+                on_change=_persist_action_checkbox,
+                args=(email_id, item_id, widget_key),
+            )
+            if st.session_state.get(widget_key):
+                bucket.add(item_id)
+        store[email_id] = sorted(bucket)
+
+
+def render_insight_tile(slot: Any, kind: str, value: str | None) -> None:
+    label = {"category": "Category", "priority": "Priority", "sentiment": "Sentiment"}[kind]
+    display = html_module.escape(pretty_enum_label(str(value or "")))
+    dot_class = html_module.escape(insight_dot_class(kind, str(value or "")))
+    slot.markdown(
+        f"<div class='insight-tile'>"
+        f"<div class='insight-label'>{label}</div>"
+        f"<div class='insight-value'>"
+        f"<span class='insight-dot {dot_class}'></span>{display}"
+        f"</div></div>",
+        unsafe_allow_html=True,
+    )
+
+
+def activity_subject(source: Any) -> str:
+    if isinstance(source, dict):
+        return str(source.get("subject") or "(No subject)")[:90]
+    return str(source or "(No subject)")[:90]
+
+
+def push_activity(title: str, detail: str = "") -> None:
+    feed = st.session_state.setdefault("activity_feed", [])
+    feed.insert(
+        0,
+        {
+            "title": title.strip(),
+            "detail": detail.strip(),
+            "time": datetime.now().strftime("%H:%M"),
+        },
+    )
+    del feed[3:]
+
+
+def format_activity_line(title: str, detail: str = "") -> str:
+    title = title.strip()
+    detail = detail.strip()
+    if title and detail:
+        return f"{title} — {detail}"
+    return title or detail
+
+
+def record_email_analysis_activity(
+    *,
+    detail: dict[str, Any],
+    analysis: dict[str, Any],
+    regenerated: bool = False,
+    uploaded: bool = False,
+) -> None:
+    """Push business-oriented activity lines after AI analysis."""
+
+    subject = activity_subject(detail)
+    priority = str(analysis.get("priority", "")).lower()
+    category = str(analysis.get("category", "")).lower()
+
+    if uploaded:
+        push_activity("New uploaded email analyzed", subject)
+    elif regenerated:
+        push_activity("Analysis refreshed", subject)
+    elif priority == "critical" or category == "urgent":
+        push_activity("Critical issue detected", subject)
+    elif priority == "high":
+        push_activity("SLA-risk email escalated", subject)
+    else:
+        push_activity("Email triaged by AI", subject)
+
+    action_items = analysis.get("action_items") or []
+    if action_items:
+        n = len(action_items)
+        label = f"{n} action item{'s' if n != 1 else ''} extracted"
+        push_activity(label, subject)
+
+    deadlines = analysis.get("deadlines") or []
+    if deadlines:
+        push_activity("Deadline detected", str(deadlines[0])[:80])
+
+
+def paint_activity_feed(slot: Any) -> None:
+    """Render activity feed into a placeholder (call after all push_activity updates)."""
+
+    with slot.container():
+        render_activity_feed()
+
+
+def render_activity_feed() -> None:
+    feed = st.session_state.get("activity_feed") or []
+    if not feed:
+        return
+    items = []
+    for item in feed[:3]:
+        line = format_activity_line(
+            str(item.get("title", "")),
+            str(item.get("detail", "")),
+        )
+        line_safe = html_module.escape(line)
+        when = html_module.escape(str(item.get("time", "")))
+        items.append(
+            "<div class='activity-item'>"
+            "<span class='activity-dot'></span>"
+            "<div>"
+            f"<div class='activity-line'>{line_safe}</div>"
+            f"<div class='activity-time'>{when}</div>"
+            "</div>"
+            "</div>"
+        )
+    st.markdown(
+        "<div class='activity-card'>"
+        "<div class='activity-title'>Recent activity</div>"
+        f"{''.join(items)}"
+        "</div>",
+        unsafe_allow_html=True,
+    )
 
 
 def sentiment_emoji(sentiment: str) -> str:
@@ -746,6 +1623,118 @@ def pretty_enum_label(value: str | None) -> str:
     if not value:
         return "—"
     return str(value).replace("_", " ").strip().title()
+
+
+def css_token(value: str | None) -> str:
+    token = str(value or "").strip().lower().replace("_", "-")
+    return re.sub(r"[^a-z0-9-]", "-", token).strip("-") or "unknown"
+
+
+def insight_icon(kind: str, value: str | None) -> str:
+    token = css_token(value)
+    if kind == "category":
+        return {
+            "invoice": "💳",
+            "invoices": "💳",
+            "urgent": "🚨",
+            "meeting": "📅",
+            "meetings": "📅",
+            "support": "💬",
+            "spam": "🛡️",
+            "personal": "👤",
+        }.get(token, "✨")
+    if kind == "priority":
+        return {
+            "critical": "🔴",
+            "high": "🟠",
+            "medium": "🟡",
+            "low": "⚪",
+        }.get(token, "⚪")
+    return {
+        "positive": "😊",
+        "neutral": "😐",
+        "negative": "😟",
+        "frustrated": "😤",
+    }.get(token, "😐")
+
+
+def sender_initials(sender: str) -> str:
+    label = sender
+    if "<" in label:
+        label = label.split("<", 1)[0].strip()
+    parts = [p for p in re.split(r"[\s._-]+", label.strip()) if p]
+    if not parts:
+        return "AI"
+    if len(parts) == 1:
+        return parts[0][:2].upper()
+    return (parts[0][0] + parts[1][0]).upper()
+
+
+def inbox_sla(bundle: dict[str, Any] | None) -> tuple[str, str, str]:
+    """Label, CSS class, and hover title for inbox SLA chips (demo operational deadlines)."""
+
+    if not bundle:
+        return (
+            "pending review",
+            "sla-pending",
+            "Awaiting AI analysis before triage deadlines apply.",
+        )
+    analysis = bundle.get("analysis") or {}
+    priority = str(analysis.get("priority", "")).lower()
+    category = str(analysis.get("category", "")).lower()
+    if priority == "critical" or category == "urgent":
+        return (
+            "due in 2h",
+            "sla-urgent",
+            "SLA (service level agreement): target response within 2 hours — demo indicator.",
+        )
+    if priority == "high":
+        return (
+            "due today",
+            "sla-soon",
+            "SLA: target response by end of day — demo indicator.",
+        )
+    return (
+        "on track",
+        "sla-normal",
+        "SLA: within agreed response window — demo indicator.",
+    )
+
+
+def estimate_minutes_saved(*, detail: dict[str, Any], analysis: dict[str, Any] | None) -> int:
+    body = str(detail.get("body", "") or "")
+    words = len([w for w in re.split(r"\s+", body.strip()) if w])
+    attachments = detail.get("attachments") or []
+    attach_n = len(attachments) if isinstance(attachments, list) else 0
+
+    action_n = 0
+    deadline_n = 0
+    if isinstance(analysis, dict):
+        action_n = len(analysis.get("action_items") or [])
+        deadline_n = len(analysis.get("deadlines") or [])
+
+    manual = 1.6 + (words / 170.0) + (0.45 * attach_n) + (0.35 * action_n) + (0.25 * deadline_n)
+    saved = int(round(manual))
+    return max(2, min(saved, 12))
+
+def analysis_confidence(analysis: dict[str, Any]) -> tuple[str, str, str]:
+    score = 0
+    if analysis.get("summary"):
+        score += 1
+    if analysis.get("category"):
+        score += 1
+    if analysis.get("priority"):
+        score += 1
+    entities = analysis.get("entities") or {}
+    if any(entities.get(k) for k in ("people", "companies", "products", "amounts", "dates")):
+        score += 1
+    if analysis.get("action_items") or analysis.get("deadlines"):
+        score += 1
+    if score >= 4:
+        return ("High confidence", "confidence-high", "Structured fields and entities look complete.")
+    if score >= 3:
+        return ("Medium confidence", "confidence-medium", "Review extracted details before exporting.")
+    return ("Needs review", "confidence-review", "Analysis is sparse; manual verification recommended.")
 
 
 def display_priority(bundle: dict[str, Any] | None, _folder: str = "") -> str | None:
@@ -1109,6 +2098,18 @@ def _select_inbox_email(email_id: str) -> None:
     st.session_state.selected_email_id = email_id
 
 
+def _set_operational_state(
+    email_id: str,
+    state_key: str,
+    activity_title: str,
+    *,
+    subject: str = "",
+) -> None:
+    bucket = st.session_state.setdefault(state_key, set())
+    bucket.add(email_id)
+    push_activity(activity_title, subject or email_id)
+
+
 def _save_analysis_snapshot(email_id: str, bundle: dict[str, Any]) -> None:
     """Keep the current analysis so the user can restore it after a regenerate."""
 
@@ -1145,6 +2146,11 @@ def ensure_session_state() -> None:
     st.session_state.setdefault("reply_edit_buffer", {})
     st.session_state.setdefault("reply_tone_header", "Professional, concise")
     st.session_state.setdefault("inbox_list_expanded", False)
+    st.session_state.setdefault("activity_feed", [])
+    st.session_state.setdefault("resolved_emails", set())
+    st.session_state.setdefault("assigned_tasks", set())
+    st.session_state.setdefault("jira_exports", set())
+    st.session_state.setdefault("checked_action_items", {})
 
 
 def merge_display_emails(emails: list[dict[str, Any]], store: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1223,22 +2229,51 @@ def render_inbox_ticket(
     when: str,
     subj: str,
     who: str,
+    sender: str,
+    attachments_count: int,
+    thread_id: str | None,
+    bundle: dict[str, Any] | None,
     selected: bool,
+    processing: bool = False,
 ) -> None:
     """HTML card (aligned) + transparent on_click layer (same-page selection)."""
 
     meta = html_module.escape(f"{emoji} {cat_upper}  —  {when}")
     subj_safe = html_module.escape(subj)
     who_safe = html_module.escape(who)
+    initials = html_module.escape(sender_initials(sender))
+    chips: list[str] = []
+    if attachments_count:
+        chips.append(f"<span class='meta-chip'>{attachments_count} attachment{'s' if attachments_count > 1 else ''}</span>")
+    if thread_id:
+        chips.append("<span class='meta-chip'>thread</span>")
+    sla_label, sla_class, sla_title = inbox_sla(bundle)
+    sla_title_safe = html_module.escape(sla_title)
+    if processing or not bundle:
+        chips.append(
+            f"<span class='meta-chip sla-pending' title='{sla_title_safe}'>pending review</span>"
+        )
+    else:
+        chips.append(
+            f"<span class='meta-chip {sla_class}' title='{sla_title_safe}'>"
+            f"{html_module.escape(sla_label)}</span>"
+        )
+    chips_html = "".join(chips)
     sel_class = " inbox-ticket-selected" if selected else ""
     safe_key = re.sub(r"[^\w]", "_", eid)
     # ticket_* keys only — avoids CSS collision with inbox_expand / inbox_collapse
     with st.container(key=f"ticket_{safe_key}"):
         st.markdown(
             f'<div class="inbox-ticket-shell"><div class="inbox-ticket{sel_class}">'
-            f'<div class="inbox-ticket-meta">{meta}</div>'
-            f'<div class="inbox-ticket-subj">{subj_safe}</div>'
-            f'<div class="inbox-ticket-who">{who_safe}</div>'
+            "<div class='inbox-ticket-layout'>"
+            f"<div class='inbox-avatar'>{initials}</div>"
+            "<div class='inbox-ticket-content'>"
+            f"<div class='inbox-ticket-meta'>{meta}</div>"
+            f"<div class='inbox-ticket-subj'>{subj_safe}</div>"
+            f"<div class='inbox-ticket-who'>{who_safe}</div>"
+            f"<div class='inbox-ticket-footer'>{chips_html}</div>"
+            "</div>"
+            "</div>"
             f"</div></div>",
             unsafe_allow_html=True,
         )
@@ -1283,6 +2318,7 @@ def _regenerate_reply_draft(
         prepared = prepare_reply_text(txt)
         st.session_state["_pending_reply_body"] = (selected_id, prepared)
         st.session_state.reply_edit_buffer[selected_id] = prepared
+        push_activity("Suggested reply regenerated", activity_subject(detail))
         st.toast("Reply updated.", icon="✅")
         st.rerun()
     except ApiError as exc:
@@ -1372,6 +2408,7 @@ def main() -> None:
     analyze_inbox = False
     analyze_import = False
     uploaded = None
+    activity_feed_slot: Any = None
 
     with st.container(key="main_workspace"):
         with st.container(key="actions_panel"):
@@ -1405,6 +2442,7 @@ def main() -> None:
                                 "Analyze file",
                                 use_container_width=True,
                             )
+            activity_feed_slot = st.empty()
 
         if analyze_import:
             if uploaded is None:
@@ -1420,7 +2458,16 @@ def main() -> None:
                     sender, subject, body = "", "", ""
                 if sender and body:
                     try:
-                        with st.spinner("Analyzing import…"):
+                        status_slot = st.empty()
+                        render_progress_card(
+                            status_slot,
+                            "Analyzing import",
+                            uploaded.name or "Uploaded email",
+                            0,
+                            1,
+                            show_icon=True,
+                        )
+                        with st.container(key="progress_only_ui"):
                             t0 = time.monotonic()
                             bundle = _patch_bundle_reply(
                                 post_analyze_inline(
@@ -1435,6 +2482,18 @@ def main() -> None:
                             st.session_state.analysis_store[inline_id] = bundle
                             st.session_state.selected_email_id = inline_id
                             st.session_state.session_analyzed_count += 1
+                            render_progress_card(
+                                status_slot,
+                                "Import analyzed",
+                                str(bundle["email"].get("subject", "Uploaded email")),
+                                1,
+                                1,
+                            )
+                            record_email_analysis_activity(
+                                detail=bundle["email"],
+                                analysis=bundle["analysis"],
+                                uploaded=True,
+                            )
                         st.toast("Import analyzed.", icon="✅")
                         st.rerun()
                     except ApiError as exc:
@@ -1442,14 +2501,29 @@ def main() -> None:
 
         if analyze_inbox:
             n = max(len(emails), 1)
-            with st.spinner("Processing inbox…"):
-                progress = st.progress(0.0)
+            analyzed_now = 0
+            status_slot = st.empty()
+            render_progress_card(status_slot, "Queue started", "Preparing inbox analysis", 0, n)
+            with st.container(key="progress_only_ui"):
                 for idx, row in enumerate(emails):
                     eid = row["id"]
                     if eid in st.session_state.analysis_store:
-                        progress.progress(min((idx + 1) / n, 1.0))
+                        render_progress_card(
+                            status_slot,
+                            "Processing inbox",
+                            f"Skipping cached · {row.get('subject', '(No subject)')}",
+                            idx + 1,
+                            n,
+                        )
                         continue
                     try:
+                        render_progress_card(
+                            status_slot,
+                            "Processing inbox",
+                            f"Analyzing · {row.get('subject', '(No subject)')}",
+                            idx,
+                            n,
+                        )
                         t0 = time.monotonic()
                         bundle = _patch_bundle_reply(
                             post_analyze(active_base, eid, regenerate=False)
@@ -1457,10 +2531,21 @@ def main() -> None:
                         st.session_state.analysis_store[eid] = bundle
                         st.session_state.last_ai_seconds = time.monotonic() - t0
                         st.session_state.session_analyzed_count += 1
+                        analyzed_now += 1
                     except ApiError as exc:
                         st.error(exc.message)
                         break
-                    progress.progress(min((idx + 1) / n, 1.0))
+                    render_progress_card(
+                        status_slot,
+                        "Processing inbox",
+                        f"Completed · {row.get('subject', '(No subject)')}",
+                        idx + 1,
+                        n,
+                    )
+            push_activity(
+                "Inbox batch processed",
+                f"{analyzed_now} email{'s' if analyzed_now != 1 else ''} analyzed",
+            )
             st.toast("Inbox processing finished.", icon="✅")
             st.rerun()
 
@@ -1468,7 +2553,7 @@ def main() -> None:
             left, right = st.columns((0.34, 0.66), gap="small")
 
     with left:
-        st.markdown("### Inbox")
+        render_page_title("Inbox")
 
         render_panel_section_title("Filters & Overview")
         with st.container(key="inbox_filters_counts"):
@@ -1543,7 +2628,12 @@ def main() -> None:
                     when=when,
                     subj=subj,
                     who=who,
+                    sender=str(row.get("sender", "")),
+                    attachments_count=len(row.get("attachments") or []),
+                    thread_id=str(row.get("thread_id") or "") or None,
+                    bundle=bundle,
                     selected=selected,
+                    processing=st.session_state.get("analyzing_email_id") == eid,
                 )
 
             hidden = total_filtered - INBOX_COLLAPSED_COUNT
@@ -1569,35 +2659,48 @@ def main() -> None:
 
     with right:
         if not emails:
-            st.warning("No emails loaded from the API.")
+            render_empty_product_state(
+                "No inbox loaded",
+                "Start the backend or check the configured email directory to load the operational inbox.",
+                "IN",
+            )
+            if activity_feed_slot is not None:
+                paint_activity_feed(activity_feed_slot)
             return
 
         selected_id = st.session_state.selected_email_id
         if selected_id is None:
-            st.info("Select an email from the inbox.")
+            render_empty_product_state(
+                "Select an email",
+                "Choose a message from the inbox to view metadata, AI insights, suggested replies and exports.",
+                "",
+            )
+            if activity_feed_slot is not None:
+                paint_activity_feed(activity_feed_slot)
             return
 
         try:
             detail = load_email_detail(active_base, selected_id, st.session_state.analysis_store)
         except ApiError as exc:
             st.error(exc.message)
+            if activity_feed_slot is not None:
+                paint_activity_feed(activity_feed_slot)
             return
 
         bundle = st.session_state.analysis_store.get(selected_id)
 
-        st.markdown("### Email")
+        render_page_title("Email")
 
         sender_txt = html_module.escape(str(detail.get("sender", "")))
         subject_txt = html_module.escape(str(detail.get("subject", "")))
         body_txt = html_module.escape(str(detail.get("body", ""))).replace("\n", "<br/>")
         st.markdown(
             f"<div class='email-card'>"
-            f"<div style='font-size:12px;color:#94a3b8;'>From</div>"
-            f"<div style='font-size:16px;font-weight:650;color:#f8fafc;'>{sender_txt}</div>"
-            f"<div style='margin-top:10px;font-size:18px;font-weight:750;color:#f8fafc;'>"
-            f"{subject_txt}</div>"
-            f"<div style='margin-top:12px;font-size:14px;line-height:1.65;color:#e2e8f0;'>"
-            f"{body_txt}</div>"
+            f"<div class='type-l3-field'>From</div>"
+            f"<div class='email-sender'>{sender_txt}</div>"
+            f"<div class='type-l3-field' style='margin-top:0.65rem'>Subject</div>"
+            f"<div class='email-subject'>{subject_txt}</div>"
+            f"<div class='email-body'>{body_txt}</div>"
             f"</div>",
             unsafe_allow_html=True,
         )
@@ -1614,8 +2717,20 @@ def main() -> None:
             key="act_analyze_or_regenerate",
         ):
             try:
-                spinner_msg = "Regenerating analysis…" if has_analysis else "Analyzing email…"
-                with st.spinner(spinner_msg):
+                progress_title = (
+                    "Regenerating analysis" if has_analysis else "Analyzing email"
+                )
+                st.session_state.analyzing_email_id = selected_id
+                status_slot = st.empty()
+                render_progress_card(
+                    status_slot,
+                    progress_title,
+                    str(detail.get("subject", "(No subject)")),
+                    0,
+                    1,
+                    show_icon=True,
+                )
+                with st.container(key="progress_only_ui"):
                     if has_analysis and bundle is not None:
                         _save_analysis_snapshot(selected_id, bundle)
                     t0 = time.monotonic()
@@ -1631,10 +2746,24 @@ def main() -> None:
                     _clear_reply_edit_for_email(selected_id)
                     st.session_state.last_ai_seconds = time.monotonic() - t0
                     st.session_state.session_analyzed_count += 1
+                    render_progress_card(
+                        status_slot,
+                        "Analysis ready",
+                        str(detail.get("subject", "(No subject)")),
+                        1,
+                        1,
+                    )
+                st.session_state.pop("analyzing_email_id", None)
                 toast_msg = "Analysis updated." if has_analysis else "Email analyzed."
+                record_email_analysis_activity(
+                    detail=detail,
+                    analysis=new_bundle["analysis"],
+                    regenerated=has_analysis,
+                )
                 st.toast(toast_msg, icon="✅")
                 st.rerun()
             except ApiError as exc:
+                st.session_state.pop("analyzing_email_id", None)
                 st.error(exc.message)
 
         if has_previous:
@@ -1646,6 +2775,10 @@ def main() -> None:
             ):
                 if _restore_previous_analysis(selected_id):
                     _clear_reply_edit_for_email(selected_id)
+                    push_activity(
+                        "Previous analysis restored",
+                        activity_subject(detail),
+                    )
                     st.toast("Previous analysis restored.", icon="✅")
                     st.rerun()
                 else:
@@ -1653,58 +2786,121 @@ def main() -> None:
 
         if bundle:
             analysis = bundle["analysis"]
-            se = sentiment_emoji(str(analysis.get("sentiment", "neutral")))
-            cat_safe = html_module.escape(pretty_enum_label(str(analysis.get("category", ""))))
-            pri_safe = html_module.escape(pretty_enum_label(str(analysis.get("priority", ""))))
-            sent_safe = html_module.escape(pretty_enum_label(str(analysis.get("sentiment", ""))))
+            resolved = selected_id in st.session_state.get("resolved_emails", set())
+            assigned = selected_id in st.session_state.get("assigned_tasks", set())
+            jira_exported = selected_id in st.session_state.get("jira_exports", set())
+            render_action_group_label("Operational workflow")
+            op1, op2, op3 = st.columns(3)
+            with op1:
+                if st.button(
+                    "Resolved" if resolved else "Mark resolved",
+                    use_container_width=True,
+                    key=f"op_resolve_{selected_id}",
+                ):
+                    _set_operational_state(
+                        selected_id,
+                        "resolved_emails",
+                        "Case closed",
+                        subject=activity_subject(detail),
+                    )
+                    st.toast("Marked as resolved.", icon="✅")
+            with op2:
+                if st.button(
+                    "Assigned" if assigned else "Assign task",
+                    use_container_width=True,
+                    key=f"op_assign_{selected_id}",
+                ):
+                    _set_operational_state(
+                        selected_id,
+                        "assigned_tasks",
+                        "Task assigned to queue",
+                        subject=activity_subject(detail),
+                    )
+                    st.toast("Task assigned.", icon="✅")
+            with op3:
+                if st.button(
+                    "Jira ready" if jira_exported else "Export to Jira",
+                    use_container_width=True,
+                    key=f"op_jira_{selected_id}",
+                ):
+                    _set_operational_state(
+                        selected_id,
+                        "jira_exports",
+                        "Jira ticket prepared",
+                        subject=activity_subject(detail),
+                    )
+                    st.toast("Jira export prepared.", icon="✅")
 
-            st.markdown("<h3 class='insights-title'>Insights</h3>", unsafe_allow_html=True)
-            c1, c2, c3 = st.columns(3)
-            with c1:
-                st.markdown(
-                    "<div class='mini-card'><div class='mini-card-label'>Category</div>"
-                    f"<div class='mini-card-value'>{cat_safe}</div></div>",
-                    unsafe_allow_html=True,
-                )
-            with c2:
-                st.markdown(
-                    "<div class='mini-card'><div class='mini-card-label'>Priority</div>"
-                    f"<div class='mini-card-value'>{pri_safe}</div></div>",
-                    unsafe_allow_html=True,
-                )
-            with c3:
-                st.markdown(
-                    "<div class='mini-card'><div class='mini-card-label'>Sentiment</div>"
-                    f"<div class='mini-card-value'>{se} {sent_safe}</div></div>",
-                    unsafe_allow_html=True,
-                )
+            conf_label, conf_class, conf_copy = analysis_confidence(analysis)
 
+            render_page_title("Insights")
+            with st.container(key="insights_confidence"):
+                st.markdown(
+                    "<div class='confidence-strip'>"
+                    "<div>"
+                    "<div class='confidence-label'>AI extraction confidence</div>"
+                    f"<div class='confidence-copy'>{html_module.escape(conf_copy)}</div>"
+                    "</div>"
+                    f"<span class='confidence-pill {conf_class}'>{html_module.escape(conf_label)}</span>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
+            st.markdown("<div class='insights-spacer' aria-hidden='true'></div>", unsafe_allow_html=True)
+            with st.container(key="insights_tiles"):
+                c1, c2, c3 = st.columns(3)
+                with c1:
+                    render_insight_tile(c1, "category", str(analysis.get("category", "") or ""))
+                with c2:
+                    render_insight_tile(c2, "priority", str(analysis.get("priority", "") or ""))
+                with c3:
+                    render_insight_tile(
+                        c3,
+                        "sentiment",
+                        str(analysis.get("sentiment", "neutral") or "neutral"),
+                    )
+            st.markdown("<div class='insights-spacer' aria-hidden='true'></div>", unsafe_allow_html=True)
             summary_safe = html_module.escape(str(analysis.get("summary", "")))
-            st.markdown(
-                f"<div class='summary-box'>"
-                f"<div class='summary-box-title'>Summary</div>"
-                f"<div class='summary-box-body'>{summary_safe}</div>"
-                f"</div>",
-                unsafe_allow_html=True,
-            )
+            with st.container(key="insights_summary"):
+                st.markdown(
+                    f"<div class='summary-box'>"
+                    f"<div class='summary-box-title'>Summary</div>"
+                    f"<div class='summary-box-body'>{summary_safe}</div>"
+                    f"</div>",
+                    unsafe_allow_html=True,
+                )
+            st.markdown("<div class='insights-spacer' aria-hidden='true'></div>", unsafe_allow_html=True)
 
             acol1, acol2 = st.columns(2)
             with acol1:
-                st.markdown("#### Action items")
-                for item in analysis.get("action_items") or []:
-                    st.markdown(f"- ☐ {html_module.escape(str(item))}")
-                if not analysis.get("action_items"):
-                    st.caption("None extracted.")
+                render_meta_label("Action items")
+                render_action_items(
+                    selected_id,
+                    list(analysis.get("action_items") or []),
+                )
             with acol2:
-                st.markdown("#### Deadlines")
-                for dl in analysis.get("deadlines") or []:
-                    st.markdown(f"• {html_module.escape(str(dl))}")
-                if not analysis.get("deadlines"):
-                    st.caption("None extracted.")
+                render_meta_label("Deadlines")
+                deadlines = analysis.get("deadlines") or []
+                if deadlines:
+                    deadlines_html = "".join(
+                        "<div class='deadline-item'>"
+                        "<span class='deadline-dot'>↗</span>"
+                        f"<span>{html_module.escape(str(dl))}</span>"
+                        "</div>"
+                        for dl in deadlines
+                    )
+                    st.markdown(f"<div class='deadline-list'>{deadlines_html}</div>", unsafe_allow_html=True)
+                else:
+                    st.markdown("<p class='empty-state'>None extracted.</p>", unsafe_allow_html=True)
 
-            manual_m = int(MANUAL_MIN_PER_EMAIL)
+            dynamic_saved = estimate_minutes_saved(detail=detail, analysis=analysis)
             st.markdown(
-                f'<p class="time-saved-label">Estimated time saved : ~{manual_m}min</p>',
+                "<div class='efficiency-card'>"
+                "<div>"
+                "<div class='efficiency-label'>Efficiency gain</div>"
+                f"<div class='efficiency-value'>~{dynamic_saved} min saved</div>"
+                "</div>"
+                "<span class='efficiency-badge'>AI assisted</span>"
+                "</div>",
                 unsafe_allow_html=True,
             )
 
@@ -1717,6 +2913,9 @@ def main() -> None:
                     file_name=f"{selected_id}_analysis.json",
                     mime="application/json",
                     use_container_width=True,
+                    key=f"export_json_{selected_id}",
+                    on_click=push_activity,
+                    args=("Analysis exported to JSON", activity_subject(detail)),
                 )
             with ex2:
                 tasks_only = {
@@ -1730,6 +2929,9 @@ def main() -> None:
                     file_name=f"{selected_id}_tasks.json",
                     mime="application/json",
                     use_container_width=True,
+                    key=f"export_tasks_{selected_id}",
+                    on_click=push_activity,
+                    args=("Action items exported", activity_subject(detail)),
                 )
         else:
             st.info(
@@ -1750,10 +2952,10 @@ def main() -> None:
                 raw = st.session_state.reply_edit_buffer.get(selected_id, default_reply)
                 st.session_state[edited_key] = prepare_reply_text(raw)
 
-            render_panel_section_title("Suggested Reply")
+            render_section_title("Suggested Reply")
             reply_body = st.text_area(
                 "Suggested reply",
-                height=180,
+                height=145,
                 key=edited_key,
                 label_visibility="collapsed",
             )
@@ -1771,6 +2973,9 @@ def main() -> None:
                         selected_id=selected_id,
                         detail=detail,
                     )
+
+    if activity_feed_slot is not None:
+        paint_activity_feed(activity_feed_slot)
 
 
 if __name__ == "__main__":
