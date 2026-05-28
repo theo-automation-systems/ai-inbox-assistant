@@ -2,7 +2,7 @@
 
 Intelligent email triage, prioritization, and AI-generated replies for enterprise inbox workflows.
 
-Live demo: `https://ai-inbox-assistant-khwwptkayrqjyuukdtcysp.streamlit.app/`
+Live demo: [AI Inbox Assistant (Streamlit)](https://ai-inbox-assistant-khwwptkayrqjyuukdtcysp.streamlit.app/)
 
 ![AI Inbox Assistant dashboard](assets/ai-inbox-assistant-dashboard.png)
 

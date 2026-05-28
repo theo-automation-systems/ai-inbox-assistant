@@ -6,7 +6,10 @@ venv/
 .env
 .idea/
 .vscode/
-.streamlit/
+# Ignore Streamlit config by default, but keep the theme config tracked.
+# Note: un-ignoring a file inside an ignored directory requires un-ignoring the directory too.
+.streamlit/*
+!.streamlit/
 !.streamlit/config.toml
 dist/
 build/
