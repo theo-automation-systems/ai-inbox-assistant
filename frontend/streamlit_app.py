@@ -246,8 +246,236 @@ def inject_styles() -> None:
                 padding-top: 0 !important;
             }
             [class*="st-key-analysis_breakdown"] p.type-l2 {
-                margin-top: 0.15rem !important;
-                margin-bottom: 0.2rem !important;
+                margin-top: 0.05rem !important;
+                margin-bottom: 0.15rem !important;
+            }
+            .insights-spacer--diag-breakdown {
+                height: 0;
+            }
+            @keyframes diag-drawer-backdrop-in {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            .diag-drawer-shell,
+            .stDialog,
+            [data-testid="stDialog"] {
+                display: flex !important;
+                align-items: stretch !important;
+                justify-content: flex-end !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+            }
+            .diag-drawer-shell.diag-drawer-opening,
+            [data-testid="stDialog"].diag-drawer-opening {
+                animation: diag-drawer-backdrop-in 0.28s ease !important;
+            }
+            .diag-drawer-shell > div,
+            .stDialog > div,
+            [data-testid="stDialog"] > div {
+                display: flex !important;
+                align-items: stretch !important;
+                justify-content: flex-end !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                min-height: 100vh !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .diag-drawer-panel,
+            .stDialog [role="dialog"],
+            [data-testid="stDialog"] [role="dialog"] {
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                left: auto !important;
+                margin: 0 !important;
+                width: 50vw !important;
+                max-width: 50vw !important;
+                min-width: min(420px, 50vw) !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                background: linear-gradient(180deg, #0f172a 0%, #111827 100%) !important;
+                border-left: 1px solid rgba(148, 163, 184, 0.12) !important;
+                box-shadow: -16px 0 48px rgba(15, 23, 42, 0.45) !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch;
+                will-change: transform;
+            }
+            .diag-drawer-panel > button {
+                display: flex !important;
+                z-index: 35 !important;
+                opacity: 1 !important;
+                width: 2rem !important;
+                height: 2rem !important;
+                min-height: 2rem !important;
+                border-radius: 8px !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                color: #94a3b8 !important;
+                border: none !important;
+            }
+            .diag-drawer-panel > button:hover {
+                background: rgba(255, 255, 255, 0.14) !important;
+                color: #f1f5f9 !important;
+            }
+            @media (max-width: 900px) {
+                .diag-drawer-panel,
+                .stDialog [role="dialog"],
+                [data-testid="stDialog"] [role="dialog"] {
+                    width: min(96vw, 100%) !important;
+                    max-width: 96vw !important;
+                    min-width: 0 !important;
+                }
+            }
+            [data-testid="stModal"] {
+                display: flex !important;
+                align-items: stretch !important;
+                justify-content: flex-end !important;
+                padding: 0 !important;
+            }
+            [data-testid="stModal"] > div {
+                align-items: stretch !important;
+                justify-content: flex-end !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            [data-testid="stModal"] [role="dialog"] {
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                left: auto !important;
+                margin: 0 !important;
+                width: 50vw !important;
+                max-width: 50vw !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                border-radius: 0 !important;
+                background: linear-gradient(180deg, #0f172a 0%, #111827 100%) !important;
+                border-left: 1px solid rgba(148, 163, 184, 0.12) !important;
+                box-shadow: -16px 0 48px rgba(15, 23, 42, 0.45) !important;
+            }
+            .stDialog [class*="st-key-analysis_breakdown"] [data-testid="stHorizontalBlock"],
+            [data-testid="stDialog"] [class*="st-key-analysis_breakdown"] [data-testid="stHorizontalBlock"],
+            [data-testid="stModal"] [class*="st-key-analysis_breakdown"] [data-testid="stHorizontalBlock"] {
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 0.55rem !important;
+            }
+            .stDialog .insight-subcard,
+            [data-testid="stDialog"] .insight-subcard,
+            [data-testid="stModal"] .insight-subcard {
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            [class*="st-key-insights_header_row"] {
+                margin-bottom: 0.15rem !important;
+            }
+            [class*="st-key-insights_header_row"] > [data-testid="stHorizontalBlock"] {
+                display: flex !important;
+                align-items: flex-end !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+                gap: 12px !important;
+            }
+            [class*="st-key-insights_header_row"] > [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+                flex: 0 0 auto !important;
+                width: auto !important;
+                min-width: 0 !important;
+            }
+            [class*="st-key-insights_header_row"] > [data-testid="stHorizontalBlock"] > [data-testid="column"]:first-child {
+                flex: 1 1 auto !important;
+            }
+            [class*="st-key-insights_header_row"] > [data-testid="stHorizontalBlock"] > [data-testid="column"]:last-child {
+                flex: 0 0 auto !important;
+                margin-left: auto !important;
+            }
+            [class*="st-key-insights_header_row"] [data-testid="column"] {
+                display: flex !important;
+                align-items: flex-end !important;
+            }
+            [class*="st-key-insights_diag_trigger"] {
+                display: flex !important;
+                justify-content: flex-end !important;
+                align-items: flex-end !important;
+                width: 100% !important;
+                margin-left: auto !important;
+            }
+            [class*="st-key-insights_diag_trigger"] > [data-testid="stVerticalBlock"] {
+                align-items: flex-end !important;
+            }
+            [class*="st-key-insights_diag_trigger"] [data-testid="stButton"] {
+                margin-left: auto !important;
+            }
+            [class*="st-key-insights_diag_trigger"] [data-testid="stButton"] {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            [class*="st-key-insights_diag_trigger"] button {
+                background: transparent !important;
+                border: none !important;
+                color: #64748b !important;
+                font-size: 0.72rem !important;
+                font-weight: 500 !important;
+                letter-spacing: 0.01em !important;
+                text-transform: none !important;
+                padding: 0 0 2px 0 !important;
+                min-height: auto !important;
+                height: auto !important;
+                width: auto !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border-bottom: 1px solid transparent !important;
+                gap: 0.2rem !important;
+            }
+            [class*="st-key-insights_diag_trigger"] button:hover {
+                color: #cbd5e1 !important;
+                background: transparent !important;
+                border-bottom-color: rgba(148, 163, 184, 0.45) !important;
+            }
+            [class*="st-key-insights_diag_trigger"] button:active,
+            [class*="st-key-insights_diag_trigger"] button:focus:not(:focus-visible) {
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+            [class*="st-key-insights_diag_trigger"] button[kind="primary"],
+            [class*="st-key-insights_diag_trigger"] button[kind="secondary"],
+            [class*="st-key-insights_diag_trigger"] button[kind="tertiary"],
+            [class*="st-key-insights_diag_trigger"] button[data-testid="baseButton-primary"],
+            [class*="st-key-insights_diag_trigger"] button[data-testid="baseButton-secondary"],
+            [class*="st-key-insights_diag_trigger"] button[data-testid="baseButton-tertiary"] {
+                background: transparent !important;
+                color: #64748b !important;
+                border: none !important;
+            }
+            [class*="st-key-diagnostics_trends_grid"] [data-testid="stHorizontalBlock"] {
+                gap: 0.45rem !important;
+                align-items: stretch !important;
+            }
+            .mini-kpi-card--compact {
+                padding: 8px 10px !important;
+                margin: 0 !important;
+            }
+            .mini-kpi-card--compact .mini-kpi-sub {
+                display: block;
+                margin-top: 4px !important;
+                font-size: 0.65rem !important;
+                line-height: 1.2 !important;
+            }
+            .mini-kpi-card--compact .mini-spark {
+                height: 26px !important;
+            }
+            .mini-kpi-card--compact .mini-kpi-head {
+                margin-bottom: 4px !important;
             }
             [class*="st-key-insights_summary"] {
                 margin-bottom: 14px !important;
@@ -1010,12 +1238,14 @@ def inject_styles() -> None:
                 font-weight: 650 !important;
                 color: #f1f5f9 !important;
             }
-            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricValue"] {
+            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricValue"],
+            [class*="st-key-diagnostics_ops_metrics"] [data-testid="stMetricValue"] {
                 font-size: 0.975rem !important;
                 font-weight: 650 !important;
                 color: #f1f5f9 !important;
             }
-            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricLabel"] {
+            [class*="st-key-inbox_ops_metrics"] [data-testid="stMetricLabel"],
+            [class*="st-key-diagnostics_ops_metrics"] [data-testid="stMetricLabel"] {
                 font-size: 0.64rem !important;
                 font-weight: 600 !important;
                 letter-spacing: 0.01em !important;
@@ -2413,7 +2643,25 @@ def ensure_session_state() -> None:
     st.session_state.setdefault("checked_action_items", {})
     st.session_state.setdefault("analysis_feedback", {})
     st.session_state.setdefault("analysis_metrics", {"ai_calls": 0, "ai_errors": 0, "ai_seconds_total": 0.0})
+    # Used to compute session throughput (emails/hour) for the UI KPIs.
+    st.session_state.setdefault("session_ai_started_at", None)
 
+
+def _record_ai_call(duration_s: float) -> None:
+    """Record one successful AI analyze call for KPIs (single or batch)."""
+
+    dt = float(duration_s or 0.0)
+    st.session_state.last_ai_seconds = dt
+
+    metrics = st.session_state.get("analysis_metrics") or {}
+    metrics["ai_calls"] = int(metrics.get("ai_calls", 0)) + 1
+    metrics["ai_seconds_total"] = float(metrics.get("ai_seconds_total", 0.0)) + dt
+    st.session_state.analysis_metrics = metrics
+
+    st.session_state.session_analyzed_count = int(st.session_state.get("session_analyzed_count", 0)) + 1
+
+    if st.session_state.get("session_ai_started_at") is None:
+        st.session_state.session_ai_started_at = time.time()
 
 def merge_display_emails(emails: list[dict[str, Any]], store: dict[str, Any]) -> list[dict[str, Any]]:
     """Merge session-only emails (e.g. upload `inline_preview`) into the index."""
@@ -2490,6 +2738,12 @@ def ops_kpis(*, emails: list[dict[str, Any]], store: dict[str, Any]) -> dict[str
     ai_errors = int(metrics.get("ai_errors", 0))
     ai_seconds_total = float(metrics.get("ai_seconds_total", 0.0))
     avg_ai = (ai_seconds_total / ai_calls) if ai_calls else None
+    started_at = st.session_state.get("session_ai_started_at")
+    analyzed_session = int(st.session_state.get("session_analyzed_count", 0) or 0)
+    throughput_per_hr = None
+    if started_at:
+        elapsed_s = max(1e-6, (time.time() - float(started_at)))
+        throughput_per_hr = analyzed_session / (elapsed_s / 3600.0)
 
     escalation = 0
     sla_due2h = 0
@@ -2534,6 +2788,7 @@ def ops_kpis(*, emails: list[dict[str, Any]], store: dict[str, Any]) -> dict[str
     return {
         "analyzed": analyzed,
         "avg_ai_seconds": avg_ai,
+        "throughput_per_hr": throughput_per_hr,
         "ai_error_rate": (ai_errors / ai_calls) if ai_calls else None,
         "escalation_rate": (escalation / analyzed) if analyzed else None,
         "sla_due2h": sla_due2h,
@@ -2637,6 +2892,11 @@ def inbox_trend_series(*, kpis: dict[str, Any]) -> dict[str, list[float]]:
     esc = float(kpis.get("escalation_rate") or 0.0)
     auto = float(kpis.get("automation_rate") or 0.0)
     avg_ai = float(kpis.get("avg_ai_seconds") or 0.0)
+    throughput_measured = kpis.get("throughput_per_hr")
+    try:
+        throughput_measured_f = float(throughput_measured) if throughput_measured is not None else None
+    except (TypeError, ValueError):
+        throughput_measured_f = None
     sla_due = int(kpis.get("sla_due2h") or 0)
     sla_today = int(kpis.get("sla_today") or 0)
     sla_ok = int(kpis.get("sla_ok") or 0)
@@ -2645,7 +2905,8 @@ def inbox_trend_series(*, kpis: dict[str, Any]) -> dict[str, list[float]]:
     seed = (analyzed % 9) / 9.0
     phase = 0.4 + seed
 
-    throughput = _ts_wave(n, base=max(2.0, analyzed / 6.0), amp=max(1.5, analyzed / 16.0), phase=phase)
+    base_tp = throughput_measured_f if throughput_measured_f is not None else (analyzed / 6.0)
+    throughput = _ts_wave(n, base=max(2.0, base_tp), amp=max(1.5, base_tp / 2.0), phase=phase)
     escalation = _ts_wave(n, base=max(0.05, esc), amp=0.08 + 0.03 * seed, phase=1.6 + phase)
     ai_time = _ts_wave(n, base=max(0.15, avg_ai), amp=0.22 + 0.06 * seed, phase=2.4 + phase)
 
@@ -2664,68 +2925,241 @@ def inbox_trend_series(*, kpis: dict[str, Any]) -> dict[str, list[float]]:
     }
 
 
-def render_inbox_mini_charts(*, kpis: dict[str, Any]) -> None:
+def inject_diag_drawer_shell() -> None:
+    """Volet latéral : slide droite→gauche, croix native en haut à droite."""
+    components.html(
+        """<script>
+(function () {
+  const doc = window.parent.document;
+  const win = window.parent;
+  const SLIDE_MS = 320;
+  let root = null;
+  let panel = null;
+  let closing = false;
+  let rafId = null;
+
+  function findNativeClose(btnRoot) {
+    const buttons = btnRoot.querySelectorAll("button");
+    const pr = btnRoot.getBoundingClientRect();
+    for (const b of buttons) {
+      const r = b.getBoundingClientRect();
+      if (r.top - pr.top < 72 && pr.right - r.right < 72) return b;
+    }
+    return null;
+  }
+
+  function wireNativeClose() {
+    if (!panel) return;
+    panel.classList.add("diag-drawer-native-close");
+    const closeBtn = findNativeClose(panel);
+    if (!closeBtn || closeBtn.dataset.diagWired === "1") return;
+    closeBtn.dataset.diagWired = "1";
+    closeBtn.style.display = "";
+    closeBtn.removeAttribute("aria-hidden");
+    closeBtn.addEventListener(
+      "click",
+      function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dismissDialog();
+      },
+      true
+    );
+  }
+
+  function slideOpen() {
+    if (!panel || panel.dataset.diagOpened === "1") return;
+    panel.dataset.diagOpened = "1";
+    panel.style.willChange = "transform";
+    panel.style.transition = "none";
+    panel.style.transform = "translateX(100%)";
+    panel.offsetHeight;
+    panel.style.transition = "transform " + SLIDE_MS + "ms cubic-bezier(0.4, 0, 0.2, 1)";
+    win.requestAnimationFrame(function () {
+      panel.style.transform = "translateX(0)";
+    });
+  }
+
+  function cleanup() {
+    if (rafId) {
+      win.cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    root = null;
+    panel = null;
+    closing = false;
+  }
+
+  function dismissDialog() {
+    if (!panel || !root || closing) return;
+    closing = true;
+    panel.style.transition = "transform " + SLIDE_MS + "ms cubic-bezier(0.4, 0, 0.2, 1)";
+    panel.style.transform = "translateX(100%)";
+    root.style.transition = "opacity 0.26s ease";
+    root.style.opacity = "0";
+    win.setTimeout(function () {
+      const closeBtn = findNativeClose(panel);
+      if (closeBtn) {
+        closeBtn.style.display = "";
+        closeBtn.removeAttribute("aria-hidden");
+        closeBtn.click();
+      } else {
+        doc.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      }
+      cleanup();
+    }, SLIDE_MS + 40);
+  }
+
+  function apply() {
+    if (closing) return;
+    root = doc.querySelector('[data-testid="stDialog"]');
+    if (!root) {
+      cleanup();
+      return;
+    }
+    root.classList.add("diag-drawer-shell", "diag-drawer-opening");
+    panel = root.querySelector('[role="dialog"]');
+    if (!panel) return;
+    panel.classList.add("diag-drawer-panel");
+    wireNativeClose();
+    slideOpen();
+  }
+
+  apply();
+  let frames = 0;
+  function boot() {
+    if (!closing) apply();
+    frames += 1;
+    if (frames < 40) {
+      rafId = win.requestAnimationFrame(boot);
+    } else {
+      rafId = null;
+    }
+  }
+  boot();
+
+  const obs = new MutationObserver(function () {
+    if (!closing) apply();
+    else if (!doc.querySelector('[data-testid="stDialog"]')) cleanup();
+  });
+  obs.observe(doc.body, { childList: true, subtree: true });
+  win.setTimeout(function () { obs.disconnect(); }, 12000);
+})();
+</script>""",
+        height=0,
+    )
+
+
+@st.dialog("AI Diagnostics", width="large", on_dismiss="rerun")
+def show_ai_diagnostics_dialog(
+    *,
+    emails: list[dict[str, Any]],
+    detail: dict[str, Any],
+    analysis: dict[str, Any],
+) -> None:
+    """Panneau diagnostics — fermeture native (Échap, croix, clic hors panneau)."""
+    inject_diag_drawer_shell()
+    render_ai_diagnostics_content(
+        emails=emails,
+        detail=detail,
+        analysis=analysis,
+    )
+
+
+def _mini_kpi_card_html(
+    *,
+    title: str,
+    value: str,
+    series: list[float],
+    stroke: str,
+    fill: str,
+    subtitle: str,
+    compact: bool = False,
+) -> str:
+    compact_cls = " mini-kpi-card--compact" if compact else ""
+    return (
+        f"<div class='mini-kpi-card{compact_cls}'>"
+        f"<div class='mini-kpi-head'><span>{html_module.escape(title)}</span>"
+        f"<span class='mini-kpi-val'>{html_module.escape(value)}</span></div>"
+        f"{sparkline_svg(series, stroke=stroke, fill=fill)}"
+        f"<div class='mini-kpi-sub'>{html_module.escape(subtitle)}</div>"
+        "</div>"
+    )
+
+
+def render_inbox_mini_charts(
+    *, kpis: dict[str, Any], cols_per_row: int = 3, compact: bool = True
+) -> None:
     series = inbox_trend_series(kpis=kpis)
+    throughput_now = kpis.get("throughput_per_hr")
+    throughput_label = None
+    try:
+        if throughput_now is not None:
+            throughput_label = f"{int(round(float(throughput_now)))}/hr"
+    except (TypeError, ValueError):
+        throughput_label = None
     render_panel_section_title("Trends")
-
-    c1, c2 = st.columns(2, gap="small")
-    with c1:
-        st.markdown(
-            "<div class='mini-kpi-card'>"
-            "<div class='mini-kpi-head'><span>AI throughput</span><span class='mini-kpi-val'>"
-            f"{int(round(series['throughput'][-1]))}/hr"
-            "</span></div>"
-            f"{sparkline_svg(series['throughput'], stroke='#93c5fd', fill='rgba(147,197,253,0.16)')}"
-            "<div class='mini-kpi-sub'>Emails analyzed per hour (demo)</div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-    with c2:
-        st.markdown(
-            "<div class='mini-kpi-card'>"
-            "<div class='mini-kpi-head'><span>SLA health</span><span class='mini-kpi-val'>"
-            f"{int(round((series['sla_health'][-1]) * 100))}%"
-            "</span></div>"
-            f"{sparkline_svg(series['sla_health'], stroke='#4ade80', fill='rgba(74,222,128,0.14)')}"
-            "<div class='mini-kpi-sub'>On-track ratio over time (demo)</div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-
-    c3, c4, c5 = st.columns(3, gap="small")
-    with c3:
-        st.markdown(
-            "<div class='mini-kpi-card'>"
-            "<div class='mini-kpi-head'><span>Escalation curve</span><span class='mini-kpi-val'>"
-            f"{int(round((kpis.get('escalation_rate') or 0) * 100))}%"
-            "</span></div>"
-            f"{sparkline_svg(series['escalation'], stroke='#fbbf24', fill='rgba(251,191,36,0.14)')}"
-            "<div class='mini-kpi-sub'>High/critical share (demo)</div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-    with c4:
-        st.markdown(
-            "<div class='mini-kpi-card'>"
-            "<div class='mini-kpi-head'><span>Avg AI time</span><span class='mini-kpi-val'>"
-            f"{float(kpis.get('avg_ai_seconds') or 0.0):.1f}s"
-            "</span></div>"
-            f"{sparkline_svg(series['ai_time'], stroke='#a78bfa', fill='rgba(167,139,250,0.14)')}"
-            "<div class='mini-kpi-sub'>Model latency trend (demo)</div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-    with c5:
-        st.markdown(
-            "<div class='mini-kpi-card'>"
-            "<div class='mini-kpi-head'><span>Automation rate</span><span class='mini-kpi-val'>"
-            f"{int(round((kpis.get('automation_rate') or 0) * 100))}%"
-            "</span></div>"
-            f"{sparkline_svg(series['automation'], stroke='#38bdf8', fill='rgba(56,189,248,0.14)')}"
-            "<div class='mini-kpi-sub'>Ops actions triggered (demo)</div>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
+    cols_per_row = max(2, min(3, int(cols_per_row)))
+    cards = [
+        (
+            "AI throughput",
+            throughput_label or f"{int(round(series['throughput'][-1]))}/hr",
+            series["throughput"],
+            "#93c5fd",
+            "rgba(147,197,253,0.16)",
+            "Emails analyzed per hour (demo)",
+        ),
+        (
+            "SLA health",
+            f"{int(round((series['sla_health'][-1]) * 100))}%",
+            series["sla_health"],
+            "#4ade80",
+            "rgba(74,222,128,0.14)",
+            "On-track ratio over time (demo)",
+        ),
+        (
+            "Escalation curve",
+            f"{int(round((kpis.get('escalation_rate') or 0) * 100))}%",
+            series["escalation"],
+            "#fbbf24",
+            "rgba(251,191,36,0.14)",
+            "High/critical share (demo)",
+        ),
+        (
+            "Avg AI time",
+            f"{float(kpis.get('avg_ai_seconds') or 0.0):.1f}s",
+            series["ai_time"],
+            "#a78bfa",
+            "rgba(167,139,250,0.14)",
+            "Model latency trend (demo)",
+        ),
+        (
+            "Automation rate",
+            f"{int(round((kpis.get('automation_rate') or 0) * 100))}%",
+            series["automation"],
+            "#38bdf8",
+            "rgba(56,189,248,0.14)",
+            "Ops actions triggered (demo)",
+        ),
+    ]
+    with st.container(key="diagnostics_trends_grid"):
+        for i in range(0, len(cards), cols_per_row):
+            row = cards[i : i + cols_per_row]
+            cols = st.columns(cols_per_row, gap="small")
+            for col, (title, value, data, stroke, fill, subtitle) in zip(cols, row):
+                with col:
+                    st.markdown(
+                        _mini_kpi_card_html(
+                            title=title,
+                            value=value,
+                            series=data,
+                            stroke=stroke,
+                            fill=fill,
+                            subtitle=subtitle,
+                            compact=compact,
+                        ),
+                        unsafe_allow_html=True,
+                    )
 
 
 def render_ops_metrics_row(
@@ -2761,6 +3195,120 @@ def render_ops_metrics_row(
             for col, (label, value) in zip((c1, c2, c3, c4), metrics):
                 with col:
                     col.metric(label, value)
+
+
+def render_ai_diagnostics_analysis_columns(
+    *,
+    detail: dict[str, Any],
+    analysis: dict[str, Any],
+) -> None:
+    with st.container(key="analysis_breakdown"):
+        rcol, ecol, ccol = st.columns(3, gap="small")
+        with rcol:
+            render_section_title("AI reasoning")
+            reasoning = analysis_reasoning_timeline(detail=detail, analysis=analysis)
+            st.markdown(
+                "<div class='insight-subcard'>"
+                + "".join(
+                    f"<div class='reason-line'>{html_module.escape(line)}</div>"
+                    for line in reasoning
+                )
+                + "</div>",
+                unsafe_allow_html=True,
+            )
+        with ecol:
+            render_section_title("Entities")
+            ent_rows = flatten_entities(
+                analysis.get("entities") if isinstance(analysis, dict) else None
+            )
+            if ent_rows:
+                ent_html = "".join(
+                    "<span class='entity-chip'>"
+                    f"<span class='entity-kind'>{html_module.escape(kind)}</span>"
+                    f"<span>{html_module.escape(val)}</span>"
+                    "</span>"
+                    for kind, val in ent_rows[:24]
+                )
+                st.markdown(
+                    f"<div class='insight-subcard'><div class='entity-grid'>{ent_html}</div></div>",
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    "<p class='empty-state'>No entities extracted.</p>",
+                    unsafe_allow_html=True,
+                )
+        with ccol:
+            render_section_title("Confidence breakdown")
+            breakdown = confidence_breakdown(analysis)
+            breakdown_rows = []
+            for label, status, hint in breakdown:
+                pill_class = "breakdown-ok" if status == "ok" else "breakdown-review"
+                pill_txt = "ok" if status == "ok" else "review"
+                breakdown_rows.append(
+                    "<div class='breakdown-row'>"
+                    "<div>"
+                    f"<div class='breakdown-label'>{html_module.escape(label)}</div>"
+                    f"<div class='breakdown-hint'>{html_module.escape(hint)}</div>"
+                    "</div>"
+                    f"<span class='breakdown-pill {pill_class}'>{pill_txt}</span>"
+                    "</div>"
+                )
+            st.markdown(
+                "<div class='insight-subcard'>" + "".join(breakdown_rows) + "</div>",
+                unsafe_allow_html=True,
+            )
+
+
+def render_ai_diagnostics_content(
+    *,
+    emails: list[dict[str, Any]],
+    detail: dict[str, Any],
+    analysis: dict[str, Any],
+) -> None:
+    diag_kpis = ops_kpis(emails=emails, store=st.session_state.analysis_store)
+    render_panel_section_title("Operational metrics")
+    render_ops_metrics_row(
+        diag_kpis,
+        container_key="diagnostics_ops_metrics",
+        n_cols=4,
+    )
+    st.markdown(
+        "<div class='insights-spacer insights-spacer--diag-breakdown' aria-hidden='true'></div>",
+        unsafe_allow_html=True,
+    )
+    render_ai_diagnostics_analysis_columns(detail=detail, analysis=analysis)
+    st.markdown(
+        "<div class='insights-spacer insights-spacer--diag-breakdown' aria-hidden='true'></div>",
+        unsafe_allow_html=True,
+    )
+    render_inbox_mini_charts(kpis=diag_kpis, cols_per_row=3, compact=True)
+
+
+def render_insights_header(
+    *,
+    selected_id: str,
+    emails: list[dict[str, Any]],
+    detail: dict[str, Any],
+    analysis: dict[str, Any],
+) -> None:
+    with st.container(key="insights_header_row"):
+        title_col, trigger_col = st.columns([1, 1], gap="small", vertical_alignment="bottom")
+        with title_col:
+            render_page_title("Insights")
+        with trigger_col:
+            with st.container(key="insights_diag_trigger"):
+                if st.button(
+                    "Diagnostics ›",
+                    key=f"diag_open_{selected_id}",
+                    type="tertiary",
+                    help="Ouvrir le volet diagnostics (métriques, tendances, extraction)",
+                ):
+                    show_ai_diagnostics_dialog(
+                        emails=emails,
+                        detail=detail,
+                        analysis=analysis,
+                    )
 
 
 def bundle_analyze_seconds(bundle: dict[str, Any] | None) -> float | None:
@@ -3085,8 +3633,7 @@ def main() -> None:
                         )
                         bundle["analyze_seconds"] = time.monotonic() - t0
                         st.session_state.analysis_store[eid] = bundle
-                        st.session_state.last_ai_seconds = float(bundle["analyze_seconds"])
-                        st.session_state.session_analyzed_count += 1
+                        _record_ai_call(float(bundle["analyze_seconds"]))
                         analyzed_now += 1
                     except ApiError as exc:
                         st.error(exc.message)
@@ -3119,9 +3666,6 @@ def main() -> None:
             mini[2].metric("Meetings", metric_display_count(stats["meetings_ai"]))
             mini[3].metric("Invoices", metric_display_count(stats["invoices_ai"]))
             kpis = ops_kpis(emails=emails, store=st.session_state.analysis_store)
-            render_panel_section_title("Operational metrics")
-            render_ops_metrics_row(kpis, container_key="inbox_ops_metrics", n_cols=2)
-            render_inbox_mini_charts(kpis=kpis)
             st.caption(
                 f"SLA: {kpis['sla_due2h']} due in 2h · {kpis['sla_today']} due today · {kpis['sla_ok']} on track"
             )
@@ -3221,6 +3765,7 @@ def main() -> None:
                 st.session_state.selected_email_id = selected_id
 
     with right:
+
         if not emails:
             render_empty_product_state(
                 "No inbox loaded",
@@ -3324,13 +3869,7 @@ def main() -> None:
                     new_bundle["analyze_seconds"] = time.monotonic() - t0
                     st.session_state.analysis_store[selected_id] = new_bundle
                     _clear_reply_edit_for_email(selected_id)
-                    dt = float(new_bundle["analyze_seconds"])
-                    st.session_state.last_ai_seconds = dt
-                    metrics = st.session_state.get("analysis_metrics") or {}
-                    metrics["ai_calls"] = int(metrics.get("ai_calls", 0)) + 1
-                    metrics["ai_seconds_total"] = float(metrics.get("ai_seconds_total", 0.0)) + float(dt)
-                    st.session_state.analysis_metrics = metrics
-                    st.session_state.session_analyzed_count += 1
+                    _record_ai_call(float(new_bundle["analyze_seconds"]))
                     render_progress_card(
                         status_slot,
                         "Analysis ready",
@@ -3421,7 +3960,12 @@ def main() -> None:
 
             conf_label, conf_class, conf_copy = analysis_confidence(analysis)
 
-            render_page_title("Insights")
+            render_insights_header(
+                selected_id=selected_id,
+                emails=emails,
+                detail=detail,
+                analysis=analysis,
+            )
             with st.container(key="insights_confidence"):
                 st.markdown(
                     "<div class='confidence-strip'>"
@@ -3569,60 +4113,6 @@ def main() -> None:
                         active_base=active_base,
                         selected_id=selected_id,
                         detail=detail,
-                    )
-
-            with st.container(key="analysis_breakdown"):
-                rcol, ecol, ccol = st.columns(3, gap="small")
-                with rcol:
-                    render_section_title("AI reasoning")
-                    reasoning = analysis_reasoning_timeline(detail=detail, analysis=analysis)
-                    st.markdown(
-                        "<div class='insight-subcard'>"
-                        + "".join(
-                            f"<div class='reason-line'>{html_module.escape(line)}</div>"
-                            for line in reasoning
-                        )
-                        + "</div>",
-                        unsafe_allow_html=True,
-                    )
-                with ecol:
-                    render_section_title("Entities")
-                    ent_rows = flatten_entities(
-                        analysis.get("entities") if isinstance(analysis, dict) else None
-                    )
-                    if ent_rows:
-                        ent_html = "".join(
-                            "<span class='entity-chip'>"
-                            f"<span class='entity-kind'>{html_module.escape(kind)}</span>"
-                            f"<span>{html_module.escape(val)}</span>"
-                            "</span>"
-                            for kind, val in ent_rows[:24]
-                        )
-                        st.markdown(
-                            f"<div class='insight-subcard'><div class='entity-grid'>{ent_html}</div></div>",
-                            unsafe_allow_html=True,
-                        )
-                    else:
-                        st.markdown("<p class='empty-state'>No entities extracted.</p>", unsafe_allow_html=True)
-                with ccol:
-                    render_section_title("Confidence breakdown")
-                    breakdown = confidence_breakdown(analysis)
-                    breakdown_rows = []
-                    for label, status, hint in breakdown:
-                        pill_class = "breakdown-ok" if status == "ok" else "breakdown-review"
-                        pill_txt = "ok" if status == "ok" else "review"
-                        breakdown_rows.append(
-                            "<div class='breakdown-row'>"
-                            "<div>"
-                            f"<div class='breakdown-label'>{html_module.escape(label)}</div>"
-                            f"<div class='breakdown-hint'>{html_module.escape(hint)}</div>"
-                            "</div>"
-                            f"<span class='breakdown-pill {pill_class}'>{pill_txt}</span>"
-                            "</div>"
-                        )
-                    st.markdown(
-                        "<div class='insight-subcard'>" + "".join(breakdown_rows) + "</div>",
-                        unsafe_allow_html=True,
                     )
 
     if activity_feed_slot is not None:
